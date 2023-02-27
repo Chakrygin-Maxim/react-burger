@@ -1,9 +1,7 @@
+import Header from '../AppHeader/AppHeader'
+
 function App() {
-  return (
-    <div className="App">
-      <p>hello world</p>
-    </div>
-  )
+  return <Header />
 }
 
 export default App
