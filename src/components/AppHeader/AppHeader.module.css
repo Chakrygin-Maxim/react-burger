@@ -45,6 +45,14 @@
   margin: 0 0 0 calc(var(--offset-base-size) * 2);
 }
 
+.appHeader__linkText_type_primary {
+  color: #f2f2f3;
+}
+
+.appHeader__linkText_type_secondary {
+  color: #8585ad;
+}
+
 .appHeader__mainLogo {
   cursor: pointer;
   position: absolute;
