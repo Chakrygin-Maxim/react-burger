@@ -21,12 +21,11 @@ function BurgerIngredients({ ingredients }) {
       </h1>
       <nav className={burgerIngredientsStyle.burgerIngredients__filter}>
         {INGREDIENTS_TYPE.map((ingredientType, index) => {
-          const isActive = ingredientType === activeFilter
           return (
             <Tab
               key={index}
               value={ingredientType}
-              active={isActive}
+              active={ingredientType === activeFilter}
               onClick={onClick}
             >
               {INGREDIENT_TYPES_FILTER[ingredientType]}
