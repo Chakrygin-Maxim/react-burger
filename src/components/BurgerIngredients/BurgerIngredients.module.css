@@ -1,0 +1,47 @@
+.burgerIngredients {
+  margin: 0 auto;
+  padding: 0;
+  width: 600px;
+}
+
+.burgerIngredients__mainText {
+  composes: mt-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: mt-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  font-family: 'Jet Brains Mono', monospace;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 40px;
+}
+
+.burgerIngredients__filter {
+  display: flex;
+}
+
+.burgerIngredients__mainContainer {
+  display: flex;
+}
+
+.burgerIngredients__list {
+  /* используем готовый скролл бар  */
+  composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  /* рассчет высоты выполнен эмпирическим путем */
+  height: calc(100vh - 300px);
+}
+
+.burgerIngredients__list::-webkit-scrollbar {
+  /* scrollbar */
+  /* переопределяем согласно макету фигмы */
+  width: 8px;
+  height: 664px;
+}
+.burgerIngredients__list::-webkit-scrollbar-thumb {
+  /* thumb */
+  /* переопределяем согласно макету фигмы */
+  border-radius: 0px;
+  border: 3px solid #8585ad;
+}

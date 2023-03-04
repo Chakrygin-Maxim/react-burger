@@ -1,0 +1,18 @@
+.ingredientsGroup__header {
+  composes: mt-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: mb-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  font-family: 'Jet Brains Mono', monospace;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+.ingredientsGroup__typeGroup {
+  composes: ml-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin-top: 0;
+  column-gap: 24px;
+}
