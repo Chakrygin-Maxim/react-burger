@@ -1,5 +1,5 @@
 import { INGREDIENT_TYPES_FILTER_TEXT } from '../../utils/constants'
-import Ingredient from '../ingredient/ingredient'
+import Ingredient from '../ingredient1/ingredient1'
 import ingredientsGroupStyle from './ingredients-group.module.css'
 
 function IngredientsGroup({ ingredients, type }) {

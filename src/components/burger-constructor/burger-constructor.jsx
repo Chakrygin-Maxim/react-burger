@@ -1,7 +1,7 @@
 import burgerConstructorStyle from './burger-constructor.module.css'
 import PropTypes from 'prop-types'
 import BurgerElement from '../burger-element/burger-element'
-import Price from '../price/price'
+import Price from '../price1/price1'
 import {
   INGREDIENT_TYPES_FILTER,
   BURGER_POSITIONS,

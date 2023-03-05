@@ -1,4 +1,4 @@
-import priceStyle from './price.module.css'
+import priceStyle from './price1.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function Price({ total }) {
