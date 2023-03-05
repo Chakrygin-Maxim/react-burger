@@ -1,4 +1,5 @@
 import burgerConstructorStyle from './burger-constructor.module.css'
+import PropTypes from 'prop-types'
 import BurgerElement from '../burger-element/burger-element'
 import Price from '../price/price'
 import {
@@ -41,6 +42,10 @@ function BurgerConstructor({ ingredients }) {
       </div>
     </section>
   )
+}
+
+BurgerConstructor.propTypes = {
+  ingredients: PropTypes.array.isRequired,
 }
 
 export default BurgerConstructor
