@@ -1,7 +1,7 @@
-import { useState } from 'react'
-import burgerIngredientsStyle from './BurgerIngredients.module.css'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
+import { useState } from 'react'
+import burgerIngredientsStyle from './burger-ingredients.module.css'
+import IngredientsGroup from '../ingredients-group/ingredients-group'
 import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,

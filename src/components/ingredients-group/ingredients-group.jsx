@@ -1,6 +1,6 @@
 import { INGREDIENT_TYPES_FILTER_TEXT } from '../../utils/constants'
-import Ingredient from '../Ingredient/Ingredient'
-import ingredientsGroupStyle from './IngredientsGroup.module.css'
+import Ingredient from '../ingredient/ingredient'
+import ingredientsGroupStyle from './ingredients-group.module.css'
 
 function IngredientsGroup({ ingredients, type }) {
   return (

@@ -1,4 +1,4 @@
-import appHeaderStyle from './AppHeader.module.css'
+import appHeaderStyle from './app-header.module.css'
 import {
   BurgerIcon,
   Logo,

@@ -1,10 +1,12 @@
-import burgerElementStyle from './BurgerElement.module.css'
+import burgerElementStyle from './burger-element.module.css'
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { BURGER_POSITIONS_TEXT } from '../../utils/constants'
-import { INGREDIENT_TYPES_FILTER } from '../../utils/constants'
+import {
+  BURGER_POSITIONS_TEXT,
+  INGREDIENT_TYPES_FILTER,
+} from '../../utils/constants'
 
 function BurgerElement({ position, ingredient }) {
   let name = ingredient.name

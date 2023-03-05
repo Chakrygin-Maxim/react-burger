@@ -1,13 +1,13 @@
-import mainStyle from './Main.module.css'
-import data from '../../utils/data.json'
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients'
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor'
+import mainStyle from './main.module.css'
+import ingredients from '../../utils/data.json'
+import BurgerIngredients from '../burger-ingredients/burger-ingredients'
+import BurgerConstructor from '../burger-constructor/burger-constructor'
 
 function Main() {
   return (
     <main className={mainStyle.main}>
-      <BurgerIngredients ingredients={data} />
-      <BurgerConstructor ingredients={data} />
+      <BurgerIngredients ingredients={ingredients} />
+      <BurgerConstructor ingredients={ingredients} />
     </main>
   )
 }

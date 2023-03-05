@@ -1,8 +1,10 @@
-import burgerConstructorStyle from './BurgerConstructor.module.css'
-import BurgerElement from '../BurgerElement/BurgerElement'
-import Price from '../Price/Price'
-import { BURGER_POSITIONS } from '../../utils/constants'
-import { INGREDIENT_TYPES_FILTER } from '../../utils/constants'
+import burgerConstructorStyle from './burger-constructor.module.css'
+import BurgerElement from '../burger-element/burger-element'
+import Price from '../price/price'
+import {
+  INGREDIENT_TYPES_FILTER,
+  BURGER_POSITIONS,
+} from '../../utils/constants'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function BurgerConstructor({ ingredients }) {
