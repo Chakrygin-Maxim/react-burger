@@ -7,11 +7,7 @@
 .burgerIngredients__mainText {
   composes: mt-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   composes: mb-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-  font-family: 'Jet Brains Mono', monospace;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 40px;
+  composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 }
 
 .burgerIngredients__filter {

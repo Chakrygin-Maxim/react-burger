@@ -14,9 +14,5 @@
 }
 
 .price__text {
-  font-family: 'Iceland';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 48px;
-  line-height: 36px;
+  composes: text_type_digits-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 }

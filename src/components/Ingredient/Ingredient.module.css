@@ -12,10 +12,7 @@
 .ingredient__text {
   composes: mt-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   composes: mb-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-  line-height: 24px;
-  font-family: 'Jet Brains Mono', monospace;
-  font-weight: 400;
-  font-size: 16px;
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
   text-align: center;
 }
 
@@ -27,11 +24,7 @@
 }
 
 .ingredient__price {
+  composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
   margin: 0;
-  font-family: 'Iceland';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 28px;
-  line-height: 24px;
   text-align: center;
 }
