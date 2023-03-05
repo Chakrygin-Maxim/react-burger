@@ -1,0 +1,11 @@
+.burgerElement {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 14px;
+  margin-right: 8px;
+}
+
+.burgerElement__isBun {
+  margin-right: 16px;
+}

@@ -4,7 +4,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import IngredientsGroup from '../IngredientsGroup/IngredientsGroup'
 import {
   INGREDIENTS_TYPE,
-  INGREDIENT_TYPES_FILTER,
+  INGREDIENT_TYPES_FILTER_TEXT,
 } from '../../utils/constants'
 
 function BurgerIngredients({ ingredients }) {
@@ -28,7 +28,7 @@ function BurgerIngredients({ ingredients }) {
               active={ingredientType === activeFilter}
               onClick={onClick}
             >
-              {INGREDIENT_TYPES_FILTER[ingredientType]}
+              {INGREDIENT_TYPES_FILTER_TEXT[ingredientType]}
             </Tab>
           )
         })}
