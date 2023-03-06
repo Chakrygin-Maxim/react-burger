@@ -26,7 +26,12 @@
       "error",
       { "allow": ["arrowFunctions"] }
     ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     "eqeqeq": ["error", "smart"]
   }
 }
-

@@ -35,13 +35,13 @@ function BurgerIngredients({ ingredients }) {
         })}
       </nav>
       <ul className={burgerIngredientsStyle.burgerIngredients__list}>
-        {INGREDIENTS_TYPE.map((ingredientType) => {
+        {INGREDIENTS_TYPE.map((ingredientType, index) => {
           const filteredIngredients = ingredients.filter(
             (ingredient) => ingredient.type === ingredientType
           )
           return (
             <IngredientsGroup
-              key={ingredientType}
+              key={index}
               ingredients={filteredIngredients}
               type={ingredientType}
             />

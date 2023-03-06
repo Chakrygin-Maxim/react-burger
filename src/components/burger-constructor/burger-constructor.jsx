@@ -21,10 +21,10 @@ function BurgerConstructor({ ingredients }) {
           position={BURGER_POSITIONS.TOP}
         />
         <div className={burgerConstructorStyle.burgerConstructor__itemsList}>
-          {ingredients.map((item, index) => {
+          {ingredients.map((item) => {
             return (
               item.type !== INGREDIENT_TYPES_FILTER.bun && (
-                <BurgerElement key={index} ingredient={item} />
+                <BurgerElement key={item._id} ingredient={item} />
               )
             )
           })}

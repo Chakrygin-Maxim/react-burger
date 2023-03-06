@@ -23,6 +23,6 @@ export const BURGER_POSITIONS = Object.freeze({
 
 // для хранения соответствия текста позиции булки
 export const BURGER_POSITIONS_TEXT = Object.freeze({
-  TOP: '(верх)',
-  BOTTOM: '(низ)',
+  top: '(верх)',
+  bottom: '(низ)',
 })

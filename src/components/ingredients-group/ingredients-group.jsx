@@ -9,8 +9,8 @@ function IngredientsGroup({ ingredients, type }) {
         {INGREDIENT_TYPES_FILTER_TEXT[type]}
       </h2>
       <ul className={ingredientsGroupStyle.ingredientsGroup__typeGroup}>
-        {ingredients.map((ingredient, index) => (
-          <Ingredient key={index} ingredient={ingredient} />
+        {ingredients.map((ingredient) => (
+          <Ingredient key={ingredient._id} ingredient={ingredient} />
         ))}
       </ul>
     </li>
