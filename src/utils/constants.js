@@ -34,3 +34,9 @@ export const BURGER_POSITIONS_TEXT = Object.freeze({
   top: '(верх)',
   bottom: '(низ)',
 })
+
+export const ORDER_TEXTS = Object.freeze({
+  orderId: 'идентификатор заказа',
+  isCooking: 'Ваш заказ начали готовить',
+  waiting: 'Дождитесь готовности на орбитальной станции',
+})

@@ -1,5 +1,6 @@
 import ingredientDetailsStyle from './ingredient-details.module.css'
 import { INGREDIENT_BZHU } from '../../utils/constants'
+import PropTypes from 'prop-types'
 
 function RenderBZHU({ title, text }) {
   return (
@@ -41,6 +42,10 @@ function IngredientDetails({ ingredient }) {
       </ul>
     </>
   )
+}
+
+IngredientDetails.propTypes = {
+  ingredient: PropTypes.object.isRequired,
 }
 
 export default IngredientDetails
