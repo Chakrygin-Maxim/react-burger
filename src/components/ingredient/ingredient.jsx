@@ -7,7 +7,7 @@ import {
 
 function Ingredient({ ingredient }) {
   return (
-    <a className={ingredientStyle.ingredient}>
+    <li className={ingredientStyle.ingredient}>
       <Counter count={1} size="default" extraClass="m-1" />
       <img src={ingredient.image} alt={ingredient.name}></img>
       <div className={ingredientStyle.ingredient__priceContainer}>
@@ -16,7 +16,7 @@ function Ingredient({ ingredient }) {
       </div>
 
       <p className={ingredientStyle.ingredient__text}>{ingredient.name}</p>
-    </a>
+    </li>
   )
 }
 
