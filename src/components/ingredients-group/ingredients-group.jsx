@@ -1,4 +1,5 @@
 import { INGREDIENT_TYPES_FILTER_TEXT } from '../../utils/constants'
+import PropTypes from 'prop-types'
 import Ingredient from '../ingredient/ingredient'
 import ingredientsGroupStyle from './ingredients-group.module.css'
 
@@ -15,6 +16,11 @@ function IngredientsGroup({ ingredients, type }) {
       </ul>
     </li>
   )
+}
+
+IngredientsGroup.propTypes = {
+  ingredients: PropTypes.array.isRequired,
+  type: PropTypes.string.isRequired,
 }
 
 export default IngredientsGroup
