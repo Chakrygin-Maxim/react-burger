@@ -1,6 +1,14 @@
 //типы состава бургера в константы для упрощения рендера
 export const INGREDIENTS_TYPE = ['bun', 'sauce', 'main']
 
+// хранит текст БЖУ
+export const INGREDIENT_BZHU = Object.freeze({
+  calories: 'Калории, ккал',
+  proteins: 'Белки, г',
+  fat: 'Жиры, г',
+  carbohydrates: 'Углеводы, г',
+})
+
 // для рендера тексты фильтров составов бургера
 export const INGREDIENT_TYPES_FILTER_TEXT = Object.freeze({
   bun: 'Булки',

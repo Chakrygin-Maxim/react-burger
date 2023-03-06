@@ -11,14 +11,11 @@
     0px 0px 1px rgba(0, 0, 0, 0.04);
   border-radius: 40px;
   background: #1c1c21;
-
-  /* потом убрать */
-  min-height: 538px;
 }
 
 .modal__closeContainer {
   position: absolute;
-  top: 60px;
+  top: 45px;
   right: 40px;
 }
 
