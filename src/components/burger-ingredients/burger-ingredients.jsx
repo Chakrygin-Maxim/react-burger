@@ -11,7 +11,7 @@ import {
 function BurgerIngredients({ ingredients }) {
   const [activeFilter, setActiveFilter] = useState(INGREDIENTS_TYPE[0])
 
-  const onClick = (value) => {
+  const hendleFilterClick = (value) => {
     setActiveFilter(value)
   }
 
@@ -27,7 +27,7 @@ function BurgerIngredients({ ingredients }) {
               key={index}
               value={ingredientType}
               active={ingredientType === activeFilter}
-              onClick={onClick}
+              onClick={hendleFilterClick}
             >
               {INGREDIENT_TYPES_FILTER_TEXT[ingredientType]}
             </Tab>
