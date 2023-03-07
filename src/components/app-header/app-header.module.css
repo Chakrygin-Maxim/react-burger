@@ -1,0 +1,60 @@
+.appHeader {
+  composes: pt-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: pb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  margin: 0 auto;
+  background-color: #1c1c21;
+}
+
+.appHeader__navbar {
+  max-width: 1280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 auto;
+  position: relative;
+}
+
+.appHeader__list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.appHeader__link {
+  composes: pt-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: pr-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: pb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: pl-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.appHeader__link:hover {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+
+.appHeader__linkText {
+  margin: 0 0 0 calc(var(--offset-base-size) * 2);
+}
+
+.appHeader__linkText_type_primary {
+  color: #f2f2f3;
+}
+
+.appHeader__linkText_type_secondary {
+  color: #8585ad;
+}
+
+.appHeader__mainLogo {
+  cursor: pointer;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+}

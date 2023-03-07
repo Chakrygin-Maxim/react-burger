@@ -1,0 +1,18 @@
+.price {
+  composes: mt-1 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: mb-1 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: mr-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.price svg {
+  width: 33px;
+  height: 33px;
+}
+
+.price__text {
+  composes: text_type_digits-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+}

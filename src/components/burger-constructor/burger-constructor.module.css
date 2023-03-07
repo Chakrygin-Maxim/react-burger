@@ -1,0 +1,44 @@
+.burgerConstructor {
+  composes: mt-25 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  padding: 0;
+  width: 600px;
+}
+
+.burgerConstructor__list {
+  /* используем готовый скролл бар  */
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  margin: 0 auto;
+  padding-left: 0;
+  row-gap: 16px;
+  max-height: 656px;
+}
+
+.burgerConstructor__itemsList {
+  composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  row-gap: 16px;
+}
+
+.burgerConstructor__itemsList::-webkit-scrollbar {
+  /* scrollbar */
+  /* переопределяем согласно макету фигмы */
+  width: 8px;
+}
+.burgerConstructor__itemsList::-webkit-scrollbar-thumb {
+  /* thumb */
+  /* переопределяем согласно макету фигмы */
+  border-radius: 0px;
+  border: 3px solid #8585ad;
+}
+
+.burgerConstructor__order {
+  composes: mt-10 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: mr-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
