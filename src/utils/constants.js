@@ -40,3 +40,5 @@ export const ORDER_TEXTS = Object.freeze({
   isCooking: 'Ваш заказ начали готовить',
   waiting: 'Дождитесь готовности на орбитальной станции',
 })
+
+export const API_URL = 'https://norma.nomoreparties.space/api/ingredients'
