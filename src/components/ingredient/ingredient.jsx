@@ -1,5 +1,6 @@
 import ingredientStyle from './ingredient.module.css'
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import Modal from '../modal/modal'
 import {
   CurrencyIcon,
@@ -36,6 +37,10 @@ function Ingredient({ ingredient }) {
       </Modal>
     </>
   )
+}
+
+Ingredient.propTypes = {
+  ingredient: PropTypes.object.isRequired,
 }
 
 export default Ingredient
