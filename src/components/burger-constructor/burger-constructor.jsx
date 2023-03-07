@@ -57,7 +57,7 @@ function BurgerConstructor({ ingredients }) {
         </div>
       </section>
       <Modal onClose={handlerButtonOnClick} isOpen={orderDetailsIsOpen}>
-        <OrderDetails />
+        <OrderDetails orderId={'034536'} />
       </Modal>
     </>
   )
