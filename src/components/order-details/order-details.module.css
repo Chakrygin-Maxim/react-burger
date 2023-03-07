@@ -1,7 +1,6 @@
 .orderDetails__container {
   display: flex;
   flex-direction: column;
-  /* margin: 120px 100px; */
 }
 
 .orderDetails__header {
@@ -40,4 +39,3 @@
   color: #8585ad;
   text-align: center;
 }
-

@@ -23,7 +23,7 @@ function Modal({ children, onClose, isOpen }) {
         <div className={modalStyle.modal__closeContainer}>
           <CloseIcon type="primary" onClick={onClose} />
         </div>
-        <div>{children}</div>
+        {children}
       </div>
     </ModalOverlay>,
     modal
