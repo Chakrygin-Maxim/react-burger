@@ -1,7 +1,10 @@
-import { INGREDIENT_TYPES_FILTER_TEXT } from '../../utils/constants'
-import PropTypes from 'prop-types'
 import Ingredient from '../ingredient/ingredient'
 import ingredientsGroupStyle from './ingredients-group.module.css'
+import { INGREDIENT_TYPES_FILTER_TEXT } from '../../utils/constants'
+import {
+  INGREDIENTS_ARRAY_TYPE,
+  INGREDIENT_TYPES_TYPE,
+} from '../../utils/propTypes'
 
 function IngredientsGroup({ ingredients, type }) {
   return (
@@ -19,8 +22,8 @@ function IngredientsGroup({ ingredients, type }) {
 }
 
 IngredientsGroup.propTypes = {
-  ingredients: PropTypes.array.isRequired,
-  type: PropTypes.string.isRequired,
+  ingredients: INGREDIENTS_ARRAY_TYPE.isRequired,
+  type: INGREDIENT_TYPES_TYPE.isRequired,
 }
 
 export default IngredientsGroup

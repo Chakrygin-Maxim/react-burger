@@ -1,8 +1,8 @@
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import PropTypes from 'prop-types'
-import { useState } from 'react'
 import burgerIngredientsStyle from './burger-ingredients.module.css'
 import IngredientsGroup from '../ingredients-group/ingredients-group'
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
+import { useState } from 'react'
+import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
 import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,
@@ -53,7 +53,7 @@ function BurgerIngredients({ ingredients }) {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.array.isRequired,
+  ingredients: INGREDIENTS_ARRAY_TYPE.isRequired,
 }
 
 export default BurgerIngredients

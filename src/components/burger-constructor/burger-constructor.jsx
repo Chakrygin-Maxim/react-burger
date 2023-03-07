@@ -1,13 +1,13 @@
 import burgerConstructorStyle from './burger-constructor.module.css'
-import PropTypes from 'prop-types'
+import OrderDetails from '../order-details/order-details'
+import Modal from '../modal/modal'
 import BurgerElement from '../burger-element/burger-element'
 import Price from '../price/price'
+import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
 import {
   INGREDIENT_TYPES_FILTER,
   BURGER_POSITIONS,
 } from '../../utils/constants'
-import OrderDetails from '../order-details/order-details'
-import Modal from '../modal/modal'
 import { useState } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
@@ -64,7 +64,7 @@ function BurgerConstructor({ ingredients }) {
 }
 
 BurgerConstructor.propTypes = {
-  ingredients: PropTypes.array.isRequired,
+  ingredients: INGREDIENTS_ARRAY_TYPE.isRequired,
 }
 
 export default BurgerConstructor

@@ -1,7 +1,7 @@
 import mainStyle from './main.module.css'
-import PropTypes from 'prop-types'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
+import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
 
 function Main({ ingredients }) {
   return (
@@ -13,7 +13,7 @@ function Main({ ingredients }) {
 }
 
 Main.propTypes = {
-  ingredients: PropTypes.array.isRequired,
+  ingredients: INGREDIENTS_ARRAY_TYPE.isRequired,
 }
 
 export default Main

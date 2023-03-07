@@ -1,5 +1,6 @@
 import burgerElementStyle from './burger-element.module.css'
 import PropTypes from 'prop-types'
+import { INGREDIENT_TYPE } from '../../utils/propTypes'
 import {
   ConstructorElement,
   DragIcon,
@@ -38,7 +39,7 @@ function BurgerElement({ position, ingredient }) {
 
 BurgerElement.propTypes = {
   position: PropTypes.string,
-  ingredient: PropTypes.object.isRequired,
+  ingredient: INGREDIENT_TYPE.isRequired,
 }
 
 export default BurgerElement
