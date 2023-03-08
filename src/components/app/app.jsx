@@ -19,8 +19,13 @@ function App() {
     const getIngredients = async () => {
       try {
         const res = await fetch(API_URL)
-        const result = await res.json()
-        setIngredients(result.data)
+        if (res.ok) {
+          const result = await res.json()
+          setIngredients(result.data)
+        } else {
+          setHasError(true)
+          console.log('something wrong', res)
+        }
       } catch (err) {
         setHasError(true)
         console.log('faild to fetch', err)
