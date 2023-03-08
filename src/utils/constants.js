@@ -44,7 +44,7 @@ export const ORDER_TEXTS = Object.freeze({
 export const API_URL = 'https://norma.nomoreparties.space/api/ingredients'
 
 export const EMPTY_INGREDIENT = {
-  type: '',
+  type: 'main',
   image: '',
   image_large: '',
   name: '',
