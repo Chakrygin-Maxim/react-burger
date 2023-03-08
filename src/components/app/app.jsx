@@ -24,9 +24,9 @@ function App() {
       } catch (err) {
         setHasError(true)
         console.log('faild to fetch', err)
+      } finally {
+        setIsLoding(false)
       }
-
-      setIsLoding(false)
     }
     getIngredients()
   }, [])
