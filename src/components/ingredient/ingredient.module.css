@@ -9,6 +9,10 @@
   width: 272px;
 }
 
+.ingredient:hover {
+  cursor: pointer;
+}
+
 .ingredient__text {
   composes: mt-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   composes: mb-2 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
