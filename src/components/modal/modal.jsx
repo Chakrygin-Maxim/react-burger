@@ -9,6 +9,8 @@ const modal = document.getElementById('modal')
 
 function Modal({ children, onClose, isOpen }) {
   useEffect(() => {
+    if (!isOpen) return
+
     const handleKeyDown = (e) => {
       if (isOpen && e.key === 'Escape') {
         onClose()
