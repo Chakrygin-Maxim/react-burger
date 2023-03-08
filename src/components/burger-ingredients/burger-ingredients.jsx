@@ -8,12 +8,13 @@ import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
 import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,
+  EMPTY_INGREDIENT,
 } from '../../utils/constants'
 
 function BurgerIngredients({ ingredients }) {
   const [activeFilter, setActiveFilter] = useState(INGREDIENTS_TYPE[0])
   const [showIngrientsDetails, setShowIngrientsDetails] = useState(false)
-  const [currentIngredient, setCurrentIngredient] = useState({})
+  const [currentIngredient, setCurrentIngredient] = useState(EMPTY_INGREDIENT)
 
   const hendleFilterClick = (value) => {
     setActiveFilter(value)

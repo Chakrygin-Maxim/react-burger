@@ -42,3 +42,15 @@ export const ORDER_TEXTS = Object.freeze({
 })
 
 export const API_URL = 'https://norma.nomoreparties.space/api/ingredients'
+
+export const EMPTY_INGREDIENT = {
+  type: '',
+  image: '',
+  image_large: '',
+  name: '',
+  price: 0,
+  calories: 0,
+  proteins: 0,
+  fat: 0,
+  carbohydrates: 0,
+}
