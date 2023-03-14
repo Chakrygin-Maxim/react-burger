@@ -2,24 +2,25 @@ import burgerIngredientsStyle from './burger-ingredients.module.css'
 import IngredientsGroup from '../ingredients-group/ingredients-group'
 import Modal from '../modal/modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState, useEffect, useRef } from 'react'
+import { setCurrentItem } from '../../services/reducers/currentIngredient'
 
 import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,
-  EMPTY_INGREDIENT,
   INGREDIENT_TYPES_FILTER,
 } from '../../utils/constants'
 
 function BurgerIngredients() {
+  const dispatch = useDispatch()
   const ingredients = useSelector((store) => store.ingredients.data)
+  const currentIngredient = useSelector((store) => store.currentIngredient.item)
 
   const [activeFilter, setActiveFilter] = useState(INGREDIENTS_TYPE[0])
   const [showIngrientsDetails, setShowIngrientsDetails] = useState(false)
-  const [currentIngredient, setCurrentIngredient] = useState(EMPTY_INGREDIENT)
 
   const inViewOption = {
     threshold: 0.5,
@@ -51,7 +52,7 @@ function BurgerIngredients() {
   }
 
   const openIngredientDetails = (ingredient) => {
-    setCurrentIngredient({ ...ingredient })
+    dispatch(setCurrentItem({ ...ingredient }))
     setShowIngrientsDetails(true)
   }
 

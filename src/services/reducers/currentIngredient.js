@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { EMPTY_INGREDIENT } from '../../utils/constants'
 
 const initialState = {
-  item: {},
+  item: EMPTY_INGREDIENT,
 }
 
 const name = 'currentIngredient'
@@ -11,12 +12,11 @@ export const currentIngredientSlice = createSlice({
   initialState,
   reducers: {
     setCurrentItem(state, action) {
-      state.item = action.payload
-    },
-    removeCurrentItem(state) {
-      state.item = {}
+      state.item = { ...action.payload }
     },
   },
 })
+
+export const { setCurrentItem } = currentIngredientSlice.actions
 
 export default currentIngredientSlice.reducer
