@@ -2,13 +2,15 @@ import burgerIngredientsStyle from './burger-ingredients.module.css'
 import IngredientsGroup from '../ingredients-group/ingredients-group'
 import Modal from '../modal/modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
+import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
 import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,
   EMPTY_INGREDIENT,
+  INGREDIENT_TYPES_FILTER,
 } from '../../utils/constants'
 
 function BurgerIngredients({ ingredients }) {
@@ -16,8 +18,33 @@ function BurgerIngredients({ ingredients }) {
   const [showIngrientsDetails, setShowIngrientsDetails] = useState(false)
   const [currentIngredient, setCurrentIngredient] = useState(EMPTY_INGREDIENT)
 
+  const inViewOption = {
+    threshold: 0.5,
+  }
+
+  const [bunsRef, bunsInView] = useInView(inViewOption)
+  const [saucesRef, sauceInView] = useInView(inViewOption)
+  const [mainRef, mainInView] = useInView(inViewOption)
+
+  useEffect(() => {
+    if (bunsInView) {
+      setActiveFilter(INGREDIENT_TYPES_FILTER.bun)
+    } else if (sauceInView) {
+      setActiveFilter(INGREDIENT_TYPES_FILTER.sauce)
+    } else if (mainInView) {
+      setActiveFilter(INGREDIENT_TYPES_FILTER.main)
+    }
+  }, [bunsInView, sauceInView, mainInView])
+
+  const refs = useRef({
+    bun: { clickRef: useRef(null), scrollRef: bunsRef },
+    sauce: { clickRef: useRef(null), scrollRef: saucesRef },
+    main: { clickRef: useRef(null), scrollRef: mainRef },
+  })
+
   const hendleFilterClick = (value) => {
     setActiveFilter(value)
+    refs.current[value].clickRef.current?.scrollIntoView()
   }
 
   const openIngredientDetails = (ingredient) => {
@@ -60,6 +87,7 @@ function BurgerIngredients({ ingredients }) {
                 ingredients={filteredIngredients}
                 type={ingredientType}
                 ingredientOnClick={openIngredientDetails}
+                ref={refs}
               />
             )
           })}
