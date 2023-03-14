@@ -1,7 +1,7 @@
 import Header from '../app-header/app-header'
 import Main from '../main/main'
 
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import { getIngrediensData } from '../../services/reducers/ingredients'
 import { useDispatch, useSelector } from 'react-redux'
 

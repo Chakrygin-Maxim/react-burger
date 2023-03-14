@@ -6,7 +6,7 @@ import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
 function Main({ ingredients }) {
   return (
     <main className={mainStyle.main}>
-      <BurgerIngredients ingredients={ingredients} />
+      <BurgerIngredients />
       <BurgerConstructor ingredients={ingredients} />
     </main>
   )

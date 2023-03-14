@@ -32,7 +32,7 @@ export const ingredientsSlice = createSlice({
     })
     builder.addCase(getIngrediensData.fulfilled, (state, { payload }) => {
       state.isLoading = false
-      state.data = payload
+      state.data = [...payload]
     })
     builder.addCase(getIngrediensData.rejected, (state) => {
       state.isLoading = false

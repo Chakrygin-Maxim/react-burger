@@ -2,10 +2,11 @@ import burgerIngredientsStyle from './burger-ingredients.module.css'
 import IngredientsGroup from '../ingredients-group/ingredients-group'
 import Modal from '../modal/modal'
 import IngredientDetails from '../ingredient-details/ingredient-details'
+import { useSelector } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState, useEffect, useRef } from 'react'
-import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
+
 import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,
@@ -13,7 +14,9 @@ import {
   INGREDIENT_TYPES_FILTER,
 } from '../../utils/constants'
 
-function BurgerIngredients({ ingredients }) {
+function BurgerIngredients() {
+  const ingredients = useSelector((store) => store.ingredients.data)
+
   const [activeFilter, setActiveFilter] = useState(INGREDIENTS_TYPE[0])
   const [showIngrientsDetails, setShowIngrientsDetails] = useState(false)
   const [currentIngredient, setCurrentIngredient] = useState(EMPTY_INGREDIENT)
@@ -98,10 +101,6 @@ function BurgerIngredients({ ingredients }) {
       </Modal>
     </>
   )
-}
-
-BurgerIngredients.propTypes = {
-  ingredients: INGREDIENTS_ARRAY_TYPE.isRequired,
 }
 
 export default BurgerIngredients
