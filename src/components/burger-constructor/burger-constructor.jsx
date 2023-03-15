@@ -9,7 +9,7 @@ import {
   INGREDIENT_TYPES_FILTER,
   BURGER_POSITIONS,
 } from '../../utils/constants'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrop } from 'react-dnd/dist/hooks/useDrop'
 import {
@@ -24,14 +24,23 @@ import {
 } from '../../services/reducers/ingredients'
 
 function BurgerConstructor() {
-  let total = 0
   const dispatch = useDispatch()
   const [orderDetailsIsOpen, setRrderDetailsIsOpen] = useState(false)
+  // const [total, setTotal] = useState(0)
   const { bun, items } = useSelector((store) => store.ingredientsConstructor)
 
   const handlerButtonOnClick = () => {
     setRrderDetailsIsOpen(!orderDetailsIsOpen)
   }
+
+  const total = useMemo(() => {
+    let sum = 0
+
+    sum = bun?.price && bun.price * 2
+    items.forEach((item) => (sum = sum + item.price))
+
+    return sum
+  }, [bun, items])
 
   const updateBuns = (item) => {
     dispatch(addBun(item))
@@ -89,7 +98,7 @@ function BurgerConstructor() {
           />
         </ul>
         <div className={burgerConstructorStyle.burgerConstructor__order}>
-          <Price total={total} />
+          <Price total={total || 0} />
           <Button
             htmlType="button"
             type="primary"
