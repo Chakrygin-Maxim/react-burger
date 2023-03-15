@@ -11,16 +11,18 @@ export const constructorSlice = createSlice({
   name,
   initialState,
   reducers: {
-    addBun(state, action) {
-      state.bun = action.payload
+    addBun(state, { payload }) {
+      state.bun = payload
     },
-    addItem(state, action) {
-      state.items.push(action.payload)
+    addItem(state, { payload }) {
+      state.items.push({
+        ...payload.item,
+        _id: payload.id,
+        apiId: payload.apiId,
+      })
     },
-    removeItem(state, action) {
-      state.items = state.items.filter(
-        (item) => action.payload._id !== item._id
-      )
+    removeItem(state, { payload }) {
+      state.items = state.items.filter((item) => payload !== item._id)
     },
   },
 })

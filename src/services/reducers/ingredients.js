@@ -34,6 +34,20 @@ export const ingredientsSlice = createSlice({
         }
       })
     },
+    increaseItemCount(state, { payload }) {
+      state.data.forEach((item) => {
+        if (item.type !== INGREDIENT_TYPES_FILTER.bun) {
+          item.count = item._id === payload._id ? ++item.count : item.count
+        }
+      })
+    },
+    decreaseItemCount(state, { payload }) {
+      state.data.forEach((item) => {
+        if (item.type !== INGREDIENT_TYPES_FILTER.bun) {
+          item.count = item._id === payload.apiId ? --item.count : item.count
+        }
+      })
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getIngrediensData.pending, (state) => {
@@ -41,6 +55,7 @@ export const ingredientsSlice = createSlice({
     })
     builder.addCase(getIngrediensData.fulfilled, (state, { payload }) => {
       state.isLoading = false
+      payload.forEach((item) => (item.count = 0))
       state.data = [...payload]
     })
     builder.addCase(getIngrediensData.rejected, (state) => {
@@ -50,6 +65,7 @@ export const ingredientsSlice = createSlice({
   },
 })
 
-export const { updateBunsCount } = ingredientsSlice.actions
+export const { updateBunsCount, increaseItemCount, decreaseItemCount } =
+  ingredientsSlice.actions
 
 export default ingredientsSlice.reducer

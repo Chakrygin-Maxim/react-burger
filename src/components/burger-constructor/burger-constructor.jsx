@@ -3,6 +3,7 @@ import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 import BurgerElement from '../burger-element/burger-element'
 import Price from '../price/price'
+import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   INGREDIENT_TYPES_FILTER,
@@ -11,8 +12,16 @@ import {
 import { useState } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrop } from 'react-dnd/dist/hooks/useDrop'
-import { addBun } from '../../services/reducers/constructor'
-import { updateBunsCount } from '../../services/reducers/ingredients'
+import {
+  addBun,
+  addItem,
+  removeItem,
+} from '../../services/reducers/constructor'
+import {
+  updateBunsCount,
+  increaseItemCount,
+  decreaseItemCount,
+} from '../../services/reducers/ingredients'
 
 function BurgerConstructor() {
   let total = 0
@@ -29,10 +38,21 @@ function BurgerConstructor() {
     dispatch(updateBunsCount(item))
   }
 
+  const updateItems = (item) => {
+    dispatch(addItem({ item, id: uuidv4(), apiId: item._id }))
+    dispatch(increaseItemCount(item))
+  }
+
+  const deleteIngredient = (item) => {
+    dispatch(removeItem(item._id))
+    dispatch(decreaseItemCount(item))
+  }
+
   const [, dropTarget] = useDrop({
     accept: 'item',
     drop(item) {
       item.type === INGREDIENT_TYPES_FILTER.bun && updateBuns(item)
+      item.type !== INGREDIENT_TYPES_FILTER.bun && updateItems(item)
     },
   })
 
@@ -53,7 +73,11 @@ function BurgerConstructor() {
               return (
                 item?._id &&
                 item.type !== INGREDIENT_TYPES_FILTER.bun && (
-                  <BurgerElement key={item._id} ingredient={item} />
+                  <BurgerElement
+                    key={item._id}
+                    ingredient={item}
+                    onDelete={deleteIngredient}
+                  />
                 )
               )
             })}

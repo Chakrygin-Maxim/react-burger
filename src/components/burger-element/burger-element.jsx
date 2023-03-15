@@ -9,7 +9,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BURGER_POSITIONS_TEXT } from '../../utils/constants'
 
-function BurgerElement({ position, ingredient, isLocked }) {
+function BurgerElement({ position, ingredient, isLocked, onDelete }) {
   let name = ingredient.name
 
   if (position) {
@@ -32,6 +32,7 @@ function BurgerElement({ position, ingredient, isLocked }) {
         text={name}
         price={ingredient.price}
         thumbnail={ingredient.image || spiner}
+        handleClose={() => onDelete(ingredient)}
       />
     </li>
   )
