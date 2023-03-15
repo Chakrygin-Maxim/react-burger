@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { API_URL } from '../../utils/constants'
+import { INGREDIENT_TYPES_FILTER } from '../../utils/constants'
 
 const initialState = {
   data: [],
@@ -25,7 +26,15 @@ export const getIngrediensData = createAsyncThunk(
 export const ingredientsSlice = createSlice({
   name,
   initialState,
-  reducers: {},
+  reducers: {
+    updateBunsCount(state, { payload }) {
+      state.data.forEach((item) => {
+        if (item.type === INGREDIENT_TYPES_FILTER.bun) {
+          item.count = item._id === payload._id ? 2 : 0
+        }
+      })
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getIngrediensData.pending, (state) => {
       state.isLoading = true
@@ -40,5 +49,7 @@ export const ingredientsSlice = createSlice({
     })
   },
 })
+
+export const { updateBunsCount } = ingredientsSlice.actions
 
 export default ingredientsSlice.reducer

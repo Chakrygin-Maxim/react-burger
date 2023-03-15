@@ -1,5 +1,6 @@
 import ingredientStyle from './ingredient.module.css'
 import PropTypes from 'prop-types'
+import { useDrag } from 'react-dnd/dist/hooks'
 import { INGREDIENT_TYPE } from '../../utils/propTypes'
 import {
   CurrencyIcon,
@@ -11,8 +12,21 @@ function Ingredient({ ingredient, onClick }) {
     onClick(ingredient)
   }
 
+  const [{ opacity }, ref] = useDrag({
+    type: 'item',
+    item: ingredient,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0.5 : 1,
+    }),
+  })
+
   return (
-    <li className={ingredientStyle.ingredient} onClick={handlerOnClick}>
+    <li
+      className={ingredientStyle.ingredient}
+      onClick={handlerOnClick}
+      ref={ref}
+      style={{ opacity }}
+    >
       <Counter count={ingredient.count} size="default" extraClass="m-1" />
       <img src={ingredient.image} alt={ingredient.name}></img>
       <div className={ingredientStyle.ingredient__priceContainer}>

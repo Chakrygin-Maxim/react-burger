@@ -53,4 +53,6 @@ export const EMPTY_INGREDIENT = {
   proteins: 0,
   fat: 0,
   carbohydrates: 0,
+  count: 0,
+  _id: 0,
 }
