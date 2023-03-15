@@ -1,37 +1,34 @@
 import burgerElementStyle from './burger-element.module.css'
 import PropTypes from 'prop-types'
 import { INGREDIENT_TYPE } from '../../utils/propTypes'
-import spiner from '../../images/spinner.svg'
+import { useDrag } from 'react-dnd'
 
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { BURGER_POSITIONS_TEXT } from '../../utils/constants'
 
-function BurgerElement({ position, ingredient, isLocked, onDelete }) {
-  let name = ingredient.name
-
-  if (position) {
-    name = [
-      ingredient.name || 'Перенесите булочку',
-      BURGER_POSITIONS_TEXT[position],
-    ].join(' ')
-  }
+function BurgerElement({ position, ingredient, onDelete }) {
+  const [{ opacity }, burgerElementRef] = useDrag({
+    type: 'burgerElement',
+    item: ingredient,
+    collect: (monitor) => ({
+      opacity: monitor.isDragging() ? 0 : 1,
+    }),
+  })
 
   return (
     <li
-      className={`${burgerElementStyle.burgerElement} ${
-        position ? burgerElementStyle.burgerElement__isBun : ''
-      }`}
+      style={{ opacity }}
+      ref={burgerElementRef}
+      className={burgerElementStyle.burgerElement}
     >
-      {!isLocked && <DragIcon type="primary" />}
+      <DragIcon type="primary" />
       <ConstructorElement
         type={position}
-        isLocked={isLocked}
-        text={name}
+        text={ingredient.name}
         price={ingredient.price}
-        thumbnail={ingredient.image || spiner}
+        thumbnail={ingredient.image}
         handleClose={() => onDelete(ingredient)}
       />
     </li>

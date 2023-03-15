@@ -3,6 +3,7 @@ import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 import BurgerElement from '../burger-element/burger-element'
 import Price from '../price/price'
+import Bun from '../burger-element/bun'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -11,7 +12,7 @@ import {
 } from '../../utils/constants'
 import { useState, useMemo } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDrop } from 'react-dnd/dist/hooks/useDrop'
+import { useDrop, useDrag } from 'react-dnd/dist/hooks/useDrop'
 import {
   addBun,
   addItem,
@@ -25,18 +26,17 @@ import {
 
 function BurgerConstructor() {
   const dispatch = useDispatch()
-  const [orderDetailsIsOpen, setRrderDetailsIsOpen] = useState(false)
-  // const [total, setTotal] = useState(0)
+  const [orderDetailsIsOpen, setOrderDetailsIsOpen] = useState(false)
   const { bun, items } = useSelector((store) => store.ingredientsConstructor)
 
   const handlerButtonOnClick = () => {
-    setRrderDetailsIsOpen(!orderDetailsIsOpen)
+    setOrderDetailsIsOpen(!orderDetailsIsOpen)
   }
 
   const total = useMemo(() => {
     let sum = 0
 
-    sum = bun?.price && bun.price * 2
+    sum = (bun?.price && bun.price * 2) || 0
     items.forEach((item) => (sum = sum + item.price))
 
     return sum
@@ -72,11 +72,7 @@ function BurgerConstructor() {
         ref={dropTarget}
       >
         <ul className={burgerConstructorStyle.burgerConstructor__list}>
-          <BurgerElement
-            ingredient={bun}
-            position={BURGER_POSITIONS.TOP}
-            isLocked
-          />
+          <Bun ingredient={bun} position={BURGER_POSITIONS.TOP} isLocked />
           <div className={burgerConstructorStyle.burgerConstructor__itemsList}>
             {items.map((item) => {
               return (
@@ -91,11 +87,7 @@ function BurgerConstructor() {
               )
             })}
           </div>
-          <BurgerElement
-            ingredient={bun}
-            position={BURGER_POSITIONS.BOTTOM}
-            isLocked
-          />
+          <Bun ingredient={bun} position={BURGER_POSITIONS.BOTTOM} isLocked />
         </ul>
         <div className={burgerConstructorStyle.burgerConstructor__order}>
           <Price total={total || 0} />
