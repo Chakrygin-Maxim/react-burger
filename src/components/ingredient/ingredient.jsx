@@ -13,7 +13,7 @@ function Ingredient({ ingredient, onClick }) {
 
   return (
     <li className={ingredientStyle.ingredient} onClick={handlerOnClick}>
-      <Counter count={1} size="default" extraClass="m-1" />
+      <Counter count={ingredient.count} size="default" extraClass="m-1" />
       <img src={ingredient.image} alt={ingredient.name}></img>
       <div className={ingredientStyle.ingredient__priceContainer}>
         <p className={ingredientStyle.ingredient__price}>{ingredient.price}</p>

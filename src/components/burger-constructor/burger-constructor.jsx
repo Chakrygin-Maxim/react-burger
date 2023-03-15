@@ -25,9 +25,11 @@ function BurgerConstructor() {
     <>
       <section className={burgerConstructorStyle.burgerConstructor}>
         <ul className={burgerConstructorStyle.burgerConstructor__list}>
-          {bun?._id && (
-            <BurgerElement ingredient={bun} position={BURGER_POSITIONS.TOP} />
-          )}
+          <BurgerElement
+            ingredient={bun}
+            position={BURGER_POSITIONS.TOP}
+            isLocked
+          />
           <div className={burgerConstructorStyle.burgerConstructor__itemsList}>
             {items.map((item) => {
               return (
@@ -38,12 +40,11 @@ function BurgerConstructor() {
               )
             })}
           </div>
-          {bun?._id && (
-            <BurgerElement
-              ingredient={bun}
-              position={BURGER_POSITIONS.BOTTOM}
-            />
-          )}
+          <BurgerElement
+            ingredient={bun}
+            position={BURGER_POSITIONS.BOTTOM}
+            isLocked
+          />
         </ul>
         <div className={burgerConstructorStyle.burgerConstructor__order}>
           <Price total={total} />
