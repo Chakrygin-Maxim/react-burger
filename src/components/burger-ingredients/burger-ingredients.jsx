@@ -6,7 +6,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState, useEffect, useRef } from 'react'
-import { setCurrentItem } from '../../services/reducers/currentIngredient'
+import {
+  setCurrentItem,
+  deleteCurrentItem,
+} from '../../services/reducers/currentIngredient'
 
 import {
   INGREDIENTS_TYPE,
@@ -58,6 +61,11 @@ function BurgerIngredients() {
 
   const closeIngredientDetails = () => {
     setShowIngrientsDetails(false)
+    // таймаут чтобы картинка не пропада раньше закрытия попапа
+    const timerId = setTimeout(() => {
+      dispatch(deleteCurrentItem())
+    }, 1000)
+    clearTimeout(timerId)
   }
 
   return (

@@ -14,9 +14,13 @@ export const currentIngredientSlice = createSlice({
     setCurrentItem(state, action) {
       state.item = action.payload
     },
+    deleteCurrentItem(state) {
+      state.item = {}
+    },
   },
 })
 
-export const { setCurrentItem } = currentIngredientSlice.actions
+export const { setCurrentItem, deleteCurrentItem } =
+  currentIngredientSlice.actions
 
 export default currentIngredientSlice.reducer
