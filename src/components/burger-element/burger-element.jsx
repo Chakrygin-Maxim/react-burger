@@ -37,9 +37,9 @@ function BurgerElement({ position, ingredient }) {
   )
 }
 
-BurgerElement.propTypes = {
-  position: PropTypes.string,
-  ingredient: INGREDIENT_TYPE.isRequired,
-}
+// BurgerElement.propTypes = {
+// position: PropTypes.string,
+// ingredient: INGREDIENT_TYPE.isRequired,
+// }
 
 export default BurgerElement

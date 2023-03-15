@@ -3,7 +3,7 @@ import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 import BurgerElement from '../burger-element/burger-element'
 import Price from '../price/price'
-import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
+import { useSelector } from 'react-redux'
 import {
   INGREDIENT_TYPES_FILTER,
   BURGER_POSITIONS,
@@ -11,12 +11,11 @@ import {
 import { useState } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 
-function BurgerConstructor({ ingredients }) {
-  //временно берем булку для верстки, далее будет реализован полноценный конструктор
-  const bunIngredient = ingredients[0]
-  const total = 610
+function BurgerConstructor() {
+  let total = 0
 
   const [orderDetailsIsOpen, setRrderDetailsIsOpen] = useState(false)
+  const { bun, items } = useSelector((store) => store.ingredientsConstructor)
 
   const handlerButtonOnClick = () => {
     setRrderDetailsIsOpen(!orderDetailsIsOpen)
@@ -26,23 +25,25 @@ function BurgerConstructor({ ingredients }) {
     <>
       <section className={burgerConstructorStyle.burgerConstructor}>
         <ul className={burgerConstructorStyle.burgerConstructor__list}>
-          <BurgerElement
-            ingredient={bunIngredient}
-            position={BURGER_POSITIONS.TOP}
-          />
+          {bun?._id && (
+            <BurgerElement ingredient={bun} position={BURGER_POSITIONS.TOP} />
+          )}
           <div className={burgerConstructorStyle.burgerConstructor__itemsList}>
-            {ingredients.map((item) => {
+            {items.map((item) => {
               return (
+                item?._id &&
                 item.type !== INGREDIENT_TYPES_FILTER.bun && (
                   <BurgerElement key={item._id} ingredient={item} />
                 )
               )
             })}
           </div>
-          <BurgerElement
-            ingredient={bunIngredient}
-            position={BURGER_POSITIONS.BOTTOM}
-          />
+          {bun?._id && (
+            <BurgerElement
+              ingredient={bun}
+              position={BURGER_POSITIONS.BOTTOM}
+            />
+          )}
         </ul>
         <div className={burgerConstructorStyle.burgerConstructor__order}>
           <Price total={total} />
@@ -61,10 +62,6 @@ function BurgerConstructor({ ingredients }) {
       </Modal>
     </>
   )
-}
-
-BurgerConstructor.propTypes = {
-  ingredients: INGREDIENTS_ARRAY_TYPE.isRequired,
 }
 
 export default BurgerConstructor

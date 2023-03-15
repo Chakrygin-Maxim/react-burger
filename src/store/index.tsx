@@ -12,7 +12,7 @@ const store = configureStore({
   middleware: customizedMiddleware,
   reducer: {
     ingredients: ingredientsReducer,
-    constructor: constructorReducer,
+    ingredientsConstructor: constructorReducer,
     currentIngredient: currentIngredientReducer,
     order: orderReducer,
   },

@@ -12,7 +12,7 @@ export const currentIngredientSlice = createSlice({
   initialState,
   reducers: {
     setCurrentItem(state, action) {
-      state.item = { ...action.payload }
+      state.item = action.payload
     },
   },
 })

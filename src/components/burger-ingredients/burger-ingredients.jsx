@@ -52,7 +52,7 @@ function BurgerIngredients() {
   }
 
   const openIngredientDetails = (ingredient) => {
-    dispatch(setCurrentItem({ ...ingredient }))
+    dispatch(setCurrentItem(ingredient))
     setShowIngrientsDetails(true)
   }
 

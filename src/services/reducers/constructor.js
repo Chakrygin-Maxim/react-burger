@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-  bun: '',
+  bun: {},
   items: [],
 }
 
@@ -24,5 +24,7 @@ export const constructorSlice = createSlice({
     },
   },
 })
+
+export const { addBun, addItem, removeItem } = constructorSlice.actions
 
 export default constructorSlice.reducer
