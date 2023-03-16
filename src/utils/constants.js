@@ -56,3 +56,8 @@ export const EMPTY_INGREDIENT = {
   count: 0,
   _id: 0,
 }
+
+export const DND_TYPE = {
+  item: 'item',
+  shake: 'shake',
+}

@@ -1,27 +1,28 @@
 import burgerElementStyle from './burger-element.module.css'
 import PropTypes from 'prop-types'
-import { INGREDIENT_TYPE } from '../../utils/propTypes'
-import { useDrag } from 'react-dnd'
-
+import { useRef } from 'react'
+import {
+  useBurgerElementDrag,
+  useBurgerElementDrop,
+} from '../../utils/dndHooks'
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-function BurgerElement({ position, ingredient, onDelete }) {
-  const [{ opacity }, burgerElementRef] = useDrag({
-    type: 'shake',
-    item: ingredient,
-    collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0 : 1,
-    }),
-  })
+function BurgerElement({ position, ingredient, onDelete, index, moveCard }) {
+  const ref = useRef(null)
+  const { handlerId, drop } = useBurgerElementDrop(ref, index, moveCard)
+  const { opacity, drag } = useBurgerElementDrag(ingredient._id, index)
+
+  drag(drop(ref))
 
   return (
     <li
-      style={{ opacity }}
-      ref={burgerElementRef}
       className={burgerElementStyle.burgerElement}
+      style={{ opacity }}
+      data-handler-id={handlerId}
+      ref={ref}
     >
       <DragIcon type="primary" />
       <ConstructorElement

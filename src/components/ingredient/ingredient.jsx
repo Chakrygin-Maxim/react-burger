@@ -1,24 +1,17 @@
 import ingredientStyle from './ingredient.module.css'
 import PropTypes from 'prop-types'
-import { useDrag } from 'react-dnd/dist/hooks'
 import { INGREDIENT_TYPE } from '../../utils/propTypes'
+import { useIngredientDrag } from '../../utils/dndHooks'
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function Ingredient({ ingredient, onClick }) {
+  const { opacity, ref } = useIngredientDrag(ingredient)
   const handlerOnClick = () => {
     onClick(ingredient)
   }
-
-  const [{ opacity }, ref] = useDrag({
-    type: 'item',
-    item: ingredient,
-    collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0.5 : 1,
-    }),
-  })
 
   return (
     <li

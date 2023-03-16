@@ -6,13 +6,11 @@ import Bun from '../bun/bun'
 import BurgerElements from '../burger-elements/burger-elements'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  INGREDIENT_TYPES_FILTER,
-  BURGER_POSITIONS,
-} from '../../utils/constants'
+import { BURGER_POSITIONS } from '../../utils/constants'
 import { useState, useMemo, useCallback } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useDrop, useDrag } from 'react-dnd/dist/hooks/useDrop'
+import { BurgerConstructorDrop } from '../../utils/dndHooks'
+
 import {
   addBun,
   addItem,
@@ -60,13 +58,7 @@ function BurgerConstructor() {
     [dispatch]
   )
 
-  const [, dropTarget] = useDrop({
-    accept: 'item',
-    drop(item) {
-      item.type === INGREDIENT_TYPES_FILTER.bun && updateBuns(item)
-      item.type !== INGREDIENT_TYPES_FILTER.bun && updateItems(item)
-    },
-  })
+  const { dropTarget } = BurgerConstructorDrop(updateBuns, updateItems)
 
   return (
     <>
