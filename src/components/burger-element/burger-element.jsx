@@ -10,7 +10,7 @@ import {
 
 function BurgerElement({ position, ingredient, onDelete }) {
   const [{ opacity }, burgerElementRef] = useDrag({
-    type: 'burgerElement',
+    type: 'shake',
     item: ingredient,
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0 : 1,

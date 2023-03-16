@@ -1,0 +1,20 @@
+.burgerElements__itemsList {
+  composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  row-gap: 16px;
+}
+
+.burgerElements__itemsList::-webkit-scrollbar {
+  /* scrollbar */
+  /* переопределяем согласно макету фигмы */
+  width: 8px;
+}
+.burgerElements__itemsList::-webkit-scrollbar-thumb {
+  /* thumb */
+  /* переопределяем согласно макету фигмы */
+  border-radius: 0px;
+  border: 3px solid #8585ad;
+}
+

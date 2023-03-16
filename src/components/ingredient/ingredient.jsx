@@ -16,7 +16,7 @@ function Ingredient({ ingredient, onClick }) {
     type: 'item',
     item: ingredient,
     collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0 : 1,
+      opacity: monitor.isDragging() ? 0.5 : 1,
     }),
   })
 

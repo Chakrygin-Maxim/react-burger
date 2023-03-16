@@ -1,16 +1,16 @@
 import burgerConstructorStyle from './burger-constructor.module.css'
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
-import BurgerElement from '../burger-element/burger-element'
 import Price from '../price/price'
-import Bun from '../burger-element/bun'
+import Bun from '../bun/bun'
+import BurgerElements from '../burger-elements/burger-elements'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   INGREDIENT_TYPES_FILTER,
   BURGER_POSITIONS,
 } from '../../utils/constants'
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useDrop, useDrag } from 'react-dnd/dist/hooks/useDrop'
 import {
@@ -52,10 +52,13 @@ function BurgerConstructor() {
     dispatch(increaseItemCount(item))
   }
 
-  const deleteIngredient = (item) => {
-    dispatch(removeItem(item._id))
-    dispatch(decreaseItemCount(item))
-  }
+  const deleteIngredient = useCallback(
+    (item) => {
+      dispatch(removeItem(item._id))
+      dispatch(decreaseItemCount(item))
+    },
+    [dispatch]
+  )
 
   const [, dropTarget] = useDrop({
     accept: 'item',
@@ -73,20 +76,7 @@ function BurgerConstructor() {
       >
         <ul className={burgerConstructorStyle.burgerConstructor__list}>
           <Bun ingredient={bun} position={BURGER_POSITIONS.TOP} isLocked />
-          <div className={burgerConstructorStyle.burgerConstructor__itemsList}>
-            {items.map((item) => {
-              return (
-                item?._id &&
-                item.type !== INGREDIENT_TYPES_FILTER.bun && (
-                  <BurgerElement
-                    key={item._id}
-                    ingredient={item}
-                    onDelete={deleteIngredient}
-                  />
-                )
-              )
-            })}
-          </div>
+          <BurgerElements items={items} deleteIngredient={deleteIngredient} />
           <Bun ingredient={bun} position={BURGER_POSITIONS.BOTTOM} isLocked />
         </ul>
         <div className={burgerConstructorStyle.burgerConstructor__order}>
