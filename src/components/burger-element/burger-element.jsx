@@ -10,9 +10,9 @@ import {
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-function BurgerElement({ position, ingredient, onDelete, index, moveCard }) {
+function BurgerElement({ position, ingredient, onDelete, index, moveElement }) {
   const ref = useRef(null)
-  const { handlerId, drop } = useBurgerElementDrop(ref, index, moveCard)
+  const { handlerId, drop } = useBurgerElementDrop(ref, index, moveElement)
   const { opacity, drag } = useBurgerElementDrag(ingredient._id, index)
 
   drag(drop(ref))

@@ -8,7 +8,7 @@ import { useDispatch } from 'react-redux'
 
 function BurgerElements({ items, deleteIngredient }) {
   const dispatch = useDispatch()
-  const moveCard = useCallback(
+  const moveElement = useCallback(
     (dragIndex, hoverIndex) => {
       const newItems = update(items, {
         $splice: [
@@ -32,7 +32,7 @@ function BurgerElements({ items, deleteIngredient }) {
               ingredient={item}
               onDelete={deleteIngredient}
               index={index}
-              moveCard={moveCard}
+              moveElement={moveElement}
             />
           )
         )

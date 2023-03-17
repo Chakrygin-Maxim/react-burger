@@ -1,7 +1,7 @@
 import { useDrop, useDrag } from 'react-dnd'
 import { DND_TYPE, INGREDIENT_TYPES_FILTER } from './constants'
 
-export const useBurgerElementDrop = (ref, index, moveCard) => {
+export const useBurgerElementDrop = (ref, index, moveElement) => {
   const [{ handlerId }, drop] = useDrop({
     accept: DND_TYPE.shake,
     collect(monitor) {
@@ -35,7 +35,7 @@ export const useBurgerElementDrop = (ref, index, moveCard) => {
         return
       }
 
-      moveCard(dragIndex, hoverIndex)
+      moveElement(dragIndex, hoverIndex)
 
       item.index = hoverIndex
     },
