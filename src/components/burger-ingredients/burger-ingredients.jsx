@@ -61,7 +61,7 @@ function BurgerIngredients() {
 
   const closeIngredientDetails = () => {
     setShowIngrientsDetails(false)
-    // таймаут чтобы картинка не пропада раньше закрытия попапа
+    // таймаут чтобы картинка не пропадала раньше закрытия попапа
     const timerId = setTimeout(() => {
       dispatch(deleteCurrentItem())
     }, 1000)
