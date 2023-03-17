@@ -12,13 +12,13 @@ const IngredientsGroup = forwardRef(
   ({ ingredients, type, ingredientOnClick }, ref) => {
     return (
       <li id={type} ref={ref.current[type].clickRef}>
-        <h2
-          className={ingredientsGroupStyle.ingredientsGroup__header}
-          ref={ref.current[type].scrollRef}
-        >
+        <h2 className={ingredientsGroupStyle.ingredientsGroup__header}>
           {INGREDIENT_TYPES_FILTER_TEXT[type]}
         </h2>
-        <ul className={ingredientsGroupStyle.ingredientsGroup__typeGroup}>
+        <ul
+          className={ingredientsGroupStyle.ingredientsGroup__typeGroup}
+          ref={ref.current[type].scrollRef}
+        >
           {ingredients.map((ingredient) => (
             <Ingredient
               key={ingredient._id}
