@@ -45,20 +45,20 @@ function BurgerConstructor() {
     dispatch(updateBunsCount(item))
   }
 
-  const updateItems = (item) => {
-    dispatch(addItem({ item, id: uuidv4(), apiId: item._id }))
+  const addIngredient = (item) => {
+    dispatch(addItem({ item, id: uuidv4() }))
     dispatch(increaseItemCount(item))
   }
 
   const deleteIngredient = useCallback(
     (item) => {
-      dispatch(removeItem(item._id))
+      dispatch(removeItem(item.id))
       dispatch(decreaseItemCount(item))
     },
     [dispatch]
   )
 
-  const { dropTarget } = BurgerConstructorDrop(updateBuns, updateItems)
+  const { dropTarget } = BurgerConstructorDrop(updateBuns, addIngredient)
 
   return (
     <>

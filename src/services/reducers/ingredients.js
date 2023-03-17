@@ -44,7 +44,7 @@ export const ingredientsSlice = createSlice({
     decreaseItemCount(state, { payload }) {
       state.data.forEach((item) => {
         if (item.type !== INGREDIENT_TYPES_FILTER.bun) {
-          item.count = item._id === payload.apiId ? --item.count : item.count
+          item.count = item._id === payload._id ? --item.count : item.count
         }
       })
     },

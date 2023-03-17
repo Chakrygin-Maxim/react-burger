@@ -17,12 +17,11 @@ export const constructorSlice = createSlice({
     addItem(state, { payload }) {
       state.items.push({
         ...payload.item,
-        _id: payload.id,
-        apiId: payload.apiId,
+        id: payload.id,
       })
     },
     removeItem(state, { payload }) {
-      state.items = state.items.filter((item) => payload !== item._id)
+      state.items = state.items.filter((item) => payload !== item.id)
     },
     updateItems(state, { payload }) {
       state.items = [...payload]

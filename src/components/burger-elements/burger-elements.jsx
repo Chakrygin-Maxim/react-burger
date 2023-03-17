@@ -28,7 +28,7 @@ function BurgerElements({ items, deleteIngredient }) {
           item?._id &&
           item.type !== INGREDIENT_TYPES_FILTER.bun && (
             <BurgerElement
-              key={item._id}
+              key={item.id}
               ingredient={item}
               onDelete={deleteIngredient}
               index={index}
