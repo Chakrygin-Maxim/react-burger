@@ -11,10 +11,10 @@ const initialState = {
 const name = 'ingredients'
 
 export const getIngrediensData = createAsyncThunk(
-  name + '/getIngrediensData',
+  name + '/getIngrediens',
   async () => {
     try {
-      const res = await fetch(API_URL)
+      const res = await fetch(API_URL + '/ingredients')
       const result = await res.json()
       return result.data
     } catch (err) {
