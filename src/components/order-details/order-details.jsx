@@ -3,10 +3,10 @@ import done from '../../images/done.svg'
 import PropTypes from 'prop-types'
 import { ORDER_TEXTS } from '../../utils/constants'
 
-function OrderDetails({ orderId }) {
+function OrderDetails({ orderNumber }) {
   return (
     <>
-      <h2 className={orderDetailsStyle.orderDetails__header}>{orderId}</h2>
+      <h2 className={orderDetailsStyle.orderDetails__header}>{orderNumber}</h2>
       <span className={orderDetailsStyle.orderDetails__title}>
         {ORDER_TEXTS.orderId}
       </span>
@@ -26,7 +26,7 @@ function OrderDetails({ orderId }) {
 }
 
 OrderDetails.propTypes = {
-  orderId: PropTypes.string.isRequired,
+  // orderNumber: PropTypes.string.isRequired,
 }
 
 export default OrderDetails

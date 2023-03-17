@@ -1,5 +1,6 @@
 import burgerConstructorStyle from './burger-constructor.module.css'
 import OrderDetails from '../order-details/order-details'
+import OrderError from '../order-error/order-error'
 import Modal from '../modal/modal'
 import Price from '../price/price'
 import Bun from '../bun/bun'
@@ -10,6 +11,7 @@ import { BURGER_POSITIONS } from '../../utils/constants'
 import { useState, useMemo, useCallback } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BurgerConstructorDrop } from '../../utils/dndHooks'
+import { postOrder } from '../../services/reducers/order'
 
 import {
   addBun,
@@ -26,9 +28,18 @@ function BurgerConstructor() {
   const dispatch = useDispatch()
   const [orderDetailsIsOpen, setOrderDetailsIsOpen] = useState(false)
   const { bun, items } = useSelector((store) => store.ingredientsConstructor)
+  const { orderNumber, isLoading, hasError } = useSelector(
+    (store) => store.order
+  )
 
   const handlerButtonOnClick = () => {
-    setOrderDetailsIsOpen(!orderDetailsIsOpen)
+    const order = { ingredients: [bun._id, ...items.map((item) => item._id)] }
+    dispatch(postOrder(order))
+    setOrderDetailsIsOpen(true)
+  }
+
+  const handleCloseModal = () => {
+    setOrderDetailsIsOpen(false)
   }
 
   const total = useMemo(() => {
@@ -83,8 +94,10 @@ function BurgerConstructor() {
           </Button>
         </div>
       </section>
-      <Modal onClose={handlerButtonOnClick} isOpen={orderDetailsIsOpen}>
-        <OrderDetails orderId={'034536'} />
+
+      <Modal onClose={handleCloseModal} isOpen={orderDetailsIsOpen}>
+        {hasError && <OrderError />}
+        {!isLoading && !hasError && <OrderDetails orderNumber={orderNumber} />}
       </Modal>
     </>
   )

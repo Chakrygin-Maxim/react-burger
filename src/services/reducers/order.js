@@ -11,7 +11,7 @@ const initialState = {
 const name = 'order'
 
 export const postOrder = createAsyncThunk(
-  name + '/postOrders',
+  name + '/postOrder',
   async (order) => {
     try {
       const res = await fetch(API_URL + '/orders', {
@@ -22,7 +22,7 @@ export const postOrder = createAsyncThunk(
         body: JSON.stringify(order),
       })
       const result = await res.json()
-      return result.data
+      return result
     } catch (err) {
       console.log('faild to fetch', err)
     }
@@ -42,12 +42,17 @@ export const orderSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(postOrder.pending, (state) => {
+      state.hasError = false
       state.isLoading = true
     })
     builder.addCase(postOrder.fulfilled, (state, { payload }) => {
       state.isLoading = false
-      state.name = payload.name
-      state.orderNumber = payload.order.number
+      if (payload.success) {
+        state.name = payload.name
+        state.orderNumber = payload.order.number
+      } else {
+        state.hasError = true
+      }
     })
     builder.addCase(postOrder.rejected, (state) => {
       state.isLoading = false
