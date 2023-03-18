@@ -16,9 +16,10 @@ export const getIngrediensData = createAsyncThunk(
     try {
       const res = await fetch(API_URL + '/ingredients')
       const result = await res.json()
-      return result.data
+      return result
     } catch (err) {
       console.log('faild to fetch', err)
+      return { success: false }
     }
   }
 )
@@ -58,8 +59,12 @@ export const ingredientsSlice = createSlice({
     })
     builder.addCase(getIngrediensData.fulfilled, (state, { payload }) => {
       state.isLoading = false
-      payload.forEach((item) => (item.count = 0))
-      state.data = [...payload]
+      if (payload.success) {
+        payload.data.forEach((item) => (item.count = 0))
+        state.data = [...payload.data]
+      } else {
+        state.hasError = true
+      }
     })
     builder.addCase(getIngrediensData.rejected, (state) => {
       state.isLoading = false

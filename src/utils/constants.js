@@ -47,6 +47,7 @@ export const EMPTY_INGREDIENT = {
   type: 'main',
   image: '',
   image_large: '',
+  image_mobile: '',
   name: '',
   price: 0,
   calories: 0,

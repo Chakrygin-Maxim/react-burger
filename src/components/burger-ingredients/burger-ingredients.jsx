@@ -21,7 +21,6 @@ function BurgerIngredients() {
   const dispatch = useDispatch()
   const ingredients = useSelector((store) => store.ingredients.data)
   const currentIngredient = useSelector((store) => store.currentIngredient.item)
-
   const [activeFilter, setActiveFilter] = useState(INGREDIENTS_TYPE[0])
   const [showIngrientsDetails, setShowIngrientsDetails] = useState(false)
 
@@ -61,11 +60,9 @@ function BurgerIngredients() {
 
   const closeIngredientDetails = () => {
     setShowIngrientsDetails(false)
-    // таймаут чтобы картинка не пропадала раньше закрытия попапа
-    const timerId = setTimeout(() => {
+    setTimeout(() => {
       dispatch(deleteCurrentItem())
-    }, 1000)
-    clearTimeout(timerId)
+    }, 100)
   }
 
   return (

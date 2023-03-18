@@ -15,7 +15,7 @@ export const currentIngredientSlice = createSlice({
       state.item = action.payload
     },
     deleteCurrentItem(state) {
-      state.item = {}
+      state.item = EMPTY_INGREDIENT
     },
   },
 })

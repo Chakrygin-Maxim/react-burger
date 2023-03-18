@@ -41,9 +41,11 @@ function BurgerConstructor() {
 
   const handleCloseModal = () => {
     setOrderDetailsIsOpen(false)
-    dispatch(cleanOrder())
-    dispatch(deleteItems())
-    dispatch(resetItemsCount())
+    setTimeout(() => {
+      dispatch(cleanOrder())
+      dispatch(deleteItems())
+      dispatch(resetItemsCount())
+    }, 100)
   }
 
   const updateBuns = (item) => {

@@ -25,6 +25,7 @@ export const postOrder = createAsyncThunk(
       return result
     } catch (err) {
       console.log('faild to fetch', err)
+      return { success: false }
     }
   }
 )
