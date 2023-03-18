@@ -23,13 +23,17 @@ export const constructorSlice = createSlice({
     removeItem(state, { payload }) {
       state.items = state.items.filter((item) => payload !== item.id)
     },
+    deleteItems(state) {
+      state.bun = {}
+      state.items = []
+    },
     updateItems(state, { payload }) {
       state.items = [...payload]
     },
   },
 })
 
-export const { addBun, addItem, removeItem, updateItems } =
+export const { addBun, addItem, removeItem, updateItems, deleteItems } =
   constructorSlice.actions
 
 export default constructorSlice.reducer

@@ -11,17 +11,18 @@ import { BURGER_POSITIONS } from '../../utils/constants'
 import { useState, useMemo, useCallback } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BurgerConstructorDrop } from '../../utils/dndHooks'
-import { postOrder } from '../../services/reducers/order'
-
+import { postOrder, cleanOrder } from '../../services/reducers/order'
 import {
   addBun,
   addItem,
   removeItem,
+  deleteItems,
 } from '../../services/reducers/constructor'
 import {
   updateBunsCount,
   increaseItemCount,
   decreaseItemCount,
+  resetItemsCount,
 } from '../../services/reducers/ingredients'
 
 function BurgerConstructor() {
@@ -40,16 +41,10 @@ function BurgerConstructor() {
 
   const handleCloseModal = () => {
     setOrderDetailsIsOpen(false)
+    dispatch(cleanOrder())
+    dispatch(deleteItems())
+    dispatch(resetItemsCount())
   }
-
-  const total = useMemo(() => {
-    let sum = 0
-
-    sum = (bun?.price && bun.price * 2) || 0
-    items.forEach((item) => (sum = sum + item.price))
-
-    return sum
-  }, [bun, items])
 
   const updateBuns = (item) => {
     dispatch(addBun(item))
@@ -70,6 +65,15 @@ function BurgerConstructor() {
   )
 
   const { dropTarget } = BurgerConstructorDrop(updateBuns, addIngredient)
+
+  const total = useMemo(() => {
+    let sum = 0
+
+    sum = (bun?.price && bun.price * 2) || 0
+    items.forEach((item) => (sum = sum + item.price))
+
+    return sum
+  }, [bun, items])
 
   return (
     <>

@@ -48,6 +48,9 @@ export const ingredientsSlice = createSlice({
         }
       })
     },
+    resetItemsCount(state) {
+      state.data.forEach((item) => (item.count = 0))
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getIngrediensData.pending, (state) => {
@@ -65,7 +68,11 @@ export const ingredientsSlice = createSlice({
   },
 })
 
-export const { updateBunsCount, increaseItemCount, decreaseItemCount } =
-  ingredientsSlice.actions
+export const {
+  updateBunsCount,
+  increaseItemCount,
+  decreaseItemCount,
+  resetItemsCount,
+} = ingredientsSlice.actions
 
 export default ingredientsSlice.reducer
