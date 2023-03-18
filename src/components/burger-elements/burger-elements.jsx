@@ -21,6 +21,8 @@ function BurgerElements({ items, deleteIngredient }) {
     [dispatch, items]
   )
 
+  const extraClass = items.length > 5 ? 'pr-2' : 'pr-4'
+
   return (
     <div className={burgerElementsStyle.burgerElements__itemsList}>
       {items.map((item, index) => {
@@ -33,6 +35,7 @@ function BurgerElements({ items, deleteIngredient }) {
               onDelete={deleteIngredient}
               index={index}
               moveElement={moveElement}
+              extraClass={extraClass}
             />
           )
         )
