@@ -1,6 +1,8 @@
 import burgerElementsStyle from './burger-elements.module.css'
 import BurgerElement from '../burger-element/burger-element'
 import update from 'immutability-helper'
+import PropTypes from 'prop-types'
+import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
 import { updateItems } from '../../services/reducers/constructor'
 import { useCallback } from 'react'
 import { INGREDIENT_TYPES_FILTER } from '../../utils/constants'
@@ -42,6 +44,11 @@ function BurgerElements({ items, deleteIngredient }) {
       })}
     </div>
   )
+}
+
+BurgerElements.propTypes = {
+  items: INGREDIENTS_ARRAY_TYPE,
+  deleteIngredient: PropTypes.func,
 }
 
 export default BurgerElements

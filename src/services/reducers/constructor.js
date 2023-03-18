@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { EMPTY_INGREDIENT } from '../../utils/constants'
 
 const initialState = {
-  bun: {},
+  bun: EMPTY_INGREDIENT,
   items: [],
 }
 
@@ -24,7 +25,7 @@ export const constructorSlice = createSlice({
       state.items = state.items.filter((item) => payload !== item.id)
     },
     deleteItems(state) {
-      state.bun = {}
+      state.bun = EMPTY_INGREDIENT
       state.items = []
     },
     updateItems(state, { payload }) {

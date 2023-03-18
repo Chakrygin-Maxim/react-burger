@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { INGREDIENTS_TYPE } from './constants'
+import { INGREDIENTS_TYPE, BURGER_POSITIONS } from './constants'
 
 export const INGREDIENT_TYPES_TYPE = PropTypes.oneOf(INGREDIENTS_TYPE)
 
@@ -14,5 +14,10 @@ export const INGREDIENT_TYPE = PropTypes.shape({
   fat: PropTypes.number.isRequired,
   carbohydrates: PropTypes.number.isRequired,
 })
+
+export const BURGER_POSITIONS_TYPE = PropTypes.oneOf([
+  BURGER_POSITIONS.TOP,
+  BURGER_POSITIONS.BOTTOM,
+])
 
 export const INGREDIENTS_ARRAY_TYPE = PropTypes.arrayOf(INGREDIENT_TYPE)

@@ -1,5 +1,6 @@
 import burgerElementStyle from './burger-element.module.css'
 import PropTypes from 'prop-types'
+import { BURGER_POSITIONS_TYPE, INGREDIENT_TYPE } from '../../utils/propTypes'
 import { useRef } from 'react'
 import {
   useBurgerElementDrag,
@@ -43,9 +44,13 @@ function BurgerElement({
   )
 }
 
-// BurgerElement.propTypes = {
-// position: PropTypes.string,
-// ingredient: INGREDIENT_TYPE.isRequired,
-// }
+BurgerElement.propTypes = {
+  position: BURGER_POSITIONS_TYPE,
+  ingredient: INGREDIENT_TYPE.isRequired,
+  onDelete: PropTypes.func,
+  index: PropTypes.number,
+  moveElement: PropTypes.func,
+  extraClass: PropTypes.string,
+}
 
 export default BurgerElement
