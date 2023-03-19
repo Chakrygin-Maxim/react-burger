@@ -1,19 +1,26 @@
 import ingredientStyle from './ingredient.module.css'
 import PropTypes from 'prop-types'
 import { INGREDIENT_TYPE } from '../../utils/propTypes'
+import { useIngredientDrag } from '../../utils/dndHooks'
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function Ingredient({ ingredient, onClick }) {
+  const { opacity, ref } = useIngredientDrag(ingredient)
   const handlerOnClick = () => {
     onClick(ingredient)
   }
 
   return (
-    <li className={ingredientStyle.ingredient} onClick={handlerOnClick}>
-      <Counter count={1} size="default" extraClass="m-1" />
+    <li
+      className={ingredientStyle.ingredient}
+      onClick={handlerOnClick}
+      ref={ref}
+      style={{ opacity }}
+    >
+      <Counter count={ingredient.count} size="default" extraClass="m-1" />
       <img src={ingredient.image} alt={ingredient.name}></img>
       <div className={ingredientStyle.ingredient__priceContainer}>
         <p className={ingredientStyle.ingredient__price}>{ingredient.price}</p>

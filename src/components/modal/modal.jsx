@@ -34,7 +34,7 @@ function Modal({ children, onClose, isOpen }) {
 }
 
 Modal.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.array]),
   onClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool,
 }

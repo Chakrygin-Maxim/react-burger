@@ -1,0 +1,7 @@
+.bunElement {
+  composes: mr-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 14px;
+}

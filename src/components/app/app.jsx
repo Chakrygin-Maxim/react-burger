@@ -1,7 +1,12 @@
 import Header from '../app-header/app-header'
 import Main from '../main/main'
-import { API_URL } from '../../utils/constants'
-import { useState, useEffect } from 'react'
+
+import { useEffect } from 'react'
+import {
+  getIngrediensData,
+  getIngredients,
+} from '../../services/reducers/ingredients'
+import { useDispatch, useSelector } from 'react-redux'
 
 function EmptyBlock() {
   // можно добавить спинер в момент загрузки,
@@ -11,35 +16,20 @@ function EmptyBlock() {
 }
 
 function App() {
-  const [isLoading, setIsLoding] = useState(true)
-  const [hasError, setHasError] = useState(false)
-  const [ingredients, setIngredients] = useState([])
+  const dispatch = useDispatch()
+  const { data, isLoading, hasError } = useSelector(getIngredients)
 
   useEffect(() => {
-    const getIngredients = async () => {
-      try {
-        const res = await fetch(API_URL)
-        if (res.ok) {
-          const result = await res.json()
-          setIngredients(result.data)
-        }
-      } catch (err) {
-        setHasError(true)
-        console.log('faild to fetch', err)
-      } finally {
-        setIsLoding(false)
-      }
-    }
-    getIngredients()
-  }, [])
+    dispatch(getIngrediensData())
+  }, [dispatch])
 
   return (
     <>
       <Header />
       {isLoading ? (
         <EmptyBlock />
-      ) : ingredients.length && !hasError ? (
-        <Main ingredients={ingredients} />
+      ) : data.length && !hasError ? (
+        <Main ingredients={data} />
       ) : (
         <EmptyBlock />
       )}

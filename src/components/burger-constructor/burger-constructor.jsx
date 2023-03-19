@@ -1,51 +1,94 @@
 import burgerConstructorStyle from './burger-constructor.module.css'
 import OrderDetails from '../order-details/order-details'
+import OrderError from '../order-error/order-error'
 import Modal from '../modal/modal'
-import BurgerElement from '../burger-element/burger-element'
 import Price from '../price/price'
-import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
-import {
-  INGREDIENT_TYPES_FILTER,
-  BURGER_POSITIONS,
-} from '../../utils/constants'
-import { useState } from 'react'
+import Bun from '../bun/bun'
+import BurgerElements from '../burger-elements/burger-elements'
+import { v4 as uuidv4 } from 'uuid'
+import { useDispatch, useSelector } from 'react-redux'
+import { BURGER_POSITIONS } from '../../utils/constants'
+import { useState, useMemo, useCallback } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
+import { BurgerConstructorDrop } from '../../utils/dndHooks'
+import { postOrder, cleanOrder, getOrder } from '../../services/reducers/order'
+import {
+  addBun,
+  addItem,
+  removeItem,
+  deleteItems,
+  getIngredientsConstructor,
+} from '../../services/reducers/constructor'
+import {
+  updateBunsCount,
+  increaseItemCount,
+  decreaseItemCount,
+  resetItemsCount,
+} from '../../services/reducers/ingredients'
 
-function BurgerConstructor({ ingredients }) {
-  //временно берем булку для верстки, далее будет реализован полноценный конструктор
-  const bunIngredient = ingredients[0]
-  const total = 610
-
-  const [orderDetailsIsOpen, setRrderDetailsIsOpen] = useState(false)
+function BurgerConstructor() {
+  const dispatch = useDispatch()
+  const [orderDetailsIsOpen, setOrderDetailsIsOpen] = useState(false)
+  const { bun, items } = useSelector(getIngredientsConstructor)
+  const { orderNumber, isLoading, hasError } = useSelector(getOrder)
 
   const handlerButtonOnClick = () => {
-    setRrderDetailsIsOpen(!orderDetailsIsOpen)
+    const order = { ingredients: [bun._id, ...items.map((item) => item._id)] }
+    dispatch(postOrder(order))
+    setOrderDetailsIsOpen(true)
   }
+
+  const handleCloseModal = () => {
+    setOrderDetailsIsOpen(false)
+    setTimeout(() => {
+      dispatch(cleanOrder())
+      dispatch(deleteItems())
+      dispatch(resetItemsCount())
+    }, 100)
+  }
+
+  const updateBuns = (item) => {
+    dispatch(addBun(item))
+    dispatch(updateBunsCount(item))
+  }
+
+  const addIngredient = (item) => {
+    dispatch(addItem({ item, id: uuidv4() }))
+    dispatch(increaseItemCount(item))
+  }
+
+  const deleteIngredient = useCallback(
+    (item) => {
+      dispatch(removeItem(item.id))
+      dispatch(decreaseItemCount(item))
+    },
+    [dispatch]
+  )
+
+  const { dropTarget } = BurgerConstructorDrop(updateBuns, addIngredient)
+
+  const total = useMemo(() => {
+    let sum = 0
+
+    sum = (bun?.price && bun.price * 2) || 0
+    items.forEach((item) => (sum = sum + item.price))
+
+    return sum
+  }, [bun, items])
 
   return (
     <>
-      <section className={burgerConstructorStyle.burgerConstructor}>
+      <section
+        className={burgerConstructorStyle.burgerConstructor}
+        ref={dropTarget}
+      >
         <ul className={burgerConstructorStyle.burgerConstructor__list}>
-          <BurgerElement
-            ingredient={bunIngredient}
-            position={BURGER_POSITIONS.TOP}
-          />
-          <div className={burgerConstructorStyle.burgerConstructor__itemsList}>
-            {ingredients.map((item) => {
-              return (
-                item.type !== INGREDIENT_TYPES_FILTER.bun && (
-                  <BurgerElement key={item._id} ingredient={item} />
-                )
-              )
-            })}
-          </div>
-          <BurgerElement
-            ingredient={bunIngredient}
-            position={BURGER_POSITIONS.BOTTOM}
-          />
+          <Bun ingredient={bun} position={BURGER_POSITIONS.TOP} isLocked />
+          <BurgerElements items={items} deleteIngredient={deleteIngredient} />
+          <Bun ingredient={bun} position={BURGER_POSITIONS.BOTTOM} isLocked />
         </ul>
         <div className={burgerConstructorStyle.burgerConstructor__order}>
-          <Price total={total} />
+          <Price total={total || 0} />
           <Button
             htmlType="button"
             type="primary"
@@ -56,15 +99,13 @@ function BurgerConstructor({ ingredients }) {
           </Button>
         </div>
       </section>
-      <Modal onClose={handlerButtonOnClick} isOpen={orderDetailsIsOpen}>
-        <OrderDetails orderId={'034536'} />
+
+      <Modal onClose={handleCloseModal} isOpen={orderDetailsIsOpen}>
+        {hasError && <OrderError />}
+        {!isLoading && !hasError && <OrderDetails orderNumber={orderNumber} />}
       </Modal>
     </>
   )
-}
-
-BurgerConstructor.propTypes = {
-  ingredients: INGREDIENTS_ARRAY_TYPE.isRequired,
 }
 
 export default BurgerConstructor

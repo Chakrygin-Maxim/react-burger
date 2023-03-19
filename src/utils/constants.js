@@ -41,16 +41,24 @@ export const ORDER_TEXTS = Object.freeze({
   waiting: 'Дождитесь готовности на орбитальной станции',
 })
 
-export const API_URL = 'https://norma.nomoreparties.space/api/ingredients'
+export const API_URL = 'https://norma.nomoreparties.space/api'
 
 export const EMPTY_INGREDIENT = {
   type: 'main',
   image: '',
   image_large: '',
+  image_mobile: '',
   name: '',
   price: 0,
   calories: 0,
   proteins: 0,
   fat: 0,
   carbohydrates: 0,
+  count: 0,
+  _id: 0,
+}
+
+export const DND_TYPE = {
+  item: 'item',
+  shake: 'shake',
 }

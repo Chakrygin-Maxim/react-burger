@@ -1,19 +1,18 @@
 import mainStyle from './main.module.css'
 import BurgerIngredients from '../burger-ingredients/burger-ingredients'
 import BurgerConstructor from '../burger-constructor/burger-constructor'
-import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd'
 
-function Main({ ingredients }) {
+function Main() {
   return (
     <main className={mainStyle.main}>
-      <BurgerIngredients ingredients={ingredients} />
-      <BurgerConstructor ingredients={ingredients} />
+      <DndProvider backend={HTML5Backend}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </DndProvider>
     </main>
   )
-}
-
-Main.propTypes = {
-  ingredients: INGREDIENTS_ARRAY_TYPE.isRequired,
 }
 
 export default Main

@@ -1,45 +1,56 @@
 import burgerElementStyle from './burger-element.module.css'
 import PropTypes from 'prop-types'
-import { INGREDIENT_TYPE } from '../../utils/propTypes'
+import { BURGER_POSITIONS_TYPE, INGREDIENT_TYPE } from '../../utils/propTypes'
+import { useRef } from 'react'
+import {
+  useBurgerElementDrag,
+  useBurgerElementDrop,
+} from '../../utils/dndHooks'
 import {
   ConstructorElement,
   DragIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import {
-  BURGER_POSITIONS_TEXT,
-  INGREDIENT_TYPES_FILTER,
-} from '../../utils/constants'
 
-function BurgerElement({ position, ingredient }) {
-  let name = ingredient.name
+function BurgerElement({
+  position,
+  ingredient,
+  onDelete,
+  index,
+  moveElement,
+  extraClass,
+}) {
+  const ref = useRef(null)
+  const { handlerId, drop } = useBurgerElementDrop(ref, index, moveElement)
+  const { opacity, drag } = useBurgerElementDrag(ingredient._id, index)
 
-  if (position) {
-    name = [name, BURGER_POSITIONS_TEXT[position]].join(' ')
-  }
+  drag(drop(ref))
 
   return (
     <li
-      className={`${burgerElementStyle.burgerElement} ${
-        position ? burgerElementStyle.burgerElement__isBun : ''
-      }`}
+      className={`${burgerElementStyle.burgerElement} ${extraClass}`}
+      style={{ opacity }}
+      data-handler-id={handlerId}
+      ref={ref}
     >
-      {ingredient.type !== INGREDIENT_TYPES_FILTER.bun && (
-        <DragIcon type="primary" />
-      )}
+      <DragIcon type="primary" />
       <ConstructorElement
         type={position}
-        isLocked={ingredient.type === INGREDIENT_TYPES_FILTER.bun}
-        text={name}
+        text={ingredient.name}
         price={ingredient.price}
         thumbnail={ingredient.image}
+        handleClose={() => onDelete(ingredient)}
       />
     </li>
   )
 }
 
 BurgerElement.propTypes = {
-  position: PropTypes.string,
+  position: BURGER_POSITIONS_TYPE,
   ingredient: INGREDIENT_TYPE.isRequired,
+  onDelete: PropTypes.func,
+  index: PropTypes.number,
+  moveElement: PropTypes.func,
+  extraClass: PropTypes.string,
 }
 
 export default BurgerElement
