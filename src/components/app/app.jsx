@@ -2,7 +2,10 @@ import Header from '../app-header/app-header'
 import Main from '../main/main'
 
 import { useEffect } from 'react'
-import { getIngrediensData } from '../../services/reducers/ingredients'
+import {
+  getIngrediensData,
+  getIngredients,
+} from '../../services/reducers/ingredients'
 import { useDispatch, useSelector } from 'react-redux'
 
 function EmptyBlock() {
@@ -14,9 +17,7 @@ function EmptyBlock() {
 
 function App() {
   const dispatch = useDispatch()
-  const { data, isLoading, hasError } = useSelector(
-    (store) => store.ingredients
-  )
+  const { data, isLoading, hasError } = useSelector(getIngredients)
 
   useEffect(() => {
     dispatch(getIngrediensData())

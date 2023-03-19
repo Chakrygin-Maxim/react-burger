@@ -11,12 +11,13 @@ import { BURGER_POSITIONS } from '../../utils/constants'
 import { useState, useMemo, useCallback } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BurgerConstructorDrop } from '../../utils/dndHooks'
-import { postOrder, cleanOrder } from '../../services/reducers/order'
+import { postOrder, cleanOrder, getOrder } from '../../services/reducers/order'
 import {
   addBun,
   addItem,
   removeItem,
   deleteItems,
+  getIngredientsConstructor,
 } from '../../services/reducers/constructor'
 import {
   updateBunsCount,
@@ -28,10 +29,8 @@ import {
 function BurgerConstructor() {
   const dispatch = useDispatch()
   const [orderDetailsIsOpen, setOrderDetailsIsOpen] = useState(false)
-  const { bun, items } = useSelector((store) => store.ingredientsConstructor)
-  const { orderNumber, isLoading, hasError } = useSelector(
-    (store) => store.order
-  )
+  const { bun, items } = useSelector(getIngredientsConstructor)
+  const { orderNumber, isLoading, hasError } = useSelector(getOrder)
 
   const handlerButtonOnClick = () => {
     const order = { ingredients: [bun._id, ...items.map((item) => item._id)] }

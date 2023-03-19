@@ -9,8 +9,9 @@ import { useState, useEffect, useRef } from 'react'
 import {
   setCurrentItem,
   deleteCurrentItem,
+  getCurrentIngredient,
 } from '../../services/reducers/currentIngredient'
-
+import { getIngredients } from '../../services/reducers/ingredients'
 import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,
@@ -19,8 +20,8 @@ import {
 
 function BurgerIngredients() {
   const dispatch = useDispatch()
-  const ingredients = useSelector((store) => store.ingredients.data)
-  const currentIngredient = useSelector((store) => store.currentIngredient.item)
+  const { data } = useSelector(getIngredients)
+  const currentIngredient = useSelector(getCurrentIngredient)
   const [activeFilter, setActiveFilter] = useState(INGREDIENTS_TYPE[0])
   const [showIngrientsDetails, setShowIngrientsDetails] = useState(false)
 
@@ -87,7 +88,7 @@ function BurgerIngredients() {
         </nav>
         <ul className={burgerIngredientsStyle.burgerIngredients__list}>
           {INGREDIENTS_TYPE.map((ingredientType, index) => {
-            const filteredIngredients = ingredients.filter(
+            const filteredIngredients = data.filter(
               (ingredient) => ingredient.type === ingredientType
             )
             return (

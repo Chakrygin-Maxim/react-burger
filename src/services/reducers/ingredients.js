@@ -80,4 +80,6 @@ export const {
   resetItemsCount,
 } = ingredientsSlice.actions
 
+export const getIngredients = (state) => state.ingredients
+
 export default ingredientsSlice.reducer

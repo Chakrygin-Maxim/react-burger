@@ -1,3 +1,4 @@
+import React from 'react'
 import burgerElementsStyle from './burger-elements.module.css'
 import BurgerElement from '../burger-element/burger-element'
 import update from 'immutability-helper'
@@ -51,4 +52,4 @@ BurgerElements.propTypes = {
   deleteIngredient: PropTypes.func,
 }
 
-export default BurgerElements
+export default React.memo(BurgerElements)

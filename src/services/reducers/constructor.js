@@ -37,4 +37,6 @@ export const constructorSlice = createSlice({
 export const { addBun, addItem, removeItem, updateItems, deleteItems } =
   constructorSlice.actions
 
+export const getIngredientsConstructor = (state) => state.ingredientsConstructor
+
 export default constructorSlice.reducer

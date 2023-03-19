@@ -23,4 +23,6 @@ export const currentIngredientSlice = createSlice({
 export const { setCurrentItem, deleteCurrentItem } =
   currentIngredientSlice.actions
 
+export const getCurrentIngredient = (state) => state.currentIngredient.item
+
 export default currentIngredientSlice.reducer

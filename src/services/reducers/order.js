@@ -64,4 +64,6 @@ export const orderSlice = createSlice({
 
 export default orderSlice.reducer
 
+export const getOrder = (state) => state.order
+
 export const { cleanOrder } = orderSlice.actions
