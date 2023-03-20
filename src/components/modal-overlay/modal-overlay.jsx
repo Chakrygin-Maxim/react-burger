@@ -23,7 +23,7 @@ function ModalOverlay({ children, onClose, isOpen }) {
 ModalOverlay.propTypes = {
   children: PropTypes.element.isRequired,
   onClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool,
+  isOpen: PropTypes.bool.isRequired,
 }
 
 export default ModalOverlay

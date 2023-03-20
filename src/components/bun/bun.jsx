@@ -25,9 +25,9 @@ function Bun({ position, ingredient, isLocked }) {
 }
 
 Bun.propTypes = {
-  position: BURGER_POSITIONS_TYPE,
-  ingredient: INGREDIENT_TYPE,
-  isLocked: PropTypes.bool,
+  position: BURGER_POSITIONS_TYPE.isRequired,
+  ingredient: INGREDIENT_TYPE.isRequired,
+  isLocked: PropTypes.bool.isRequired,
 }
 
 export default Bun

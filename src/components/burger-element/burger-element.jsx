@@ -1,6 +1,6 @@
 import burgerElementStyle from './burger-element.module.css'
 import PropTypes from 'prop-types'
-import { BURGER_POSITIONS_TYPE, INGREDIENT_TYPE } from '../../utils/propTypes'
+import { INGREDIENT_TYPE } from '../../utils/propTypes'
 import { useRef } from 'react'
 import {
   useBurgerElementDrag,
@@ -12,7 +12,6 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function BurgerElement({
-  position,
   ingredient,
   onDelete,
   index,
@@ -34,7 +33,6 @@ function BurgerElement({
     >
       <DragIcon type="primary" />
       <ConstructorElement
-        type={position}
         text={ingredient.name}
         price={ingredient.price}
         thumbnail={ingredient.image}
@@ -45,12 +43,11 @@ function BurgerElement({
 }
 
 BurgerElement.propTypes = {
-  position: BURGER_POSITIONS_TYPE,
   ingredient: INGREDIENT_TYPE.isRequired,
-  onDelete: PropTypes.func,
-  index: PropTypes.number,
-  moveElement: PropTypes.func,
-  extraClass: PropTypes.string,
+  onDelete: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  moveElement: PropTypes.func.isRequired,
+  extraClass: PropTypes.string.isRequired,
 }
 
 export default BurgerElement

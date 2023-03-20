@@ -48,8 +48,8 @@ function BurgerElements({ items, deleteIngredient }) {
 }
 
 BurgerElements.propTypes = {
-  items: INGREDIENTS_ARRAY_TYPE,
-  deleteIngredient: PropTypes.func,
+  items: INGREDIENTS_ARRAY_TYPE.isRequired,
+  deleteIngredient: PropTypes.func.isRequired,
 }
 
 export default React.memo(BurgerElements)
