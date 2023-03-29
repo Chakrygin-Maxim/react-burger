@@ -1,47 +1,34 @@
 import styles from './style.module.css'
-import { useLocation, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   EDIT_PROFILE_PAGE_TEXT,
   NAVIGATION,
-  APP_ROUTES,
+  NAVIGATION_TYPE,
 } from '../../utils/constants'
 
 function ProfileNavigation() {
-  const { pathname } = useLocation()
+  const [currentLink, setCurrentLink] = useState(NAVIGATION.profile.type)
 
   return (
     <nav className={styles.profileNavigation__nav}>
       <ul className={styles.profileNavigation__list}>
-        <li className={styles.profileNavigation__listItem}>
-          <Link
-            to={APP_ROUTES.profile}
-            className={`${styles.profileNavigation__mainText} ${
-              pathname === APP_ROUTES.profile &&
-              styles.profileNavigation__mainText_link_current
-            }`}
-          >
-            {NAVIGATION.profile}
-          </Link>
-        </li>
-        <li className={styles.profileNavigation__listItem}>
-          <Link
-            to={APP_ROUTES.profileOrders}
-            className={`${styles.profileNavigation__mainText} ${
-              pathname === APP_ROUTES.profileOrders &&
-              styles.profileNavigation__mainText_link_current
-            }`}
-          >
-            {NAVIGATION.history}
-          </Link>
-        </li>
-        <li className={styles.profileNavigation__listItem}>
-          <Link
-            to={APP_ROUTES.root}
-            className={styles.profileNavigation__mainText}
-          >
-            {NAVIGATION.exit}
-          </Link>
-        </li>
+        {NAVIGATION_TYPE.map((item, index) => {
+          return (
+            <li key={index} className={styles.profileNavigation__listItem}>
+              <Link
+                to={NAVIGATION[item].linkTo}
+                onClick={() => setCurrentLink(NAVIGATION[item].type)}
+                className={`${styles.profileNavigation__mainText} ${
+                  currentLink === NAVIGATION[item].type &&
+                  styles.profileNavigation__mainText_link_current
+                }`}
+              >
+                {NAVIGATION[item].name}
+              </Link>
+            </li>
+          )
+        })}
       </ul>
       <p className={styles.profileNavigation__text}>{EDIT_PROFILE_PAGE_TEXT}</p>
     </nav>

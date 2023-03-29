@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import UserProfile from '../../components/user-profile'
+import { Outlet } from 'react-router-dom'
 import ProfileNavigation from '../../components/profile-navigation'
 import AppHeader from '../../components/app-header/app-header'
 
@@ -9,7 +9,7 @@ function Profile() {
       <AppHeader />
       <div className={styles.profile}>
         <ProfileNavigation />
-        <UserProfile />
+        <Outlet />
       </div>
     </>
   )

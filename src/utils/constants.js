@@ -3,10 +3,26 @@ export const INGREDIENTS_TYPE = ['bun', 'sauce', 'main']
 
 export const NAVIGATION_TYPE = ['profile', 'history', 'exit']
 
+export const APP_ROUTES = Object.freeze({
+  root: '/',
+  profile: '/profile',
+  login: '/login',
+  register: '/register',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  ingredientsId: '/ingredients/:id',
+  profileOrders: 'orders',
+  profileOrdersId: '/profile/orders/id',
+})
+
 export const NAVIGATION = Object.freeze({
-  profile: 'Профиль',
-  history: 'История',
-  exit: 'Выход',
+  profile: { name: 'Профиль', linkTo: APP_ROUTES.profile, type: 'profile' },
+  history: {
+    name: 'История',
+    linkTo: APP_ROUTES.profileOrders,
+    type: 'history',
+  },
+  exit: { name: 'Выход', linkTo: '/', type: 'exit' },
 })
 
 // хранит текст БЖУ
@@ -73,15 +89,3 @@ export const DND_TYPE = {
   item: 'item',
   shake: 'shake',
 }
-
-export const APP_ROUTES = Object.freeze({
-  root: '/',
-  profile: '/profile',
-  login: '/login',
-  register: '/register',
-  forgotPassword: '/forgot-password',
-  resetPassword: '/reset-password',
-  ingredientsId: '/ingredients/:id',
-  profileOrders: '/profile/orders',
-  profileOrdersId: '/profile/orders/id',
-})
