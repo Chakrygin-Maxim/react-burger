@@ -1,6 +1,14 @@
 //типы состава бургера в константы для упрощения рендера
 export const INGREDIENTS_TYPE = ['bun', 'sauce', 'main']
 
+export const NAVIGATION_TYPE = ['profile', 'history', 'exit']
+
+export const NAVIGATION = Object.freeze({
+  profile: 'Профиль',
+  history: 'История',
+  exit: 'Выход',
+})
+
 // хранит текст БЖУ
 export const INGREDIENT_BZHU = Object.freeze({
   calories: 'Калории, ккал',
@@ -41,6 +49,9 @@ export const ORDER_TEXTS = Object.freeze({
   waiting: 'Дождитесь готовности на орбитальной станции',
 })
 
+export const EDIT_PROFILE_PAGE_TEXT =
+  'В этом разделе вы можете изменить свои персональные данные'
+
 export const API_URL = 'https://norma.nomoreparties.space/api'
 
 export const EMPTY_INGREDIENT = {
@@ -62,3 +73,15 @@ export const DND_TYPE = {
   item: 'item',
   shake: 'shake',
 }
+
+export const APP_ROUTES = Object.freeze({
+  root: '/',
+  profile: '/profile',
+  login: '/login',
+  register: '/register',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  ingredientsId: '/ingredients/:id',
+  profileOrders: '/profile/orders',
+  profileOrdersId: '/profile/orders/id',
+})

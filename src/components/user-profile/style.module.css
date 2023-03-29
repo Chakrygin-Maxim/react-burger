@@ -1,0 +1,14 @@
+.profile {
+  display: flex;
+  width: 860px;
+  margin: 0;
+}
+
+.profile__inputs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 480px;
+  row-gap: 24px;
+}
+

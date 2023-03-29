@@ -1,4 +1,5 @@
 import appHeaderStyle from './app-header.module.css'
+import { Link } from 'react-router-dom'
 import {
   BurgerIcon,
   Logo,
@@ -33,16 +34,19 @@ function AppHeader() {
           </li>
         </ul>
         <div className={appHeaderStyle.appHeader__mainLogo}>
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
         </div>
-        <a className={appHeaderStyle.appHeader__link}>
+        <>
           <ProfileIcon type="secondary" />
-          <p
+          <Link
+            to="/profile"
             className={`${appHeaderStyle.appHeader__linkText} ${appHeaderStyle.appHeader__linkText_type_secondary}`}
           >
             Личный Кабинет
-          </p>
-        </a>
+          </Link>
+        </>
       </nav>
     </header>
   )

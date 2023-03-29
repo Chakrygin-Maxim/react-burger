@@ -42,6 +42,7 @@
 
 .appHeader__linkText {
   margin: 0 0 0 calc(var(--offset-base-size) * 2);
+  text-decoration: none;
 }
 
 .appHeader__linkText_type_primary {
