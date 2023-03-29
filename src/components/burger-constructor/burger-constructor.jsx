@@ -100,10 +100,10 @@ function BurgerConstructor() {
         </div>
       </section>
 
-      <Modal onClose={handleCloseModal} isOpen={orderDetailsIsOpen}>
+      {/* <Modal onClose={handleCloseModal} isOpen={orderDetailsIsOpen}>
         {hasError && <OrderError />}
         {!isLoading && !hasError && <OrderDetails orderNumber={orderNumber} />}
-      </Modal>
+      </Modal> */}
     </>
   )
 }

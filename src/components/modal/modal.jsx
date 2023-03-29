@@ -19,7 +19,7 @@ function Modal({ children, onClose }) {
   }, [onClose])
 
   return createPortal(
-    <ModalOverlay onClose={onClose} isOpen>
+    <ModalOverlay onClose={onClose}>
       <div className={modalStyle.modal}>
         <div className={modalStyle.modal__closeContainer}>
           <CloseIcon type="primary" onClick={onClose} />
