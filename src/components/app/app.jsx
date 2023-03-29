@@ -1,5 +1,8 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getIngrediensData } from '../../services/reducers/ingredients'
 import { APP_ROUTES } from '../../utils/constants'
+import { useEffect } from 'react'
 import Constructor from '../../pages/constructor'
 import Login from '../../pages/login'
 import Profile from '../../pages/profile'
@@ -10,11 +13,23 @@ import ResetPassword from '../../pages/reset-password'
 import Ingredient from '../../pages/ingredient'
 import NotFound from '../../pages/not-found'
 import OrderHistory from '../order-history'
+import ModalIngredient from '../../pages/modal-ingredient'
 
 function App() {
+  let location = useLocation()
+  let state = location.state
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getIngrediensData())
+  }, [dispatch])
+
+  console.log(state?.background)
+
   return (
-    <BrowserRouter>
-      <Routes>
+    <>
+      <Routes location={state?.background || location}>
         <Route path={APP_ROUTES.root} element={<Constructor />} />
         <Route path={APP_ROUTES.login} element={<Login />} />
 
@@ -30,7 +45,15 @@ function App() {
         <Route path={APP_ROUTES.ingredientsId} element={<Ingredient />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </BrowserRouter>
+      {state?.background && (
+        <Routes>
+          <Route
+            path={APP_ROUTES.ingredientsId}
+            element={<ModalIngredient />}
+          />
+        </Routes>
+      )}
+    </>
   )
 }
 

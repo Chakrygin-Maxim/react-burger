@@ -1,16 +1,9 @@
 import burgerIngredientsStyle from './burger-ingredients.module.css'
 import IngredientsGroup from '../ingredients-group/ingredients-group'
-import Modal from '../modal/modal'
-import IngredientDetails from '../ingredient-details/ingredient-details'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState, useEffect, useRef } from 'react'
-import {
-  setCurrentItem,
-  deleteCurrentItem,
-  getCurrentIngredient,
-} from '../../services/reducers/currentIngredient'
 import { getIngredients } from '../../services/reducers/ingredients'
 import {
   INGREDIENTS_TYPE,
@@ -19,12 +12,8 @@ import {
 } from '../../utils/constants'
 
 function BurgerIngredients() {
-  const dispatch = useDispatch()
   const { data } = useSelector(getIngredients)
-  const currentIngredient = useSelector(getCurrentIngredient)
   const [activeFilter, setActiveFilter] = useState(INGREDIENTS_TYPE[0])
-  const [showIngrientsDetails, setShowIngrientsDetails] = useState(false)
-
   const inViewOption = {
     threshold: 0.5,
   }
@@ -52,18 +41,6 @@ function BurgerIngredients() {
   const hendleFilterClick = (value) => {
     setActiveFilter(value)
     refs.current[value].clickRef.current?.scrollIntoView()
-  }
-
-  const openIngredientDetails = (ingredient) => {
-    dispatch(setCurrentItem(ingredient))
-    setShowIngrientsDetails(true)
-  }
-
-  const closeIngredientDetails = () => {
-    setShowIngrientsDetails(false)
-    setTimeout(() => {
-      dispatch(deleteCurrentItem())
-    }, 100)
   }
 
   return (
@@ -96,16 +73,12 @@ function BurgerIngredients() {
                 key={index}
                 ingredients={filteredIngredients}
                 type={ingredientType}
-                ingredientOnClick={openIngredientDetails}
                 ref={refs}
               />
             )
           })}
         </ul>
       </section>
-      <Modal onClose={closeIngredientDetails} isOpen={showIngrientsDetails}>
-        <IngredientDetails ingredient={currentIngredient} />
-      </Modal>
     </>
   )
 }

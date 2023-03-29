@@ -1,7 +1,7 @@
-import modalOverlayStyle from './modal-overlay.module.css'
+import styles from './modal-overlay.module.css'
 import PropTypes from 'prop-types'
 
-function ModalOverlay({ children, onClose, isOpen }) {
+function ModalOverlay({ children, onClose }) {
   const handleClickOnOverlay = (e) => {
     if (e.currentTarget === e.target) {
       onClose()
@@ -9,12 +9,7 @@ function ModalOverlay({ children, onClose, isOpen }) {
   }
 
   return (
-    <div
-      className={`${modalOverlayStyle.modalOverlay} ${
-        isOpen ? modalOverlayStyle.modalOverlay__status_open : ''
-      }`}
-      onClick={handleClickOnOverlay}
-    >
+    <div className={styles.modalOverlay} onClick={handleClickOnOverlay}>
       {children}
     </div>
   )
@@ -23,7 +18,6 @@ function ModalOverlay({ children, onClose, isOpen }) {
 ModalOverlay.propTypes = {
   children: PropTypes.element.isRequired,
   onClose: PropTypes.func.isRequired,
-  isOpen: PropTypes.bool.isRequired,
 }
 
 export default ModalOverlay

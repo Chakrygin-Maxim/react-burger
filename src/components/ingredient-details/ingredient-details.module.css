@@ -5,6 +5,10 @@
   width: 640px;
 }
 
+.ingredientDetails__header_align_center {
+  text-align: center;
+}
+
 .ingredientDetails__textName {
   composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
   composes: mt-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';

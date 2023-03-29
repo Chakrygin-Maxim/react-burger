@@ -1,6 +1,7 @@
 import Ingredient from '../ingredient/ingredient'
-import ingredientsGroupStyle from './ingredients-group.module.css'
+import styles from './ingredients-group.module.css'
 import PropTypes from 'prop-types'
+import { Link, useLocation } from 'react-router-dom'
 import { forwardRef } from 'react'
 import { INGREDIENT_TYPES_FILTER_TEXT } from '../../utils/constants'
 import {
@@ -10,21 +11,30 @@ import {
 
 const IngredientsGroup = forwardRef(
   ({ ingredients, type, ingredientOnClick }, ref) => {
+    const location = useLocation()
+
     return (
       <li id={type} ref={ref.current[type].clickRef}>
-        <h2 className={ingredientsGroupStyle.ingredientsGroup__header}>
+        <h2 className={styles.ingredientsGroup__header}>
           {INGREDIENT_TYPES_FILTER_TEXT[type]}
         </h2>
         <ul
-          className={ingredientsGroupStyle.ingredientsGroup__typeGroup}
+          className={styles.ingredientsGroup__typeGroup}
           ref={ref.current[type].scrollRef}
         >
           {ingredients.map((ingredient) => (
-            <Ingredient
+            <Link
               key={ingredient._id}
-              ingredient={ingredient}
-              onClick={ingredientOnClick}
-            />
+              to={`/ingredients/${ingredient._id}`}
+              state={{ background: location }}
+              className={styles.ingredient__link}
+            >
+              <Ingredient
+                key={ingredient._id}
+                ingredient={ingredient}
+                onClick={ingredientOnClick}
+              />
+            </Link>
           ))}
         </ul>
       </li>

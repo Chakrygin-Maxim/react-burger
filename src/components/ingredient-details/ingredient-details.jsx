@@ -1,31 +1,33 @@
-import ingredientDetailsStyle from './ingredient-details.module.css'
+import styles from './ingredient-details.module.css'
 import { INGREDIENT_BZHU } from '../../utils/constants'
 import { INGREDIENT_TYPE } from '../../utils/propTypes'
+import { useLocation } from 'react-router-dom'
 
 function RenderBZHU({ title, text }) {
   return (
-    <li className={ingredientDetailsStyle.ingredientDetails__element}>
-      <span className={ingredientDetailsStyle.ingredientDetails__title}>
-        {title}
-      </span>
-      <span className={ingredientDetailsStyle.ingredientDetails__value}>
-        {text}
-      </span>
+    <li className={styles.ingredientDetails__element}>
+      <span className={styles.ingredientDetails__title}>{title}</span>
+      <span className={styles.ingredientDetails__value}>{text}</span>
     </li>
   )
 }
 
 function IngredientDetails({ ingredient }) {
+  const location = useLocation()
+
   return (
     <>
-      <h2 className={ingredientDetailsStyle.ingredientDetails__header}>
+      <h2
+        className={`${styles.ingredientDetails__header} ${
+          !location?.state?.background &&
+          styles.ingredientDetails__header_align_center
+        }`}
+      >
         Детали ингридиента
       </h2>
       <img src={ingredient.image_large} alt={ingredient.name}></img>
-      <h3 className={ingredientDetailsStyle.ingredientDetails__textName}>
-        {ingredient.name}
-      </h3>
-      <ul className={ingredientDetailsStyle.ingredientDetails__list}>
+      <h3 className={styles.ingredientDetails__textName}>{ingredient.name}</h3>
+      <ul className={styles.ingredientDetails__list}>
         <RenderBZHU
           title={INGREDIENT_BZHU.calories}
           text={ingredient.calories}
