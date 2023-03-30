@@ -1,6 +1,25 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { API_URL } from '../../utils/constants'
 
+const checkReponse = (res) => {
+  if (!res.ok) {
+    return Promise.reject(`Ошибка: ${res.status}`)
+  }
+  return res.json()
+}
+
+const refreshToken = () => {
+  return fetch(`${API_URL}/auth/token`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+    body: JSON.stringify({
+      token: localStorage.getItem('refreshToken'),
+    }),
+  }).then(checkReponse)
+}
+
 const initialState = {
   user: { email: '', name: '' },
   isLoading: false,
@@ -49,9 +68,28 @@ export const registerUser = createAsyncThunk(
   }
 )
 
+const fetchLogoutWithRefresh = async (url, options) => {
+  try {
+    const res = await fetch(url, options)
+    return await checkReponse(res)
+  } catch (err) {
+    if (err.message === 'jwt expired') {
+      const refreshData = await refreshToken() //обновляем токен
+      if (!refreshData.success) {
+        return Promise.reject(refreshData)
+      }
+      options.body.token = refreshData.refreshToken
+      const res = await fetch(url, options) //повторяем запрос
+      return await checkReponse(res)
+    } else {
+      return Promise.reject(err)
+    }
+  }
+}
+
 export const logoutUser = createAsyncThunk(name + '/postLogout', async () => {
   try {
-    const res = await fetch(`${API_URL}/auth/logout`, {
+    return await fetchLogoutWithRefresh(`${API_URL}/auth/logout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -60,10 +98,43 @@ export const logoutUser = createAsyncThunk(name + '/postLogout', async () => {
         token: localStorage.getItem('refreshToken'),
       }),
     })
-    const result = await res.json()
-    return result
   } catch (err) {
     console.log('fail to logout', err)
+    return { succsess: false }
+  }
+})
+
+const fetchUserDataWithRefresh = async (url, options) => {
+  try {
+    const res = await fetch(url, options)
+    return await checkReponse(res)
+  } catch (err) {
+    if (err.message === 'jwt expired') {
+      const refreshData = await refreshToken() //обновляем токен
+      if (!refreshData.success) {
+        return Promise.reject(refreshData)
+      }
+      localStorage.setItem('refreshToken', refreshData.refreshToken)
+      localStorage.setItem('accessToken', refreshData.accessToken)
+      options.headers.Authorization = refreshData.accessToken
+      const res = await fetch(url, options) //повторяем запрос
+      return await checkReponse(res)
+    } else {
+      return Promise.reject(err)
+    }
+  }
+}
+
+export const getUserData = createAsyncThunk(name + '/user', async () => {
+  try {
+    return await fetchUserDataWithRefresh(`${API_URL}/auth/user`, {
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+    })
+  } catch (err) {
+    console.log('fail to get user', err)
     return { succsess: false }
   }
 })
@@ -72,6 +143,7 @@ export const userSlice = createSlice({
   name,
   initialState,
   extraReducers: (builder) => {
+    // регистрация пользователя
     builder.addCase(registerUser.pending, (state) => {
       state.hasError = false
       state.isLoading = true
@@ -90,6 +162,7 @@ export const userSlice = createSlice({
       state.isLoading = false
       state.hasError = true
     })
+    // выход пользователя
     builder.addCase(logoutUser.pending, (state) => {
       state.hasError = false
       state.isLoading = true
@@ -108,6 +181,7 @@ export const userSlice = createSlice({
       state.isLoading = false
       state.hasError = true
     })
+    // логин
     builder.addCase(loginUser.pending, (state) => {
       state.hasError = false
       state.isLoading = true
@@ -123,6 +197,23 @@ export const userSlice = createSlice({
       }
     })
     builder.addCase(loginUser.rejected, (state) => {
+      state.isLoading = false
+      state.hasError = true
+    })
+    // получение данных пользователя
+    builder.addCase(getUserData.pending, (state) => {
+      state.hasError = false
+      state.isLoading = true
+    })
+    builder.addCase(getUserData.fulfilled, (state, { payload }) => {
+      state.isLoading = false
+      if (payload.success) {
+        state.user = { ...payload.user }
+      } else {
+        state.hasError = true
+      }
+    })
+    builder.addCase(getUserData.rejected, (state) => {
       state.isLoading = false
       state.hasError = true
     })
