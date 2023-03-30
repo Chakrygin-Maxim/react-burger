@@ -9,6 +9,26 @@ const initialState = {
 
 const name = 'user'
 
+export const loginUser = createAsyncThunk(
+  name + '/postLogin',
+  async (payload) => {
+    try {
+      const res = await fetch(`${API_URL}/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(payload),
+      })
+      const result = await res.json()
+      return result
+    } catch (err) {
+      console.log('fail to login', err)
+      return { succsess: false }
+    }
+  }
+)
+
 export const registerUser = createAsyncThunk(
   name + '/postRegister',
   async (payload) => {
@@ -85,6 +105,24 @@ export const userSlice = createSlice({
       }
     })
     builder.addCase(logoutUser.rejected, (state) => {
+      state.isLoading = false
+      state.hasError = true
+    })
+    builder.addCase(loginUser.pending, (state) => {
+      state.hasError = false
+      state.isLoading = true
+    })
+    builder.addCase(loginUser.fulfilled, (state, { payload }) => {
+      state.isLoading = false
+      if (payload.success) {
+        state.user = { ...payload.user }
+        localStorage.setItem('accessToken', payload.accessToken)
+        localStorage.setItem('refreshToken', payload.refreshToken)
+      } else {
+        state.hasError = true
+      }
+    })
+    builder.addCase(loginUser.rejected, (state) => {
       state.isLoading = false
       state.hasError = true
     })

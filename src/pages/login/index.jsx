@@ -1,5 +1,7 @@
 import styles from './style.module.css'
 import { Link } from 'react-router-dom'
+import { loginUser } from '../../services/reducers/user'
+import { useDispatch } from 'react-redux'
 import { useForm } from '../../utils/formHooks'
 import {
   Input,
@@ -8,10 +10,12 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function Login() {
+  const dispatch = useDispatch()
   const [values, handleOnChange] = useForm({ password: '', email: '' })
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    dispatch(loginUser(values))
   }
 
   return (
