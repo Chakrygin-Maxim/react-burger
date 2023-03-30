@@ -11,8 +11,10 @@ export const APP_ROUTES = Object.freeze({
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   ingredientsId: '/ingredients/:id',
-  profileOrders: 'orders',
-  profileOrdersId: '/profile/orders/id',
+  profileOrders: '/profile/orders',
+  orderList: '/order-list',
+  orders: 'orders',
+  profileOrdersId: ':id',
 })
 
 export const NAVIGATION = Object.freeze({

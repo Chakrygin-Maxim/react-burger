@@ -1,6 +1,11 @@
-.profile {
+.container {
   display: flex;
   width: 860px;
+  flex-direction: column;
+}
+
+.profile {
+  display: flex;
   margin: 0;
 }
 
@@ -10,5 +15,19 @@
   align-items: center;
   min-width: 480px;
   row-gap: 24px;
+}
+
+.buttons {
+  display: flex;
+  max-width: 480px;
+  justify-content: flex-end;
+  align-items: baseline;
+}
+
+.link {
+  composes: mr-7 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #4c4cff;
+  text-decoration: none;
 }
 

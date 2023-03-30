@@ -7,19 +7,11 @@ import {
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-function Ingredient({ ingredient, onClick }) {
+function Ingredient({ ingredient }) {
   const { opacity, ref } = useIngredientDrag(ingredient)
-  const handlerOnClick = () => {
-    onClick(ingredient)
-  }
 
   return (
-    <li
-      className={ingredientStyle.ingredient}
-      onClick={handlerOnClick}
-      ref={ref}
-      style={{ opacity }}
-    >
+    <li className={ingredientStyle.ingredient} ref={ref} style={{ opacity }}>
       <Counter count={ingredient.count} size="default" extraClass="m-1" />
       <img src={ingredient.image} alt={ingredient.name}></img>
       <div className={ingredientStyle.ingredient__priceContainer}>
@@ -33,7 +25,6 @@ function Ingredient({ ingredient, onClick }) {
 
 Ingredient.propTypes = {
   ingredient: INGREDIENT_TYPE.isRequired,
-  onClick: PropTypes.func.isRequired,
 }
 
 export default Ingredient

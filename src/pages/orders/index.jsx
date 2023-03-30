@@ -1,5 +1,5 @@
 import styles from './style.module.css'
-import AppHeader from '../../components/app-header/app-header'
+import AppHeader from '../../components/app-header'
 import ProfileNavigation from '../../components/profile-navigation'
 import OrderHistory from '../../components/order-history'
 

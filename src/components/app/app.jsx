@@ -35,7 +35,7 @@ function App() {
 
         <Route path={APP_ROUTES.profile} element={<Profile />}>
           <Route index element={<UserProfile />} />
-          <Route path={APP_ROUTES.profileOrders} element={<OrderHistory />} />
+          <Route path={APP_ROUTES.orders} element={<OrderHistory />} />
         </Route>
 
         <Route path={APP_ROUTES.profileOrdersId} element={<NotFound />} />

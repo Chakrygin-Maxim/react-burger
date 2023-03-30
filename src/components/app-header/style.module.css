@@ -22,27 +22,27 @@
   margin: 0;
 }
 
-.appHeader__link {
+.appHeader__listItem {
   composes: pt-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   composes: pr-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   composes: pb-4 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   composes: pl-5 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
 }
 
-.appHeader__link:hover {
+.appHeader__linkText {
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  margin: 0 0 0 calc(var(--offset-base-size) * 2);
+  text-decoration: none;
+}
+
+.appHeader__linkText:hover {
   cursor: pointer;
   opacity: 0.6;
   transition: 0.3s;
-}
-
-.appHeader__linkText {
-  margin: 0 0 0 calc(var(--offset-base-size) * 2);
-  text-decoration: none;
 }
 
 .appHeader__linkText_type_primary {
@@ -58,4 +58,9 @@
   position: absolute;
   left: 50%;
   transform: translate(-50%);
+}
+
+.appHeader__linkText:hover.appHeader__linkText_type_primary {
+  cursor: default;
+  opacity: 1;
 }
