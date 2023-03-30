@@ -18,7 +18,7 @@ function Register() {
   })
 
   const handleOnSubmit = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     dispatch(registerUser(values))
   }
 
