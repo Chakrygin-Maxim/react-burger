@@ -1,6 +1,12 @@
 import styles from './style.module.css'
-import { Link } from 'react-router-dom'
 import { useForm } from '../../utils/formHooks'
+import { useEffect, useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import {
+  getUser,
+  updateUserData,
+  getUserData,
+} from '../../services/reducers/user'
 import {
   Input,
   PasswordInput,
@@ -8,19 +14,31 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function UserProfile() {
-  const [values, handleOnChange] = useForm({
-    name: '',
-    password: '',
-    login: '',
-  })
+  const dispatch = useDispatch()
+  const { user } = useSelector(getUser)
+  const inititialState = useMemo((user) => {
+    return { ...user, password: '' }
+  }, [])
 
-  const onSubmit = (e) => {
-    e.preventDefault()
+  const [values, handleOnChange, updateValues] = useForm(inititialState)
+
+  const heandleUpdateUser = () => {
+    const { name, email } = values
+    dispatch(updateUserData({ name, email }))
   }
+
+  const heandleCancel = () => {
+    dispatch(getUserData())
+    updateValues(inititialState, user)
+  }
+
+  useEffect(() => {
+    updateValues(inititialState, user)
+  }, [user, inititialState, updateValues])
 
   return (
     <div className={styles.container}>
-      <form className={styles.profile} onSubmit={onSubmit}>
+      <form className={styles.profile}>
         <section className={styles.profile__inputs}>
           <Input
             name="name"
@@ -30,9 +48,9 @@ function UserProfile() {
             icon="EditIcon"
           />
           <Input
-            name="login"
+            name="email"
             placeholder="Логин"
-            value={values.login}
+            value={values.email}
             onChange={handleOnChange}
             icon="EditIcon"
           />
@@ -46,10 +64,16 @@ function UserProfile() {
         </section>
       </form>
       <div className={styles.buttons}>
-        <Link to="/login" className={styles.link}>
+        <p to="/login" className={styles.link} onClick={heandleCancel}>
           Отмена
-        </Link>
-        <Button htmlType="submit" type="primary" size="large" extraClass="mt-6">
+        </p>
+        <Button
+          htmlType="submit"
+          type="primary"
+          size="large"
+          extraClass="mt-6"
+          onClick={heandleUpdateUser}
+        >
           Сохранить
         </Button>
       </div>

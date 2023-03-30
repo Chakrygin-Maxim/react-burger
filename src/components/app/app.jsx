@@ -1,8 +1,9 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { getIngrediensData } from '../../services/reducers/ingredients'
 import { APP_ROUTES } from '../../utils/constants'
 import { useEffect } from 'react'
+import { getUserData } from '../../services/reducers/user'
 import Constructor from '../../pages/constructor'
 import Login from '../../pages/login'
 import Profile from '../../pages/profile'
@@ -23,9 +24,8 @@ function App() {
 
   useEffect(() => {
     dispatch(getIngrediensData())
+    dispatch(getUserData())
   }, [dispatch])
-
-  console.log(state?.background)
 
   return (
     <>

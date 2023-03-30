@@ -1,6 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { API_URL } from '../../utils/constants'
 
+const name = 'user'
+
+const initialState = {
+  user: { email: '', name: '' },
+  isLoading: false,
+  hasError: false,
+}
+
 const checkReponse = (res) => {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`)
@@ -19,14 +27,6 @@ const refreshToken = () => {
     }),
   }).then(checkReponse)
 }
-
-const initialState = {
-  user: { email: '', name: '' },
-  isLoading: false,
-  hasError: false,
-}
-
-const name = 'user'
 
 export const loginUser = createAsyncThunk(
   name + '/postLogin',
@@ -73,7 +73,7 @@ const fetchLogoutWithRefresh = async (url, options) => {
     const res = await fetch(url, options)
     return await checkReponse(res)
   } catch (err) {
-    if (err.message === 'jwt expired') {
+    if (err.message === 'jwt expired' || err === 'Ошибка: 403') {
       const refreshData = await refreshToken() //обновляем токен
       if (!refreshData.success) {
         return Promise.reject(refreshData)
@@ -109,7 +109,7 @@ const fetchUserDataWithRefresh = async (url, options) => {
     const res = await fetch(url, options)
     return await checkReponse(res)
   } catch (err) {
-    if (err.message === 'jwt expired') {
+    if (err.message === 'jwt expired' || err === 'Ошибка: 403') {
       const refreshData = await refreshToken() //обновляем токен
       if (!refreshData.success) {
         return Promise.reject(refreshData)
@@ -138,6 +138,25 @@ export const getUserData = createAsyncThunk(name + '/user', async () => {
     return { succsess: false }
   }
 })
+
+export const updateUserData = createAsyncThunk(
+  name + '/updateUser',
+  async (payload) => {
+    try {
+      return await fetchUserDataWithRefresh(`${API_URL}/auth/user`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+          Authorization: localStorage.getItem('accessToken'),
+        },
+        body: JSON.stringify(payload),
+      })
+    } catch (err) {
+      console.log('fail to update user', err)
+      return { succsess: false }
+    }
+  }
+)
 
 export const userSlice = createSlice({
   name,
@@ -214,6 +233,23 @@ export const userSlice = createSlice({
       }
     })
     builder.addCase(getUserData.rejected, (state) => {
+      state.isLoading = false
+      state.hasError = true
+    })
+    // обновление пользователя
+    builder.addCase(updateUserData.pending, (state) => {
+      state.hasError = false
+      state.isLoading = true
+    })
+    builder.addCase(updateUserData.fulfilled, (state, { payload }) => {
+      state.isLoading = false
+      if (payload.success) {
+        state.user = { ...payload.user }
+      } else {
+        state.hasError = true
+      }
+    })
+    builder.addCase(updateUserData.rejected, (state) => {
       state.isLoading = false
       state.hasError = true
     })
