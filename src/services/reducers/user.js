@@ -29,14 +29,28 @@ export const registerUser = createAsyncThunk(
   }
 )
 
+export const logoutUser = createAsyncThunk(name + '/postLogout', async () => {
+  try {
+    const res = await fetch(`${API_URL}/auth/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+      },
+      body: JSON.stringify({
+        token: localStorage.getItem('refreshToken'),
+      }),
+    })
+    const result = await res.json()
+    return result
+  } catch (err) {
+    console.log('fail to logout', err)
+    return { succsess: false }
+  }
+})
+
 export const userSlice = createSlice({
   name,
   initialState,
-  reducers: {
-    cleanUser(state) {
-      state.user = initialState
-    },
-  },
   extraReducers: (builder) => {
     builder.addCase(registerUser.pending, (state) => {
       state.hasError = false
@@ -56,11 +70,27 @@ export const userSlice = createSlice({
       state.isLoading = false
       state.hasError = true
     })
+    builder.addCase(logoutUser.pending, (state) => {
+      state.hasError = false
+      state.isLoading = true
+    })
+    builder.addCase(logoutUser.fulfilled, (state, { payload }) => {
+      state.isLoading = false
+      if (payload.success) {
+        state = initialState
+        localStorage.removeItem('accessToken')
+        localStorage.removeItem('refreshToken')
+      } else {
+        state.hasError = true
+      }
+    })
+    builder.addCase(logoutUser.rejected, (state) => {
+      state.isLoading = false
+      state.hasError = true
+    })
   },
 })
 
 export default userSlice.reducer
 
 export const getUser = (state) => state.user
-
-export const { cleanUser } = userSlice.actions
