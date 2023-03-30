@@ -6,8 +6,11 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { registerUser } from '../../services/reducers/user'
+import { useDispatch } from 'react-redux'
 
 function Register() {
+  const dispatch = useDispatch()
   const [values, handleOnChange] = useForm({
     name: '',
     password: '',
@@ -16,6 +19,7 @@ function Register() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    dispatch(registerUser(values))
   }
 
   return (
@@ -24,7 +28,6 @@ function Register() {
         <h2 className={styles.register__header}>Регистрация</h2>
         <Input
           name="name"
-          type="name"
           placeholder="Имя"
           value={values.name}
           onChange={handleOnChange}
