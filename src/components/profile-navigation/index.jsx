@@ -2,7 +2,7 @@ import styles from './style.module.css'
 import { useDispatch } from 'react-redux'
 import { isCurrentRoute } from '../../utils/common'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
-import { logoutUser } from '../../services/reducers/user'
+import { logoutUser, cleanUser } from '../../services/reducers/user'
 import {
   APP_ROUTES_MATCH,
   EDIT_PROFILE_PAGE_TEXT,
@@ -15,6 +15,7 @@ function ProfileNavigation() {
   const { pathname } = useLocation()
 
   const hendleLogOut = () => {
+    dispatch(cleanUser())
     dispatch(logoutUser())
     navigate(APP_ROUTES_MATCH.login)
   }
@@ -46,7 +47,7 @@ function ProfileNavigation() {
         </li>
         <li className={styles.profileNavigation__listItem}>
           <Link
-            to={APP_ROUTES_MATCH.root}
+            to={APP_ROUTES_MATCH.login}
             onClick={hendleLogOut}
             className={`${styles.profileNavigation__mainText}`}
           >

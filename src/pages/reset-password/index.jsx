@@ -1,5 +1,8 @@
 import styles from './style.module.css'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
+import { getUser } from '../../services/reducers/user'
+import { useSelector } from 'react-redux'
+import { APP_ROUTES, APP_ROUTES_MATCH } from '../../utils/constants'
 import { useForm } from '../../utils/formHooks'
 import {
   Input,
@@ -8,6 +11,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function ResetPassword() {
+  const location = useLocation()
+  const { auth } = useSelector(getUser)
   const [values, handleOnChange] = useForm({
     token: '',
     password: '',
@@ -15,6 +20,10 @@ function ResetPassword() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+  }
+
+  if (auth) {
+    return <Navigate to={APP_ROUTES.root} state={{ from: location }} />
   }
 
   return (
@@ -41,7 +50,10 @@ function ResetPassword() {
         </Button>
         <p className={`${styles.resetPassword__text} mt-20`}>
           Вспомнили пароль?
-          <Link to="/login" className={styles.resetPassword__link}>
+          <Link
+            to={APP_ROUTES_MATCH.login}
+            className={styles.resetPassword__link}
+          >
             Войти
           </Link>
         </p>

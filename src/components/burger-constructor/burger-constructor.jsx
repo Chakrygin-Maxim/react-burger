@@ -1,17 +1,18 @@
 import burgerConstructorStyle from './burger-constructor.module.css'
 import OrderDetails from '../order-details/order-details'
-import OrderError from '../order-error/order-error'
 import Modal from '../modal/modal'
 import Price from '../price/price'
 import Bun from '../bun/bun'
 import BurgerElements from '../burger-elements/burger-elements'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
-import { BURGER_POSITIONS } from '../../utils/constants'
+import { APP_ROUTES_MATCH, BURGER_POSITIONS } from '../../utils/constants'
 import { useState, useMemo, useCallback } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BurgerConstructorDrop } from '../../utils/dndHooks'
+import { getUser } from '../../services/reducers/user'
 import { postOrder, cleanOrder, getOrder } from '../../services/reducers/order'
+import { useNavigate } from 'react-router-dom'
 import {
   addBun,
   addItem,
@@ -28,11 +29,15 @@ import {
 
 function BurgerConstructor() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [orderDetailsIsOpen, setOrderDetailsIsOpen] = useState(false)
   const { bun, items } = useSelector(getIngredientsConstructor)
-  const { orderNumber, isLoading, hasError } = useSelector(getOrder)
+  const { auth } = useSelector(getUser)
 
   const handlerButtonOnClick = () => {
+    if (!auth) {
+      navigate(APP_ROUTES_MATCH.login)
+    }
     const order = { ingredients: [bun._id, ...items.map((item) => item._id)] }
     dispatch(postOrder(order))
     setOrderDetailsIsOpen(true)
@@ -100,10 +105,11 @@ function BurgerConstructor() {
         </div>
       </section>
 
-      {/* <Modal onClose={handleCloseModal} isOpen={orderDetailsIsOpen}>
-        {hasError && <OrderError />}
-        {!isLoading && !hasError && <OrderDetails orderNumber={orderNumber} />}
-      </Modal> */}
+      {orderDetailsIsOpen && (
+        <Modal onClose={handleCloseModal}>
+          <OrderDetails />
+        </Modal>
+      )}
     </>
   )
 }

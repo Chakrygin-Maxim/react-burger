@@ -1,32 +1,44 @@
-import orderDetailsStyle from './order-details.module.css'
+import styles from './style.module.css'
 import done from '../../images/done.svg'
-import PropTypes from 'prop-types'
+import OrderError from '../order-error/order-error'
+import { getOrder } from '../../services/reducers/order'
+import { useSelector } from 'react-redux'
 import { ORDER_TEXTS } from '../../utils/constants'
 
-function OrderDetails({ orderNumber }) {
-  return (
-    <>
-      <h2 className={orderDetailsStyle.orderDetails__header}>{orderNumber}</h2>
-      <span className={orderDetailsStyle.orderDetails__title}>
-        {ORDER_TEXTS.orderId}
-      </span>
-      <img
-        className={orderDetailsStyle.orderDetails__image}
-        src={done}
-        alt="Заказ принят"
-      />
-      <span className={orderDetailsStyle.orderDetails__text}>
-        {ORDER_TEXTS.isCooking}
-      </span>
-      <span className={orderDetailsStyle.orderDetails__subText}>
-        {ORDER_TEXTS.waiting}
-      </span>
-    </>
-  )
+const Loding = () => {
+  return <h2 className={styles.orderDetails__loding}>Загрузка, ждите...</h2>
 }
 
-OrderDetails.propTypes = {
-  orderNumber: PropTypes.number.isRequired,
+function OrderDetails() {
+  const { orderNumber, isLoading, hasError } = useSelector(getOrder)
+
+  return (
+    <div className={styles.section}>
+      {isLoading ? (
+        <Loding />
+      ) : hasError ? (
+        <OrderError />
+      ) : (
+        <>
+          <h2 className={styles.orderDetails__header}>{orderNumber}</h2>
+          <span className={styles.orderDetails__title}>
+            {ORDER_TEXTS.orderId}
+          </span>
+          <img
+            className={styles.orderDetails__image}
+            src={done}
+            alt="Заказ принят"
+          />
+          <span className={styles.orderDetails__text}>
+            {ORDER_TEXTS.isCooking}
+          </span>
+          <span className={styles.orderDetails__subText}>
+            {ORDER_TEXTS.waiting}
+          </span>
+        </>
+      )}
+    </div>
+  )
 }
 
 export default OrderDetails

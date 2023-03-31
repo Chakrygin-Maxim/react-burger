@@ -1,24 +1,29 @@
 import styles from './style.module.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import { loginUser } from '../../services/reducers/user'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser } from '../../services/reducers/user'
 import { useForm } from '../../utils/formHooks'
 import {
   Input,
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { APP_ROUTES_MATCH } from '../../utils/constants'
+import { APP_ROUTES } from '../../utils/constants'
 
 function Login() {
   const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const location = useLocation()
+  const { auth } = useSelector(getUser)
   const [values, handleOnChange] = useForm({ password: '', email: '' })
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
     dispatch(loginUser(values))
-    navigate(APP_ROUTES_MATCH.root)
+  }
+
+  if (auth) {
+    return <Navigate to={APP_ROUTES.root} state={{ from: location }} />
   }
 
   return (

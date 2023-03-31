@@ -1,16 +1,20 @@
 import styles from './style.module.css'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useLocation } from 'react-router-dom'
 import { useForm } from '../../utils/formHooks'
+import { getUser } from '../../services/reducers/user'
+import { APP_ROUTES } from '../../utils/constants'
 import {
   Input,
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { registerUser } from '../../services/reducers/user'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 function Register() {
   const dispatch = useDispatch()
+  const location = useLocation()
+  const { auth } = useSelector(getUser)
   const [values, handleOnChange] = useForm({
     name: '',
     password: '',
@@ -20,6 +24,10 @@ function Register() {
   const handleOnSubmit = (e) => {
     e.preventDefault()
     dispatch(registerUser(values))
+  }
+
+  if (auth) {
+    return <Navigate to={APP_ROUTES.root} state={{ from: location }} />
   }
 
   return (

@@ -7,6 +7,7 @@ const initialState = {
   user: { email: '', name: '', password: '' },
   isLoading: false,
   hasError: false,
+  auth: false,
 }
 
 const checkReponse = (res) => {
@@ -161,6 +162,13 @@ export const updateUserData = createAsyncThunk(
 export const userSlice = createSlice({
   name,
   initialState,
+  reducers: {
+    cleanUser(state) {
+      state.auth = false
+      state.isLoading = false
+      state.hasError = false
+    },
+  },
   extraReducers: (builder) => {
     // регистрация пользователя
     builder.addCase(registerUser.pending, (state) => {
@@ -171,6 +179,7 @@ export const userSlice = createSlice({
       state.isLoading = false
       if (payload.success) {
         state.user = { ...initialState.user, ...payload.user }
+        state.auth = false
         localStorage.setItem('accessToken', payload.accessToken)
         localStorage.setItem('refreshToken', payload.refreshToken)
       } else {
@@ -190,6 +199,7 @@ export const userSlice = createSlice({
       state.isLoading = false
       if (payload.success) {
         state.user = { ...initialState.user }
+        state.auth = false
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
       } else {
@@ -209,6 +219,7 @@ export const userSlice = createSlice({
       state.isLoading = false
       if (payload.success) {
         state.user = { ...initialState.user, ...payload.user }
+        state.auth = true
         localStorage.setItem('accessToken', payload.accessToken)
         localStorage.setItem('refreshToken', payload.refreshToken)
       } else {
@@ -228,6 +239,7 @@ export const userSlice = createSlice({
       state.isLoading = false
       if (payload.success) {
         state.user = { ...initialState.user, ...payload.user }
+        state.auth = true
       } else {
         state.hasError = true
       }
@@ -245,6 +257,7 @@ export const userSlice = createSlice({
       state.isLoading = false
       if (payload.success) {
         state.user = { ...initialState.user, ...payload.user }
+        state.auth = true
       } else {
         state.hasError = true
       }
@@ -259,3 +272,5 @@ export const userSlice = createSlice({
 export default userSlice.reducer
 
 export const getUser = (state) => state.user
+
+export const { cleanUser } = userSlice.actions
