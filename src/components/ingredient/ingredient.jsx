@@ -1,5 +1,4 @@
 import ingredientStyle from './ingredient.module.css'
-import PropTypes from 'prop-types'
 import { INGREDIENT_TYPE } from '../../utils/propTypes'
 import { useIngredientDrag } from '../../utils/dndHooks'
 import {

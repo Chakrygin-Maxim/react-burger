@@ -4,7 +4,7 @@ import { API_URL } from '../../utils/constants'
 const name = 'user'
 
 const initialState = {
-  user: { email: '', name: '' },
+  user: { email: '', name: '', password: '' },
   isLoading: false,
   hasError: false,
 }
@@ -170,7 +170,7 @@ export const userSlice = createSlice({
     builder.addCase(registerUser.fulfilled, (state, { payload }) => {
       state.isLoading = false
       if (payload.success) {
-        state.user = { ...payload.user }
+        state.user = { ...initialState.user, ...payload.user }
         localStorage.setItem('accessToken', payload.accessToken)
         localStorage.setItem('refreshToken', payload.refreshToken)
       } else {
@@ -208,7 +208,7 @@ export const userSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, { payload }) => {
       state.isLoading = false
       if (payload.success) {
-        state.user = { ...payload.user }
+        state.user = { ...initialState.user, ...payload.user }
         localStorage.setItem('accessToken', payload.accessToken)
         localStorage.setItem('refreshToken', payload.refreshToken)
       } else {
@@ -227,7 +227,7 @@ export const userSlice = createSlice({
     builder.addCase(getUserData.fulfilled, (state, { payload }) => {
       state.isLoading = false
       if (payload.success) {
-        state.user = { ...payload.user }
+        state.user = { ...initialState.user, ...payload.user }
       } else {
         state.hasError = true
       }
@@ -244,7 +244,7 @@ export const userSlice = createSlice({
     builder.addCase(updateUserData.fulfilled, (state, { payload }) => {
       state.isLoading = false
       if (payload.success) {
-        state.user = { ...payload.user }
+        state.user = { ...initialState.user, ...payload.user }
       } else {
         state.hasError = true
       }

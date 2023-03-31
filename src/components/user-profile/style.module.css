@@ -7,12 +7,12 @@
 .profile {
   display: flex;
   margin: 0;
+  flex-direction: column;
 }
 
 .profile__inputs {
   display: flex;
   flex-direction: column;
-  align-items: center;
   min-width: 480px;
   row-gap: 24px;
 }

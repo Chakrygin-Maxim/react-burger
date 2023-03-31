@@ -1,6 +1,6 @@
 import styles from './style.module.css'
 import { useForm } from '../../utils/formHooks'
-import { useEffect, useMemo } from 'react'
+import { useEffect, useCallback, useMemo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   getUser,
@@ -16,29 +16,32 @@ import {
 function UserProfile() {
   const dispatch = useDispatch()
   const { user } = useSelector(getUser)
-  const inititialState = useMemo((user) => {
-    return { ...user, password: '' }
-  }, [])
 
-  const [values, handleOnChange, updateValues] = useForm(inititialState)
+  const [values, handleOnChange, updateValues] = useForm({ ...user })
 
-  const heandleUpdateUser = () => {
+  const isModify =
+    user.name !== values.name ||
+    user.email !== values.email ||
+    user.password !== values.password
+
+  const heandleUpdateUser = (e) => {
+    e.preventDefault()
     const { name, email } = values
     dispatch(updateUserData({ name, email }))
   }
 
   const heandleCancel = () => {
     dispatch(getUserData())
-    updateValues(inititialState, user)
+    updateValues(user)
   }
 
   useEffect(() => {
-    updateValues(inititialState, user)
-  }, [user, inititialState, updateValues])
+    updateValues(user)
+  }, [user, updateValues])
 
   return (
     <div className={styles.container}>
-      <form className={styles.profile}>
+      <form className={styles.profile} onSubmit={heandleUpdateUser}>
         <section className={styles.profile__inputs}>
           <Input
             name="name"
@@ -62,21 +65,22 @@ function UserProfile() {
             icon="ShowIcon"
           />
         </section>
+        {isModify && (
+          <div className={styles.buttons}>
+            <p to="/login" className={styles.link} onClick={heandleCancel}>
+              Отмена
+            </p>
+            <Button
+              htmlType="submit"
+              type="primary"
+              size="large"
+              extraClass="mt-6"
+            >
+              Сохранить
+            </Button>
+          </div>
+        )}
       </form>
-      <div className={styles.buttons}>
-        <p to="/login" className={styles.link} onClick={heandleCancel}>
-          Отмена
-        </p>
-        <Button
-          htmlType="submit"
-          type="primary"
-          size="large"
-          extraClass="mt-6"
-          onClick={heandleUpdateUser}
-        >
-          Сохранить
-        </Button>
-      </div>
     </div>
   )
 }
