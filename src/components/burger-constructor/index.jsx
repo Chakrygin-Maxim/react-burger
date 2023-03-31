@@ -1,4 +1,4 @@
-import burgerConstructorStyle from './burger-constructor.module.css'
+import styles from './style.module.css'
 import OrderDetails from '../order-details/order-details'
 import Modal from '../modal/modal'
 import Price from '../price/price'
@@ -11,8 +11,8 @@ import { useState, useMemo, useCallback } from 'react'
 import { Button } from '@ya.praktikum/react-developer-burger-ui-components'
 import { BurgerConstructorDrop } from '../../utils/dndHooks'
 import { getUser } from '../../services/reducers/user'
-import { postOrder, cleanOrder, getOrder } from '../../services/reducers/order'
-import { useNavigate } from 'react-router-dom'
+import { postOrder, cleanOrder } from '../../services/reducers/order'
+import { useNavigate, useLocation } from 'react-router-dom'
 import {
   addBun,
   addItem,
@@ -30,13 +30,17 @@ import {
 function BurgerConstructor() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
   const [orderDetailsIsOpen, setOrderDetailsIsOpen] = useState(false)
   const { bun, items } = useSelector(getIngredientsConstructor)
   const { auth } = useSelector(getUser)
 
   const handlerButtonOnClick = () => {
     if (!auth) {
-      navigate(APP_ROUTES_MATCH.login)
+      navigate(APP_ROUTES_MATCH.login, {
+        state: { from: location },
+        replace: true,
+      })
     }
     const order = { ingredients: [bun._id, ...items.map((item) => item._id)] }
     dispatch(postOrder(order))
@@ -83,16 +87,13 @@ function BurgerConstructor() {
 
   return (
     <>
-      <section
-        className={burgerConstructorStyle.burgerConstructor}
-        ref={dropTarget}
-      >
-        <ul className={burgerConstructorStyle.burgerConstructor__list}>
+      <section className={styles.burgerConstructor} ref={dropTarget}>
+        <ul className={styles.burgerConstructor__list}>
           <Bun ingredient={bun} position={BURGER_POSITIONS.TOP} isLocked />
           <BurgerElements items={items} deleteIngredient={deleteIngredient} />
           <Bun ingredient={bun} position={BURGER_POSITIONS.BOTTOM} isLocked />
         </ul>
-        <div className={burgerConstructorStyle.burgerConstructor__order}>
+        <div className={styles.burgerConstructor__order}>
           <Price total={total || 0} />
           <Button
             htmlType="button"

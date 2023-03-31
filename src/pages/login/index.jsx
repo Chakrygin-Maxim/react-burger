@@ -9,7 +9,7 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
-import { APP_ROUTES } from '../../utils/constants'
+import { APP_ROUTES_MATCH } from '../../utils/constants'
 
 function Login() {
   const dispatch = useDispatch()
@@ -23,7 +23,12 @@ function Login() {
   }
 
   if (auth) {
-    return <Navigate to={APP_ROUTES.root} state={{ from: location }} />
+    return (
+      <Navigate
+        to={location?.state?.from.pathname || APP_ROUTES_MATCH.root}
+        state={{ from: location }}
+      />
+    )
   }
 
   return (
