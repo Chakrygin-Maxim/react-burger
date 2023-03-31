@@ -189,7 +189,7 @@ export const userSlice = createSlice({
     builder.addCase(logoutUser.fulfilled, (state, { payload }) => {
       state.isLoading = false
       if (payload.success) {
-        state = initialState
+        state.user = { ...initialState.user }
         localStorage.removeItem('accessToken')
         localStorage.removeItem('refreshToken')
       } else {

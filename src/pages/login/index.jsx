@@ -1,6 +1,6 @@
 import styles from './style.module.css'
-import { Link } from 'react-router-dom'
-import { loginUser, getUserData } from '../../services/reducers/user'
+import { Link, useNavigate } from 'react-router-dom'
+import { loginUser } from '../../services/reducers/user'
 import { useDispatch } from 'react-redux'
 import { useForm } from '../../utils/formHooks'
 import {
@@ -8,19 +8,17 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { APP_ROUTES_MATCH } from '../../utils/constants'
 
 function Login() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [values, handleOnChange] = useForm({ password: '', email: '' })
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
     dispatch(loginUser(values))
-  }
-
-  const handleUserData = (e) => {
-    e.preventDefault()
-    dispatch(getUserData())
+    navigate(APP_ROUTES_MATCH.root)
   }
 
   return (
@@ -46,15 +44,6 @@ function Login() {
         />
         <Button htmlType="submit" type="primary" size="large" extraClass="mt-6">
           Войти
-        </Button>
-        <Button
-          htmlType="submit"
-          type="primary"
-          size="large"
-          extraClass="mt-6"
-          onClick={handleUserData}
-        >
-          данныеПользователя
         </Button>
         <p className={`${styles.login__text} mt-20`}>
           Вы - новый пользователь?

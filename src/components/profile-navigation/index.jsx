@@ -1,20 +1,22 @@
 import styles from './style.module.css'
 import { useDispatch } from 'react-redux'
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { isCurrentRoute } from '../../utils/common'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { logoutUser } from '../../services/reducers/user'
 import {
-  APP_ROUTES,
+  APP_ROUTES_MATCH,
   EDIT_PROFILE_PAGE_TEXT,
   NAVIGATION,
 } from '../../utils/constants'
 
 function ProfileNavigation() {
   const dispatch = useDispatch()
-  const [currentLink, setCurrentLink] = useState(NAVIGATION.profile.type)
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
 
   const hendleLogOut = () => {
     dispatch(logoutUser())
+    navigate(APP_ROUTES_MATCH.login)
   }
 
   return (
@@ -23,9 +25,8 @@ function ProfileNavigation() {
         <li className={styles.profileNavigation__listItem}>
           <Link
             to={NAVIGATION.profile.linkTo}
-            onClick={() => setCurrentLink(NAVIGATION.profile.type)}
             className={`${styles.profileNavigation__mainText} ${
-              currentLink === NAVIGATION.profile.type &&
+              isCurrentRoute(pathname, APP_ROUTES_MATCH.profile) &&
               styles.profileNavigation__mainText_link_current
             }`}
           >
@@ -35,9 +36,8 @@ function ProfileNavigation() {
         <li className={styles.profileNavigation__listItem}>
           <Link
             to={NAVIGATION.history.linkTo}
-            onClick={() => setCurrentLink(NAVIGATION.history.type)}
             className={`${styles.profileNavigation__mainText} ${
-              currentLink === NAVIGATION.history.type &&
+              isCurrentRoute(pathname, APP_ROUTES_MATCH.profileOrders) &&
               styles.profileNavigation__mainText_link_current
             }`}
           >
@@ -46,12 +46,9 @@ function ProfileNavigation() {
         </li>
         <li className={styles.profileNavigation__listItem}>
           <Link
-            to={APP_ROUTES.root}
+            to={APP_ROUTES_MATCH.root}
             onClick={hendleLogOut}
-            className={`${styles.profileNavigation__mainText} ${
-              currentLink === NAVIGATION.exit.type &&
-              styles.profileNavigation__mainText_link_current
-            }`}
+            className={`${styles.profileNavigation__mainText}`}
           >
             {NAVIGATION.exit.name}
           </Link>

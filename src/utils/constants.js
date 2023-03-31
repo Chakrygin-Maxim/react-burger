@@ -1,8 +1,6 @@
 //типы состава бургера в константы для упрощения рендера
 export const INGREDIENTS_TYPE = ['bun', 'sauce', 'main']
 
-export const NAVIGATION_TYPE = ['profile', 'history', 'exit']
-
 export const APP_ROUTES = Object.freeze({
   root: '/',
   profile: '/profile',
@@ -17,14 +15,26 @@ export const APP_ROUTES = Object.freeze({
   profileOrdersId: ':id',
 })
 
+export const APP_ROUTES_MATCH = Object.freeze({
+  root: '/',
+  profile: '/profile',
+  profileOrders: '/profile/orders',
+  profileOrdersId: '/profile/orders/:id',
+  login: '/login',
+  register: '/register',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  ingredientsId: '/ingredients/:id',
+  orderList: '/order-list',
+})
+
 export const NAVIGATION = Object.freeze({
-  profile: { name: 'Профиль', linkTo: APP_ROUTES.profile, type: 'profile' },
+  profile: { name: 'Профиль', linkTo: APP_ROUTES.profile },
   history: {
     name: 'История',
     linkTo: APP_ROUTES.profileOrders,
-    type: 'history',
   },
-  exit: { name: 'Выход', linkTo: '/', type: 'exit' },
+  exit: { name: 'Выход', linkTo: '/' },
 })
 
 // хранит текст БЖУ
