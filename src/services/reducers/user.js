@@ -7,7 +7,7 @@ import {
   updateUserData,
   forgotPassword,
   resetPassword,
-} from '../../utils/userApi'
+} from './userApi'
 
 const name = 'user'
 

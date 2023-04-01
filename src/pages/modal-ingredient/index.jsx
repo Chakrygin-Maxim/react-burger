@@ -1,5 +1,6 @@
 import Modal from '../../components/modal'
 import IngredientDetails from '../../components/ingredient-details'
+import styles from './style.module.css'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   deleteCurrentItem,
@@ -8,6 +9,10 @@ import {
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { getIngredients } from '../../services/reducers/ingredients'
 import { useMemo, useEffect } from 'react'
+
+const Loading = () => {
+  return <h2 className={styles.loadingText}> Загрузка ингредиента...</h2>
+}
 
 function ModalIngredient() {
   const dispatch = useDispatch()
@@ -31,7 +36,7 @@ function ModalIngredient() {
 
   return (
     <Modal onClose={closeIngredientDetails}>
-      {ingredient && <IngredientDetails ingredient={ingredient} />}
+      {ingredient ? <IngredientDetails ingredient={ingredient} /> : <Loading />}
     </Modal>
   )
 }

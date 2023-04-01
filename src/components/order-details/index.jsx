@@ -5,7 +5,7 @@ import { getOrder } from '../../services/reducers/order'
 import { useSelector } from 'react-redux'
 import { ORDER_TEXTS } from '../../utils/constants'
 
-const Loding = () => {
+const Loading = () => {
   return <h2 className={styles.orderDetails__loding}>{ORDER_TEXTS.loading}</h2>
 }
 
@@ -15,7 +15,7 @@ function OrderDetails() {
   return (
     <div className={styles.section}>
       {isLoading ? (
-        <Loding />
+        <Loading />
       ) : hasError ? (
         <OrderError />
       ) : (

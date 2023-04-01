@@ -1,14 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { API_URL } from './constants'
+import { API_URL } from '../../utils/constants'
+import { checkReponse } from '../../utils/common'
 
 const name = 'user'
-
-const checkReponse = (res) => {
-  if (!res.ok) {
-    return Promise.reject(`Ошибка: ${res.status}`)
-  }
-  return res.json()
-}
 
 const refreshToken = () => {
   return fetch(`${API_URL}/auth/token`, {

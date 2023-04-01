@@ -1,5 +1,4 @@
 import styles from './style.module.css'
-import AppHeader from '../../components/app-header'
 import IngredientDetails from '../../components/ingredient-details'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentItem } from '../../services/reducers/currentIngredient'
@@ -21,12 +20,9 @@ function Ingredient() {
   }, [ingredient, dispatch])
 
   return (
-    <>
-      <AppHeader />
-      <main className={styles.main}>
-        {ingredient && <IngredientDetails ingredient={ingredient} />}
-      </main>
-    </>
+    <main className={styles.main}>
+      {ingredient && <IngredientDetails ingredient={ingredient} />}
+    </main>
   )
 }
 

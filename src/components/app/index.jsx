@@ -4,7 +4,8 @@ import { getIngrediensData } from '../../services/reducers/ingredients'
 import { APP_ROUTES } from '../../utils/constants'
 import { useEffect } from 'react'
 import { getUserData } from '../../services/reducers/user'
-import Constructor from '../../pages/constructor'
+import AppHeader from '../../components/app-header'
+import MainPage from '../../pages/main-page'
 import Login from '../../pages/login'
 import Profile from '../../pages/profile'
 import UserProfile from '../user-profile'
@@ -30,8 +31,9 @@ function App() {
 
   return (
     <>
+      <AppHeader />
       <Routes location={state?.background || location}>
-        <Route path={APP_ROUTES.root} element={<Constructor />} />
+        <Route path={APP_ROUTES.root} element={<MainPage />} />
 
         <Route
           path={APP_ROUTES.login}
