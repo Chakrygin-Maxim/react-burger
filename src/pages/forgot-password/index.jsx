@@ -1,5 +1,7 @@
 import styles from './style.module.css'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser, forgotPassword } from '../../services/reducers/user'
 import { useForm } from '../../utils/formHooks'
 import {
   Input,
@@ -7,14 +9,19 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function ForgotPassword() {
+  const dispatch = useDispatch()
+  const { isResetPasswordStart } = useSelector(getUser)
   const [values, handleOnChange] = useForm({
-    name: '',
-    password: '',
     email: '',
   })
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    dispatch(forgotPassword(values))
+  }
+
+  if (isResetPasswordStart) {
+    return <Navigate to={'/reset-password'} />
   }
 
   return (

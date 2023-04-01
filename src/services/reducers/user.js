@@ -8,6 +8,8 @@ const initialState = {
   isLoading: false,
   hasError: false,
   auth: false,
+  isResetPasswordStart: false,
+  isResetPasswordFinish: false,
 }
 
 const checkReponse = (res) => {
@@ -159,6 +161,46 @@ export const updateUserData = createAsyncThunk(
   }
 )
 
+export const forgotPassword = createAsyncThunk(
+  name + '/forgotPassword',
+  async (payload) => {
+    try {
+      const res = await fetch(`${API_URL}/password-reset`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(payload),
+      })
+      const result = await res.json()
+      return result
+    } catch (err) {
+      console.log('failed to send reset password', err)
+      return { succsess: false }
+    }
+  }
+)
+
+export const resetPassword = createAsyncThunk(
+  name + '/resetPassword',
+  async (payload) => {
+    try {
+      const res = await fetch(`${API_URL}/password-reset/reset`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8',
+        },
+        body: JSON.stringify(payload),
+      })
+      const result = await res.json()
+      return result
+    } catch (err) {
+      console.log('failed to reset password', err)
+      return { succsess: false }
+    }
+  }
+)
+
 export const userSlice = createSlice({
   name,
   initialState,
@@ -179,7 +221,7 @@ export const userSlice = createSlice({
       state.isLoading = false
       if (payload.success) {
         state.user = { ...initialState.user, ...payload.user }
-        state.auth = false
+        state.auth = true
         localStorage.setItem('accessToken', payload.accessToken)
         localStorage.setItem('refreshToken', payload.refreshToken)
       } else {
@@ -220,6 +262,8 @@ export const userSlice = createSlice({
       if (payload.success) {
         state.user = { ...initialState.user, ...payload.user }
         state.auth = true
+        state.isResetPasswordStart = false
+        state.isResetPasswordFinish = false
         localStorage.setItem('accessToken', payload.accessToken)
         localStorage.setItem('refreshToken', payload.refreshToken)
       } else {
@@ -263,6 +307,42 @@ export const userSlice = createSlice({
       }
     })
     builder.addCase(updateUserData.rejected, (state) => {
+      state.isLoading = false
+      state.hasError = true
+    })
+    // получение кода для сброса пароля
+    builder.addCase(forgotPassword.pending, (state) => {
+      state.hasError = false
+      state.isLoading = true
+    })
+    builder.addCase(forgotPassword.fulfilled, (state, { payload }) => {
+      state.isLoading = false
+      if (payload.success) {
+        state.isResetPasswordStart = true
+        state.isResetPasswordFinish = false
+      } else {
+        state.hasError = true
+      }
+    })
+    builder.addCase(forgotPassword.rejected, (state) => {
+      state.isLoading = false
+      state.hasError = true
+    })
+    // сброс пароля
+    builder.addCase(resetPassword.pending, (state) => {
+      state.hasError = false
+      state.isLoading = true
+    })
+    builder.addCase(resetPassword.fulfilled, (state, { payload }) => {
+      state.isLoading = false
+      if (payload.success) {
+        state.isResetPasswordStart = false
+        state.isResetPasswordFinish = true
+      } else {
+        state.hasError = true
+      }
+    })
+    builder.addCase(resetPassword.rejected, (state) => {
       state.isLoading = false
       state.hasError = true
     })

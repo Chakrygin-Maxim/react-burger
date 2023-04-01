@@ -1,5 +1,8 @@
 import styles from './style.module.css'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { getUser, resetPassword } from '../../services/reducers/user'
+import { useSelector } from 'react-redux'
 import { APP_ROUTES_MATCH } from '../../utils/constants'
 import { useForm } from '../../utils/formHooks'
 import {
@@ -9,6 +12,8 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function ResetPassword() {
+  const dispatch = useDispatch()
+  const { isResetPasswordStart, isResetPasswordFinish } = useSelector(getUser)
   const [values, handleOnChange] = useForm({
     token: '',
     password: '',
@@ -16,6 +21,15 @@ function ResetPassword() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault()
+    dispatch(resetPassword(values))
+  }
+
+  if (isResetPasswordFinish) {
+    return <Navigate to={APP_ROUTES_MATCH.login} />
+  }
+
+  if (!isResetPasswordStart) {
+    return <Navigate to={APP_ROUTES_MATCH.forgotPassword} />
   }
 
   return (
