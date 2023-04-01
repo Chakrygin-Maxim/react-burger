@@ -1,3 +1,5 @@
+import { API_URL } from '../utils/constants'
+
 const checkResponse = (res) => {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`)
@@ -10,5 +12,5 @@ export const isCurrentRoute = (pathname, route) => {
 }
 
 export function request(url, options) {
-  return fetch(url, options).then(checkResponse)
+  return fetch(API_URL + url, options).then(checkResponse)
 }

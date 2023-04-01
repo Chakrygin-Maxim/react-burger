@@ -1,11 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { API_URL } from '../../utils/constants'
 import { request } from '../../utils/common'
 
 const name = 'user'
 
 const refreshToken = () => {
-  return request(`${API_URL}/auth/token`, {
+  return request('/auth/token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -18,7 +17,7 @@ const refreshToken = () => {
 
 const loginUser = createAsyncThunk(name + '/postLogin', async (payload) => {
   try {
-    return await request(`${API_URL}/auth/login`, {
+    return await request('/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -35,7 +34,7 @@ const registerUser = createAsyncThunk(
   name + '/postRegister',
   async (payload) => {
     try {
-      return await request(`${API_URL}/auth/register`, {
+      return await request('/auth/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -68,7 +67,7 @@ const fetchLogoutWithRefresh = async (url, options) => {
 
 const logoutUser = createAsyncThunk(name + '/postLogout', async () => {
   try {
-    return await fetchLogoutWithRefresh(`${API_URL}/auth/logout`, {
+    return await fetchLogoutWithRefresh('/auth/logout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
@@ -104,7 +103,7 @@ const fetchUserDataWithRefresh = async (url, options) => {
 
 const getUserData = createAsyncThunk(name + '/user', async () => {
   try {
-    return await fetchUserDataWithRefresh(`${API_URL}/auth/user`, {
+    return await fetchUserDataWithRefresh('/auth/user', {
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('accessToken'),
@@ -120,7 +119,7 @@ const updateUserData = createAsyncThunk(
   name + '/updateUser',
   async (payload) => {
     try {
-      return await fetchUserDataWithRefresh(`${API_URL}/auth/user`, {
+      return await fetchUserDataWithRefresh('/auth/user', {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -139,7 +138,7 @@ const forgotPassword = createAsyncThunk(
   name + '/forgotPassword',
   async (payload) => {
     try {
-      return await request(`${API_URL}/password-reset`, {
+      return await request('/password-reset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -157,7 +156,7 @@ const resetPassword = createAsyncThunk(
   name + '/resetPassword',
   async (payload) => {
     try {
-      return await request(`${API_URL}/password-reset/reset`, {
+      return await request('/password-reset/reset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',

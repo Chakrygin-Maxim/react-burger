@@ -1,5 +1,4 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { API_URL } from '../../utils/constants'
 import { request } from '../../utils/common'
 
 const initialState = {
@@ -15,7 +14,7 @@ export const postOrder = createAsyncThunk(
   name + '/postOrder',
   async (order) => {
     try {
-      return await request(API_URL + '/orders', {
+      return await request('/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
