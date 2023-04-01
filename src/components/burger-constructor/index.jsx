@@ -41,10 +41,11 @@ function BurgerConstructor() {
         state: { from: location },
         replace: true,
       })
+    } else {
+      const order = { ingredients: [bun._id, ...items.map((item) => item._id)] }
+      dispatch(postOrder(order))
+      setOrderDetailsIsOpen(true)
     }
-    const order = { ingredients: [bun._id, ...items.map((item) => item._id)] }
-    dispatch(postOrder(order))
-    setOrderDetailsIsOpen(true)
   }
 
   const handleCloseModal = () => {
