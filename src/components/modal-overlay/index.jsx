@@ -1,4 +1,4 @@
-import styles from './modal-overlay.module.css'
+import styles from './style.module.css'
 import PropTypes from 'prop-types'
 
 function ModalOverlay({ children, onClose }) {

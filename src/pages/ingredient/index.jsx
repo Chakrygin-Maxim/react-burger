@@ -1,6 +1,6 @@
 import styles from './style.module.css'
 import AppHeader from '../../components/app-header'
-import IngredientDetails from '../../components/ingredient-details/ingredient-details'
+import IngredientDetails from '../../components/ingredient-details'
 import { useSelector, useDispatch } from 'react-redux'
 import { setCurrentItem } from '../../services/reducers/currentIngredient'
 import { useParams } from 'react-router-dom'

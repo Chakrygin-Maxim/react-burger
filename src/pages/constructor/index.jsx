@@ -1,5 +1,5 @@
 import Header from '../../components/app-header'
-import Main from '../../components/main/main'
+import Main from '../../components/main'
 
 function Constructor() {
   return (

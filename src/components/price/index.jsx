@@ -1,11 +1,11 @@
-import priceStyle from './price.module.css'
+import styles from './style.module.css'
 import PropTypes from 'prop-types'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function Price({ total }) {
   return (
-    <div className={priceStyle.price}>
-      <span className={priceStyle.price__text}>{total}</span>
+    <div className={styles.price}>
+      <span className={styles.price__text}>{total}</span>
       <CurrencyIcon type="primary" />
     </div>
   )

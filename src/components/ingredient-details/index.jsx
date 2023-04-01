@@ -1,4 +1,4 @@
-import styles from './ingredient-details.module.css'
+import styles from './style.module.css'
 import { INGREDIENT_BZHU } from '../../utils/constants'
 import { INGREDIENT_TYPE } from '../../utils/propTypes'
 import { useLocation } from 'react-router-dom'

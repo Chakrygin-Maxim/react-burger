@@ -1,4 +1,4 @@
-import bunStyle from './bun.module.css'
+import styles from './style.module.css'
 import spiner from '../../images/spinner.svg'
 import PropTypes from 'prop-types'
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -12,7 +12,7 @@ function Bun({ position, ingredient, isLocked }) {
   ].join(' ')
 
   return (
-    <li className={bunStyle.bunElement}>
+    <li className={styles.bunElement}>
       <ConstructorElement
         type={position}
         isLocked={isLocked}

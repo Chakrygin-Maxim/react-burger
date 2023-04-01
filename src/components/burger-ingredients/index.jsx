@@ -1,5 +1,5 @@
-import burgerIngredientsStyle from './burger-ingredients.module.css'
-import IngredientsGroup from '../ingredients-group/ingredients-group'
+import styles from './style.module.css'
+import IngredientsGroup from '../ingredients-group'
 import { useSelector } from 'react-redux'
 import { useInView } from 'react-intersection-observer'
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
@@ -45,11 +45,9 @@ function BurgerIngredients() {
 
   return (
     <>
-      <section className={burgerIngredientsStyle.burgerIngredients}>
-        <h1 className={burgerIngredientsStyle.burgerIngredients__mainText}>
-          Соберите бургер
-        </h1>
-        <nav className={burgerIngredientsStyle.burgerIngredients__filter}>
+      <section className={styles.burgerIngredients}>
+        <h1 className={styles.burgerIngredients__mainText}>Соберите бургер</h1>
+        <nav className={styles.burgerIngredients__filter}>
           {INGREDIENTS_TYPE.map((ingredientType, index) => {
             return (
               <Tab
@@ -63,7 +61,7 @@ function BurgerIngredients() {
             )
           })}
         </nav>
-        <ul className={burgerIngredientsStyle.burgerIngredients__list}>
+        <ul className={styles.burgerIngredients__list}>
           {INGREDIENTS_TYPE.map((ingredientType, index) => {
             const filteredIngredients = data.filter(
               (ingredient) => ingredient.type === ingredientType

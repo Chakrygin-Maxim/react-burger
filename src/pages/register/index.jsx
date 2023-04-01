@@ -2,7 +2,7 @@ import styles from './style.module.css'
 import { Link, Navigate, useLocation } from 'react-router-dom'
 import { useForm } from '../../utils/formHooks'
 import { getUser } from '../../services/reducers/user'
-import { APP_ROUTES } from '../../utils/constants'
+import { APP_ROUTES_MATCH } from '../../utils/constants'
 import {
   Input,
   PasswordInput,
@@ -27,7 +27,7 @@ function Register() {
   }
 
   if (auth) {
-    return <Navigate to={APP_ROUTES.root} state={{ from: location }} />
+    return <Navigate to={APP_ROUTES_MATCH.root} state={{ from: location }} />
   }
 
   return (

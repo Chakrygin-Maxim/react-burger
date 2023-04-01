@@ -1,5 +1,5 @@
-import Ingredient from '../ingredient/ingredient'
-import styles from './ingredients-group.module.css'
+import Ingredient from '../ingredient'
+import styles from './style.module.css'
 import { Link, useLocation } from 'react-router-dom'
 import { forwardRef } from 'react'
 import { INGREDIENT_TYPES_FILTER_TEXT } from '../../utils/constants'

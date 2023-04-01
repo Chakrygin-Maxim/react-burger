@@ -1,5 +1,5 @@
-import Modal from '../../components/modal/modal'
-import IngredientDetails from '../../components/ingredient-details/ingredient-details'
+import Modal from '../../components/modal'
+import IngredientDetails from '../../components/ingredient-details'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   deleteCurrentItem,

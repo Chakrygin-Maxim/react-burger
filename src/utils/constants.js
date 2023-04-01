@@ -9,7 +9,6 @@ export const APP_ROUTES = Object.freeze({
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   ingredientsId: '/ingredients/:id',
-  profileOrders: '/profile/orders',
   orderList: '/order-list',
   orders: 'orders',
   profileOrdersId: ':id',
@@ -32,7 +31,7 @@ export const NAVIGATION = Object.freeze({
   profile: { name: 'Профиль', linkTo: APP_ROUTES.profile },
   history: {
     name: 'История',
-    linkTo: APP_ROUTES.profileOrders,
+    linkTo: APP_ROUTES_MATCH.profileOrders,
   },
   exit: { name: 'Выход', linkTo: '/' },
 })
@@ -75,6 +74,7 @@ export const ORDER_TEXTS = Object.freeze({
   orderId: 'идентификатор заказа',
   isCooking: 'Ваш заказ начали готовить',
   waiting: 'Дождитесь готовности на орбитальной станции',
+  loading: 'Загрузка, ждите...',
 })
 
 export const EDIT_PROFILE_PAGE_TEXT =

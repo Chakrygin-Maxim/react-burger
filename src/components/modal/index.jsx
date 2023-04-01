@@ -1,5 +1,5 @@
-import modalStyle from './modal.module.css'
-import ModalOverlay from '../modal-overlay/modal-overlay'
+import styles from './style.module.css'
+import ModalOverlay from '../modal-overlay'
 import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
@@ -20,8 +20,8 @@ function Modal({ children, onClose }) {
 
   return createPortal(
     <ModalOverlay onClose={onClose}>
-      <div className={modalStyle.modal}>
-        <div className={modalStyle.modal__closeContainer}>
+      <div className={styles.modal}>
+        <div className={styles.modal__closeContainer}>
           <CloseIcon type="primary" onClick={onClose} />
         </div>
         {children}

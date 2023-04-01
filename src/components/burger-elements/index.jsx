@@ -1,6 +1,6 @@
 import React from 'react'
-import burgerElementsStyle from './burger-elements.module.css'
-import BurgerElement from '../burger-element/burger-element'
+import styles from './style.module.css'
+import BurgerElement from '../burger-element'
 import update from 'immutability-helper'
 import PropTypes from 'prop-types'
 import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
@@ -27,7 +27,7 @@ function BurgerElements({ items, deleteIngredient }) {
   const extraClass = items.length > 5 ? 'pr-2' : 'pr-4'
 
   return (
-    <div className={burgerElementsStyle.burgerElements__itemsList}>
+    <div className={styles.burgerElements__itemsList}>
       {items.map((item, index) => {
         return (
           item?._id &&

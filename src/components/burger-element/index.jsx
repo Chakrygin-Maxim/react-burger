@@ -1,4 +1,4 @@
-import burgerElementStyle from './burger-element.module.css'
+import styles from './style.module.css'
 import PropTypes from 'prop-types'
 import { INGREDIENT_TYPE } from '../../utils/propTypes'
 import { useRef } from 'react'
@@ -26,7 +26,7 @@ function BurgerElement({
 
   return (
     <li
-      className={`${burgerElementStyle.burgerElement} ${extraClass}`}
+      className={`${styles.burgerElement} ${extraClass}`}
       style={{ opacity }}
       data-handler-id={handlerId}
       ref={ref}

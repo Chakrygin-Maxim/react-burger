@@ -1,12 +1,12 @@
 import styles from './style.module.css'
 import done from '../../images/done.svg'
-import OrderError from '../order-error/order-error'
+import OrderError from '../order-error'
 import { getOrder } from '../../services/reducers/order'
 import { useSelector } from 'react-redux'
 import { ORDER_TEXTS } from '../../utils/constants'
 
 const Loding = () => {
-  return <h2 className={styles.orderDetails__loding}>Загрузка, ждите...</h2>
+  return <h2 className={styles.orderDetails__loding}>{ORDER_TEXTS.loading}</h2>
 }
 
 function OrderDetails() {
