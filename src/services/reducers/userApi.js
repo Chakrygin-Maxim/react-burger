@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { API_URL } from '../../utils/constants'
-import { checkReponse } from '../../utils/common'
+import { request } from '../../utils/common'
 
 const name = 'user'
 
 const refreshToken = () => {
-  return fetch(`${API_URL}/auth/token`, {
+  return request(`${API_URL}/auth/token`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json;charset=utf-8',
@@ -13,19 +13,18 @@ const refreshToken = () => {
     body: JSON.stringify({
       token: localStorage.getItem('refreshToken'),
     }),
-  }).then(checkReponse)
+  })
 }
 
 const loginUser = createAsyncThunk(name + '/postLogin', async (payload) => {
   try {
-    const res = await fetch(`${API_URL}/auth/login`, {
+    return await request(`${API_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
       },
       body: JSON.stringify(payload),
     })
-    return await checkReponse(res)
   } catch (err) {
     console.log('fail to login', err)
     return { succsess: false }
@@ -36,14 +35,13 @@ const registerUser = createAsyncThunk(
   name + '/postRegister',
   async (payload) => {
     try {
-      const res = await fetch(`${API_URL}/auth/register`, {
+      return await request(`${API_URL}/auth/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
         },
         body: JSON.stringify(payload),
       })
-      return await checkReponse(res)
     } catch (err) {
       console.log('fail to register', err)
       return { succsess: false }
@@ -53,8 +51,7 @@ const registerUser = createAsyncThunk(
 
 const fetchLogoutWithRefresh = async (url, options) => {
   try {
-    const res = await fetch(url, options)
-    return await checkReponse(res)
+    return await request(url, options)
   } catch (err) {
     if (err.message === 'jwt expired' || err === 'Ошибка: 403') {
       const refreshData = await refreshToken() //обновляем токен
@@ -62,8 +59,7 @@ const fetchLogoutWithRefresh = async (url, options) => {
         return Promise.reject(refreshData)
       }
       options.body.token = refreshData.refreshToken
-      const res = await fetch(url, options) //повторяем запрос
-      return await checkReponse(res)
+      return await request(url, options) //повторяем запрос
     } else {
       return Promise.reject(err)
     }
@@ -89,8 +85,7 @@ const logoutUser = createAsyncThunk(name + '/postLogout', async () => {
 
 const fetchUserDataWithRefresh = async (url, options) => {
   try {
-    const res = await fetch(url, options)
-    return await checkReponse(res)
+    return await request(url, options)
   } catch (err) {
     if (err.message === 'jwt expired' || err === 'Ошибка: 403') {
       const refreshData = await refreshToken() //обновляем токен
@@ -100,8 +95,7 @@ const fetchUserDataWithRefresh = async (url, options) => {
       localStorage.setItem('refreshToken', refreshData.refreshToken)
       localStorage.setItem('accessToken', refreshData.accessToken)
       options.headers.Authorization = refreshData.accessToken
-      const res = await fetch(url, options) //повторяем запрос
-      return await checkReponse(res)
+      return await request(url, options) //повторяем запрос
     } else {
       return Promise.reject(err)
     }
@@ -145,14 +139,13 @@ const forgotPassword = createAsyncThunk(
   name + '/forgotPassword',
   async (payload) => {
     try {
-      const res = await fetch(`${API_URL}/password-reset`, {
+      return await request(`${API_URL}/password-reset`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
         },
         body: JSON.stringify(payload),
       })
-      return await checkReponse(res)
     } catch (err) {
       console.log('failed to send reset password', err)
       return { succsess: false }
@@ -164,14 +157,13 @@ const resetPassword = createAsyncThunk(
   name + '/resetPassword',
   async (payload) => {
     try {
-      const res = await fetch(`${API_URL}/password-reset/reset`, {
+      return await request(`${API_URL}/password-reset/reset`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
         },
         body: JSON.stringify(payload),
       })
-      return await checkReponse(res)
     } catch (err) {
       console.log('failed to reset password', err)
       return { succsess: false }

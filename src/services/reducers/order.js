@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { API_URL } from '../../utils/constants'
-import { checkReponse } from '../../utils/common'
+import { request } from '../../utils/common'
 
 const initialState = {
   name: '',
@@ -15,7 +15,7 @@ export const postOrder = createAsyncThunk(
   name + '/postOrder',
   async (order) => {
     try {
-      const res = await fetch(API_URL + '/orders', {
+      return await request(API_URL + '/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
@@ -23,7 +23,6 @@ export const postOrder = createAsyncThunk(
         },
         body: JSON.stringify(order),
       })
-      return await checkReponse(res)
     } catch (err) {
       console.log('faild to fetch', err)
       return { success: false }

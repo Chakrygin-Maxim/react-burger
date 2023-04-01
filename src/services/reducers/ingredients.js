@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { API_URL } from '../../utils/constants'
 import { INGREDIENT_TYPES_FILTER } from '../../utils/constants'
-import { checkReponse } from '../../utils/common'
+import { request } from '../../utils/common'
 
 const initialState = {
   data: [],
@@ -15,8 +15,7 @@ export const getIngrediensData = createAsyncThunk(
   name + '/getIngrediens',
   async () => {
     try {
-      const res = await fetch(API_URL + '/ingredients')
-      return await checkReponse(res)
+      return await request(API_URL + '/ingredients')
     } catch (err) {
       console.log('faild to fetch', err)
       return { success: false }
