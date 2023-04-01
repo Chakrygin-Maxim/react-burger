@@ -20,4 +20,8 @@ function ProtectedRouteElement({ checkAuth = false, element }) {
   return element
 }
 
-export default ProtectedRouteElement
+export const OnlyAuth = ProtectedRouteElement
+
+export const OnlyUnAuth = (props) => (
+  <ProtectedRouteElement checkAuth {...props} />
+)

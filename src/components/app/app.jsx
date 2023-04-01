@@ -15,7 +15,7 @@ import Ingredient from '../../pages/ingredient'
 import NotFound from '../../pages/not-found'
 import OrderHistory from '../order-history'
 import ModalIngredient from '../../pages/modal-ingredient'
-import ProtectedRouteElement from '../protected-route'
+import { OnlyAuth, OnlyUnAuth } from '../protected-route'
 
 function App() {
   let location = useLocation()
@@ -35,12 +35,12 @@ function App() {
 
         <Route
           path={APP_ROUTES.login}
-          element={<ProtectedRouteElement checkAuth element={<Login />} />}
+          element={<OnlyUnAuth element={<Login />} />}
         />
 
         <Route
           path={APP_ROUTES.profile}
-          element={<ProtectedRouteElement element={<Profile />} />}
+          element={<OnlyAuth element={<Profile />} />}
         >
           <Route index element={<UserProfile />} />
           <Route path={APP_ROUTES.orders} element={<OrderHistory />} />
@@ -50,20 +50,16 @@ function App() {
 
         <Route
           path={APP_ROUTES.register}
-          element={<ProtectedRouteElement checkAuth element={<Register />} />}
+          element={<OnlyUnAuth element={<Register />} />}
         />
 
         <Route
           path={APP_ROUTES.resetPassword}
-          element={
-            <ProtectedRouteElement checkAuth element={<ResetPassword />} />
-          }
+          element={<OnlyUnAuth element={<ResetPassword />} />}
         />
         <Route
           path={APP_ROUTES.forgotPassword}
-          element={
-            <ProtectedRouteElement checkAuth element={<ForgotPassword />} />
-          }
+          element={<OnlyUnAuth element={<ForgotPassword />} />}
         />
         <Route path={APP_ROUTES.ingredientsId} element={<Ingredient />} />
         <Route path="*" element={<NotFound />} />
