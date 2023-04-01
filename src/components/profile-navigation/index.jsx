@@ -12,12 +12,13 @@ import {
 function ProfileNavigation() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { pathname } = useLocation()
+  const location = useLocation()
+  const { pathname } = location
 
   const hendleLogOut = () => {
     dispatch(cleanUser())
     dispatch(logoutUser())
-    navigate(APP_ROUTES_MATCH.login)
+    navigate(APP_ROUTES_MATCH.login, { state: { from: location } })
   }
 
   return (

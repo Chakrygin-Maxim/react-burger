@@ -25,7 +25,7 @@ function Login() {
   if (auth) {
     return (
       <Navigate
-        to={location?.state?.from.pathname || APP_ROUTES_MATCH.root}
+        to={location.state?.from.pathname || APP_ROUTES_MATCH.root}
         state={{ from: location }}
       />
     )
