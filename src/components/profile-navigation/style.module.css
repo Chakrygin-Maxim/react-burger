@@ -1,0 +1,49 @@
+.profileNavigation__nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.profileNavigation__list {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 320px;
+  justify-content: flex-start;
+  border: 2px dashed #4c4cff;
+}
+
+.profileNavigation__listItem {
+  min-height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.profileNavigation__mainText {
+  composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #8585ad;
+}
+
+.profileNavigation__text {
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #8585ad;
+  width: 320px;
+}
+
+.profileNavigation__mainText_link_current {
+  color: #f2f2f3;
+}
+
+.profileNavigation__mainText_link_current.profileNavigation__mainText:hover {
+  cursor: default;
+  color: #f2f2f3;
+  opacity: 1;
+}
+
+.profileNavigation__mainText:hover {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+

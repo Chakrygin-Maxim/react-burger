@@ -1,6 +1,41 @@
 //типы состава бургера в константы для упрощения рендера
 export const INGREDIENTS_TYPE = ['bun', 'sauce', 'main']
 
+export const APP_ROUTES = Object.freeze({
+  root: '/',
+  profile: '/profile',
+  login: '/login',
+  register: '/register',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  ingredientsId: '/ingredients/:id',
+  orderList: '/order-list',
+  orders: 'orders',
+  profileOrdersId: ':id',
+})
+
+export const APP_ROUTES_MATCH = Object.freeze({
+  root: '/',
+  profile: '/profile',
+  profileOrders: '/profile/orders',
+  profileOrdersId: '/profile/orders/:id',
+  login: '/login',
+  register: '/register',
+  forgotPassword: '/forgot-password',
+  resetPassword: '/reset-password',
+  ingredientsId: '/ingredients/:id',
+  orderList: '/order-list',
+})
+
+export const NAVIGATION = Object.freeze({
+  profile: { name: 'Профиль', linkTo: APP_ROUTES.profile },
+  history: {
+    name: 'История',
+    linkTo: APP_ROUTES_MATCH.profileOrders,
+  },
+  exit: { name: 'Выход', linkTo: '/' },
+})
+
 // хранит текст БЖУ
 export const INGREDIENT_BZHU = Object.freeze({
   calories: 'Калории, ккал',
@@ -39,7 +74,11 @@ export const ORDER_TEXTS = Object.freeze({
   orderId: 'идентификатор заказа',
   isCooking: 'Ваш заказ начали готовить',
   waiting: 'Дождитесь готовности на орбитальной станции',
+  loading: 'Загрузка, ждите...',
 })
+
+export const EDIT_PROFILE_PAGE_TEXT =
+  'В этом разделе вы можете изменить свои персональные данные'
 
 export const API_URL = 'https://norma.nomoreparties.space/api'
 
