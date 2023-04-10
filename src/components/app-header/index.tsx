@@ -38,20 +38,23 @@ function AppHeader(): JSX.Element {
           <li className={styles.appHeader__listItem}>
             <ListIcon
               type={
-                isCurrentRoute(pathname, APP_ROUTES_MATCH.orderList)
+                isCurrentRoute(pathname, APP_ROUTES_MATCH.feed) ||
+                isCurrentRoute(pathname, APP_ROUTES_MATCH.feedId)
                   ? 'primary'
                   : 'secondary'
               }
             />
-            <p
+            <Link
+              to={APP_ROUTES_MATCH.feed}
               className={`${styles.appHeader__linkText} ${
-                isCurrentRoute(pathname, APP_ROUTES_MATCH.orderList)
+                isCurrentRoute(pathname, APP_ROUTES_MATCH.feed) ||
+                isCurrentRoute(pathname, APP_ROUTES_MATCH.feedId)
                   ? styles.appHeader__linkText_type_primary
                   : styles.appHeader__linkText_type_secondary
               }`}
             >
               Лента Заказов
-            </p>
+            </Link>
           </li>
         </ul>
         <div className={styles.appHeader__mainLogo}>

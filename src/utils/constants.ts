@@ -21,9 +21,10 @@ export const APP_ROUTES: { [key in string]: string } = Object.freeze({
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   ingredientsId: '/ingredients/:id',
-  orderList: '/order-list',
   orders: 'orders',
   profileOrdersId: ':id',
+  feed: '/feed',
+  feedId: ':id',
 })
 
 export const APP_ROUTES_MATCH: { [key in string]: string } = Object.freeze({
@@ -36,7 +37,8 @@ export const APP_ROUTES_MATCH: { [key in string]: string } = Object.freeze({
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   ingredientsId: '/ingredients/:id',
-  orderList: '/order-list',
+  feed: '/feed',
+  feedId: '/feed/:id',
 })
 
 export const NAVIGATION: Navigation = Object.freeze({

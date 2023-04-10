@@ -8,6 +8,7 @@ import { OnlyAuth, OnlyUnAuth } from '../protected-route'
 import { AppDispatch } from '../../store'
 import AppHeader from '../app-header'
 import MainPage from '../../pages/main-page'
+import Feed from '../../pages/feed'
 import Login from '../../pages/login'
 import Profile from '../../pages/profile'
 import UserProfile from '../user-profile'
@@ -35,6 +36,7 @@ function App(): JSX.Element {
       <AppHeader />
       <Routes location={state?.background || location}>
         <Route path={APP_ROUTES.root} element={<MainPage />} />
+        <Route path={APP_ROUTES.feed} element={<Feed />} />
 
         <Route
           path={APP_ROUTES.login}

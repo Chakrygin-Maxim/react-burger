@@ -21,4 +21,5 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: calc(var(--offset-base-size) * 10);
 }
