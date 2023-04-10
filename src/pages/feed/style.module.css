@@ -1,1 +1,18 @@
+.feed {
+  max-width: 1240px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+
+.container {
+  display: flex;
+  column-gap: calc(var(--offset-base-size) * 15);
+}
+
+.feed__header {
+  composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  margin: 0 0 20px 0;
+}
 
