@@ -10,15 +10,18 @@ import {
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { APP_ROUTES_MATCH } from '../../utils/constants'
+import { AppDispatch } from '../../store'
 
 function Login() {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const location = useLocation()
   const { auth } = useSelector(getUser)
   const [values, handleOnChange] = useForm({ password: '', email: '' })
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     dispatch(loginUser(values))
   }
 

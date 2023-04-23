@@ -2,17 +2,16 @@ import React from 'react'
 import styles from './style.module.css'
 import BurgerElement from '../burger-element'
 import update from 'immutability-helper'
-import PropTypes from 'prop-types'
-import { INGREDIENTS_ARRAY_TYPE } from '../../utils/propTypes'
+import { BurgerElementsProps } from './types'
 import { updateItems } from '../../services/reducers/constructor'
 import { useCallback } from 'react'
 import { INGREDIENT_TYPES_FILTER } from '../../utils/constants'
 import { useDispatch } from 'react-redux'
 
-function BurgerElements({ items, deleteIngredient }) {
+function BurgerElements({ items, deleteIngredient }: BurgerElementsProps) {
   const dispatch = useDispatch()
   const moveElement = useCallback(
-    (dragIndex, hoverIndex) => {
+    (dragIndex: number, hoverIndex: number) => {
       const newItems = update(items, {
         $splice: [
           [dragIndex, 1],
@@ -45,11 +44,6 @@ function BurgerElements({ items, deleteIngredient }) {
       })}
     </div>
   )
-}
-
-BurgerElements.propTypes = {
-  items: INGREDIENTS_ARRAY_TYPE.isRequired,
-  deleteIngredient: PropTypes.func.isRequired,
 }
 
 export default React.memo(BurgerElements)

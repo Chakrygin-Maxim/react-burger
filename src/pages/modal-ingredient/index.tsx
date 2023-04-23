@@ -9,6 +9,7 @@ import {
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { getIngredients } from '../../services/reducers/ingredients'
 import { useMemo, useEffect } from 'react'
+import { IngredientItem } from '../../utils/types'
 
 const Loading = () => {
   return <h2 className={styles.loadingText}> Загрузка ингредиента...</h2>
@@ -22,7 +23,7 @@ function ModalIngredient() {
   const { id } = useParams()
 
   const ingredient = useMemo(() => {
-    return data?.find((el) => el._id === id)
+    return data?.find((el: IngredientItem) => el._id === id)
   }, [data, id])
 
   useEffect(() => {

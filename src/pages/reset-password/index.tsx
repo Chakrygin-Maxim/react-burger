@@ -10,17 +10,20 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { AppDispatch } from '../../store'
 
 function ResetPassword() {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const { isResetPasswordStart, isResetPasswordFinish } = useSelector(getUser)
   const [values, handleOnChange] = useForm({
     token: '',
     password: '',
   })
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     dispatch(resetPassword(values))
   }
 

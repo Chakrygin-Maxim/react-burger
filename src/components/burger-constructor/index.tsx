@@ -4,6 +4,7 @@ import Modal from '../modal'
 import Price from '../price'
 import Bun from '../bun'
 import BurgerElements from '../burger-elements'
+import { AppDispatch } from '../../store'
 import { v4 as uuidv4 } from 'uuid'
 import { useDispatch, useSelector } from 'react-redux'
 import { APP_ROUTES_MATCH, BURGER_POSITIONS } from '../../utils/constants'
@@ -13,6 +14,7 @@ import { BurgerConstructorDrop } from '../../utils/dndHooks'
 import { getUser } from '../../services/reducers/user'
 import { postOrder, cleanOrder } from '../../services/reducers/order'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { IngredientItem, Order } from '../../utils/types'
 import {
   addBun,
   addItem,
@@ -28,7 +30,7 @@ import {
 } from '../../services/reducers/ingredients'
 
 function BurgerConstructor() {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   const [orderDetailsIsOpen, setOrderDetailsIsOpen] = useState(false)
@@ -42,7 +44,14 @@ function BurgerConstructor() {
         replace: true,
       })
     } else {
-      const order = { ingredients: [bun._id, ...items.map((item) => item._id)] }
+      const order: Order = {
+        ingredients: [
+          bun._id,
+          ...items.map((item: IngredientItem) => item._id),
+        ],
+      }
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       dispatch(postOrder(order))
       setOrderDetailsIsOpen(true)
     }
@@ -57,18 +66,18 @@ function BurgerConstructor() {
     }, 100)
   }
 
-  const updateBuns = (item) => {
+  const updateBuns = (item: IngredientItem) => {
     dispatch(addBun(item))
     dispatch(updateBunsCount(item))
   }
 
-  const addIngredient = (item) => {
+  const addIngredient = (item: IngredientItem) => {
     dispatch(addItem({ item, id: uuidv4() }))
     dispatch(increaseItemCount(item))
   }
 
   const deleteIngredient = useCallback(
-    (item) => {
+    (item: IngredientItem) => {
       dispatch(removeItem(item.id))
       dispatch(decreaseItemCount(item))
     },
@@ -81,7 +90,7 @@ function BurgerConstructor() {
     let sum = 0
 
     sum = (bun?.price && bun.price * 2) || 0
-    items.forEach((item) => (sum = sum + item.price))
+    items.forEach((item: IngredientItem) => (sum = sum + item.price))
 
     return sum
   }, [bun, items])

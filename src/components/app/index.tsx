@@ -4,7 +4,9 @@ import { getIngrediensData } from '../../services/reducers/ingredients'
 import { APP_ROUTES } from '../../utils/constants'
 import { useEffect } from 'react'
 import { getUserData } from '../../services/reducers/user'
-import AppHeader from '../../components/app-header'
+import { OnlyAuth, OnlyUnAuth } from '../protected-route'
+import { AppDispatch } from '../../store'
+import AppHeader from '../app-header'
 import MainPage from '../../pages/main-page'
 import Login from '../../pages/login'
 import Profile from '../../pages/profile'
@@ -16,13 +18,12 @@ import Ingredient from '../../pages/ingredient'
 import NotFound from '../../pages/not-found'
 import OrderHistory from '../order-history'
 import ModalIngredient from '../../pages/modal-ingredient'
-import { OnlyAuth, OnlyUnAuth } from '../protected-route'
 
-function App() {
-  let location = useLocation()
-  let state = location.state
+function App(): JSX.Element {
+  const location = useLocation()
+  const state = location.state
 
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
 
   useEffect(() => {
     dispatch(getIngrediensData())

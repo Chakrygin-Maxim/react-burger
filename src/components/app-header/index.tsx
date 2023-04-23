@@ -9,7 +9,7 @@ import {
   ListIcon,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-function AppHeader() {
+function AppHeader(): JSX.Element {
   const { pathname } = useLocation()
 
   return (

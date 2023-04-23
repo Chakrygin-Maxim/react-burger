@@ -1,6 +1,5 @@
 import styles from './style.module.css'
-import PropTypes from 'prop-types'
-import { INGREDIENT_TYPE } from '../../utils/propTypes'
+import { BurgerElementProps } from './types'
 import { useRef } from 'react'
 import {
   useBurgerElementDrag,
@@ -17,7 +16,7 @@ function BurgerElement({
   index,
   moveElement,
   extraClass,
-}) {
+}: BurgerElementProps) {
   const ref = useRef(null)
   const { handlerId, drop } = useBurgerElementDrop(ref, index, moveElement)
   const { opacity, drag } = useBurgerElementDrag(ingredient._id, index)
@@ -40,14 +39,6 @@ function BurgerElement({
       />
     </li>
   )
-}
-
-BurgerElement.propTypes = {
-  ingredient: INGREDIENT_TYPE.isRequired,
-  onDelete: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
-  moveElement: PropTypes.func.isRequired,
-  extraClass: PropTypes.string.isRequired,
 }
 
 export default BurgerElement

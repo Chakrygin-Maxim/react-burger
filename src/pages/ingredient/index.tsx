@@ -5,6 +5,7 @@ import { setCurrentItem } from '../../services/reducers/currentIngredient'
 import { useParams } from 'react-router-dom'
 import { getIngredients } from '../../services/reducers/ingredients'
 import { useMemo, useEffect } from 'react'
+import { IngredientItem } from '../../utils/types'
 
 function Ingredient() {
   const dispatch = useDispatch()
@@ -12,7 +13,7 @@ function Ingredient() {
   const { id } = useParams()
 
   const ingredient = useMemo(() => {
-    return data?.find((el) => el._id === id)
+    return data?.find((el: IngredientItem) => el._id === id)
   }, [data, id])
 
   useEffect(() => {

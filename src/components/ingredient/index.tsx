@@ -1,12 +1,12 @@
 import styles from './style.module.css'
-import { INGREDIENT_TYPE } from '../../utils/propTypes'
 import { useIngredientDrag } from '../../utils/dndHooks'
+import { IngredientProps } from './types'
 import {
   CurrencyIcon,
   Counter,
 } from '@ya.praktikum/react-developer-burger-ui-components'
 
-function Ingredient({ ingredient }) {
+function Ingredient({ ingredient }: IngredientProps): JSX.Element {
   const { opacity, ref } = useIngredientDrag(ingredient)
 
   return (
@@ -20,10 +20,6 @@ function Ingredient({ ingredient }) {
       <p className={styles.ingredient__text}>{ingredient.name}</p>
     </li>
   )
-}
-
-Ingredient.propTypes = {
-  ingredient: INGREDIENT_TYPE.isRequired,
 }
 
 export default Ingredient

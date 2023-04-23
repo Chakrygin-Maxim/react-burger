@@ -10,9 +10,10 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { registerUser } from '../../services/reducers/user'
 import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch } from '../../store'
 
 function Register() {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const location = useLocation()
   const { auth } = useSelector(getUser)
   const [values, handleOnChange] = useForm({
@@ -21,8 +22,10 @@ function Register() {
     email: '',
   })
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     dispatch(registerUser(values))
   }
 

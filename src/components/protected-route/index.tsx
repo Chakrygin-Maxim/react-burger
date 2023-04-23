@@ -2,8 +2,13 @@ import { getUser } from '../../services/reducers/user'
 import { useSelector } from 'react-redux'
 import { APP_ROUTES_MATCH } from '../../utils/constants'
 import { Navigate, useLocation } from 'react-router-dom'
+import { ProtectedRouteElementProps, OnlyUnAuthProps } from './types'
+import { FC } from 'react'
 
-function ProtectedRouteElement({ checkAuth = false, element }) {
+function ProtectedRouteElement({
+  checkAuth = false,
+  element,
+}: ProtectedRouteElementProps) {
   const location = useLocation()
   const { auth } = useSelector(getUser)
 
@@ -22,6 +27,6 @@ function ProtectedRouteElement({ checkAuth = false, element }) {
 
 export const OnlyAuth = ProtectedRouteElement
 
-export const OnlyUnAuth = (props) => (
-  <ProtectedRouteElement checkAuth {...props} />
-)
+export const OnlyUnAuth: FC<OnlyUnAuthProps> = ({ element }) => {
+  return <ProtectedRouteElement checkAuth element={element} />
+}

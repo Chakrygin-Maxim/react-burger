@@ -1,9 +1,9 @@
 import styles from './style.module.css'
+import { IngredientDetailsProps, RenderBZHUProps } from './types'
 import { INGREDIENT_BZHU } from '../../utils/constants'
-import { INGREDIENT_TYPE } from '../../utils/propTypes'
 import { useLocation } from 'react-router-dom'
 
-function RenderBZHU({ title, text }) {
+function RenderBZHU({ title, text }: RenderBZHUProps) {
   return (
     <li className={styles.ingredientDetails__element}>
       <span className={styles.ingredientDetails__title}>{title}</span>
@@ -12,7 +12,7 @@ function RenderBZHU({ title, text }) {
   )
 }
 
-function IngredientDetails({ ingredient }) {
+function IngredientDetails({ ingredient }: IngredientDetailsProps) {
   const location = useLocation()
 
   return (
@@ -44,10 +44,6 @@ function IngredientDetails({ ingredient }) {
       </ul>
     </>
   )
-}
-
-IngredientDetails.propTypes = {
-  ingredient: INGREDIENT_TYPE.isRequired,
 }
 
 export default IngredientDetails

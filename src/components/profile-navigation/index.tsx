@@ -8,9 +8,10 @@ import {
   EDIT_PROFILE_PAGE_TEXT,
   NAVIGATION,
 } from '../../utils/constants'
+import { AppDispatch } from '../../store'
 
 function ProfileNavigation() {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
   const { pathname } = location

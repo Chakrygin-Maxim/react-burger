@@ -7,16 +7,19 @@ import {
   Input,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { AppDispatch } from '../../store'
 
 function ForgotPassword() {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const { isResetPasswordStart } = useSelector(getUser)
   const [values, handleOnChange] = useForm({
     email: '',
   })
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     dispatch(forgotPassword(values))
   }
 

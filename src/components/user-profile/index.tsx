@@ -12,9 +12,10 @@ import {
   PasswordInput,
   Button,
 } from '@ya.praktikum/react-developer-burger-ui-components'
+import { AppDispatch } from '../../store'
 
 function UserProfile() {
-  const dispatch = useDispatch()
+  const dispatch: AppDispatch = useDispatch()
   const { user } = useSelector(getUser)
 
   const [values, handleOnChange, updateValues] = useForm({ ...user })
@@ -24,9 +25,12 @@ function UserProfile() {
     user.email !== values.email ||
     user.password !== values.password
 
-  const heandleUpdateUser = (e) => {
+  const heandleUpdateUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const { name, email } = values
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     dispatch(updateUserData({ name, email }))
   }
 
@@ -67,7 +71,7 @@ function UserProfile() {
         </section>
         {isModify && (
           <div className={styles.buttons}>
-            <p to="/login" className={styles.link} onClick={heandleCancel}>
+            <p className={styles.link} onClick={heandleCancel}>
               Отмена
             </p>
             <Button

@@ -1,5 +1,5 @@
 //типы состава бургера в константы для упрощения рендера
-export const INGREDIENTS_TYPE = ['bun', 'sauce', 'main']
+export const INGREDIENTS_TYPE: string[] = ['bun', 'sauce', 'main']
 
 export const APP_ROUTES = Object.freeze({
   root: '/',
@@ -45,11 +45,19 @@ export const INGREDIENT_BZHU = Object.freeze({
 })
 
 // для рендера тексты фильтров составов бургера
-export const INGREDIENT_TYPES_FILTER_TEXT = Object.freeze({
-  bun: 'Булки',
-  sauce: 'Соусы',
-  main: 'Начинки',
-})
+export type IngredientFilterText = {
+  bun: string
+  sauce: string
+  main: string
+}
+
+export const INGREDIENT_TYPES_FILTER_TEXT: IngredientFilterText = Object.freeze(
+  {
+    bun: 'Булки',
+    sauce: 'Соусы',
+    main: 'Начинки',
+  }
+)
 
 // для отбора булок в конструкторе бургера
 export const INGREDIENT_TYPES_FILTER = Object.freeze({

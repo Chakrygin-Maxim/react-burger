@@ -9,11 +9,14 @@ import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,
   INGREDIENT_TYPES_FILTER,
+  IngredientFilterText,
 } from '../../utils/constants'
+import { IngredientItem, Ingredients } from '../../utils/types'
+import { ScrollRefs } from './types'
 
 function BurgerIngredients() {
   const { data } = useSelector(getIngredients)
-  const [activeFilter, setActiveFilter] = useState(INGREDIENTS_TYPE[0])
+  const [activeFilter, setActiveFilter] = useState<string>(INGREDIENTS_TYPE[0])
   const inViewOption = {
     threshold: 0.5,
   }
@@ -32,14 +35,17 @@ function BurgerIngredients() {
     }
   }, [bunsInView, sauceInView, mainInView])
 
-  const refs = useRef({
+  const refs = useRef<ScrollRefs>({
     bun: { clickRef: useRef(null), scrollRef: bunsRef },
     sauce: { clickRef: useRef(null), scrollRef: saucesRef },
     main: { clickRef: useRef(null), scrollRef: mainRef },
   })
 
-  const hendleFilterClick = (value) => {
+  const hendleFilterClick = (value: string) => {
     setActiveFilter(value)
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     refs.current[value].clickRef.current?.scrollIntoView()
   }
 
@@ -48,7 +54,7 @@ function BurgerIngredients() {
       <section className={styles.burgerIngredients}>
         <h1 className={styles.burgerIngredients__mainText}>Соберите бургер</h1>
         <nav className={styles.burgerIngredients__filter}>
-          {INGREDIENTS_TYPE.map((ingredientType, index) => {
+          {INGREDIENTS_TYPE.map((ingredientType: string, index) => {
             return (
               <Tab
                 key={index}
@@ -56,15 +62,19 @@ function BurgerIngredients() {
                 active={ingredientType === activeFilter}
                 onClick={hendleFilterClick}
               >
-                {INGREDIENT_TYPES_FILTER_TEXT[ingredientType]}
+                {
+                  INGREDIENT_TYPES_FILTER_TEXT[
+                    ingredientType as keyof IngredientFilterText
+                  ]
+                }
               </Tab>
             )
           })}
         </nav>
         <ul className={styles.burgerIngredients__list}>
           {INGREDIENTS_TYPE.map((ingredientType, index) => {
-            const filteredIngredients = data.filter(
-              (ingredient) => ingredient.type === ingredientType
+            const filteredIngredients: Ingredients = data.filter(
+              (ingredient: IngredientItem) => ingredient.type === ingredientType
             )
             return (
               <IngredientsGroup
