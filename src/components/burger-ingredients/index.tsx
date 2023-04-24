@@ -9,8 +9,8 @@ import {
   INGREDIENTS_TYPE,
   INGREDIENT_TYPES_FILTER_TEXT,
   INGREDIENT_TYPES_FILTER,
-  IngredientFilterText,
 } from '../../utils/constants'
+import { IngredientFilterText } from '../../utils/types'
 import { IngredientItem, Ingredients } from '../../utils/types'
 import { ScrollRefs } from './types'
 

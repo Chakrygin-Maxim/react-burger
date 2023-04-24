@@ -2,10 +2,8 @@ import Ingredient from '../ingredient'
 import styles from './style.module.css'
 import { Link, useLocation } from 'react-router-dom'
 import { forwardRef } from 'react'
-import {
-  INGREDIENT_TYPES_FILTER_TEXT,
-  IngredientFilterText,
-} from '../../utils/constants'
+import { INGREDIENT_TYPES_FILTER_TEXT } from '../../utils/constants'
+import { IngredientFilterText } from '../../utils/types'
 import { IngredientsGroupProps } from './types'
 
 const IngredientsGroup = forwardRef(

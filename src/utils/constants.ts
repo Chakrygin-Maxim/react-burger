@@ -1,7 +1,14 @@
+import {
+  IngredientFilterText,
+  IngredientItem,
+  Navigation,
+  PositionsType,
+} from './types'
+
 //типы состава бургера в константы для упрощения рендера
 export const INGREDIENTS_TYPE: string[] = ['bun', 'sauce', 'main']
 
-export const APP_ROUTES = Object.freeze({
+export const APP_ROUTES: { [key in string]: string } = Object.freeze({
   root: '/',
   profile: '/profile',
   login: '/login',
@@ -14,7 +21,7 @@ export const APP_ROUTES = Object.freeze({
   profileOrdersId: ':id',
 })
 
-export const APP_ROUTES_MATCH = Object.freeze({
+export const APP_ROUTES_MATCH: { [key in string]: string } = Object.freeze({
   root: '/',
   profile: '/profile',
   profileOrders: '/profile/orders',
@@ -27,7 +34,7 @@ export const APP_ROUTES_MATCH = Object.freeze({
   orderList: '/order-list',
 })
 
-export const NAVIGATION = Object.freeze({
+export const NAVIGATION: Navigation = Object.freeze({
   profile: { name: 'Профиль', linkTo: APP_ROUTES.profile },
   history: {
     name: 'История',
@@ -37,19 +44,12 @@ export const NAVIGATION = Object.freeze({
 })
 
 // хранит текст БЖУ
-export const INGREDIENT_BZHU = Object.freeze({
+export const INGREDIENT_BZHU: { [key in string]: string } = Object.freeze({
   calories: 'Калории, ккал',
   proteins: 'Белки, г',
   fat: 'Жиры, г',
   carbohydrates: 'Углеводы, г',
 })
-
-// для рендера тексты фильтров составов бургера
-export type IngredientFilterText = {
-  bun: string
-  sauce: string
-  main: string
-}
 
 export const INGREDIENT_TYPES_FILTER_TEXT: IngredientFilterText = Object.freeze(
   {
@@ -60,25 +60,28 @@ export const INGREDIENT_TYPES_FILTER_TEXT: IngredientFilterText = Object.freeze(
 )
 
 // для отбора булок в конструкторе бургера
-export const INGREDIENT_TYPES_FILTER = Object.freeze({
-  bun: 'bun',
-  sauce: 'sauce',
-  main: 'main',
-})
+export const INGREDIENT_TYPES_FILTER: { [key in string]: string } =
+  Object.freeze({
+    bun: 'bun',
+    sauce: 'sauce',
+    main: 'main',
+  })
 
 // для определения позции булок
-export const BURGER_POSITIONS = Object.freeze({
+export const BURGER_POSITIONS: PositionsType = Object.freeze({
   TOP: 'top',
   BOTTOM: 'bottom',
 })
 
 // для хранения соответствия текста позиции булки
-export const BURGER_POSITIONS_TEXT = Object.freeze({
-  top: '(верх)',
-  bottom: '(низ)',
-})
+export const BURGER_POSITIONS_TEXT: { [key in string]: string } = Object.freeze(
+  {
+    top: '(верх)',
+    bottom: '(низ)',
+  }
+)
 
-export const ORDER_TEXTS = Object.freeze({
+export const ORDER_TEXTS: { [key in string]: string } = Object.freeze({
   orderId: 'идентификатор заказа',
   isCooking: 'Ваш заказ начали готовить',
   waiting: 'Дождитесь готовности на орбитальной станции',
@@ -90,7 +93,8 @@ export const EDIT_PROFILE_PAGE_TEXT =
 
 export const API_URL = 'https://norma.nomoreparties.space/api'
 
-export const EMPTY_INGREDIENT = {
+export const EMPTY_INGREDIENT: IngredientItem = {
+  id: '0',
   type: 'main',
   image: '',
   image_large: '',
@@ -102,10 +106,10 @@ export const EMPTY_INGREDIENT = {
   fat: 0,
   carbohydrates: 0,
   count: 0,
-  _id: 0,
+  _id: '0',
 }
 
-export const DND_TYPE = {
+export const DND_TYPE: { [key in string]: string } = {
   item: 'item',
   shake: 'shake',
 }

@@ -17,9 +17,12 @@ function BurgerElement({
   moveElement,
   extraClass,
 }: BurgerElementProps) {
-  const ref = useRef(null)
+  const ref = useRef<HTMLLIElement | null>(null)
   const { handlerId, drop } = useBurgerElementDrop(ref, index, moveElement)
-  const { opacity, drag } = useBurgerElementDrag(ingredient._id, index)
+  const { opacity, drag } = useBurgerElementDrag(
+    ingredient._id as string,
+    index
+  )
 
   drag(drop(ref))
 

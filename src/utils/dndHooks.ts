@@ -1,19 +1,36 @@
-import { useDrop, useDrag } from 'react-dnd'
+import { useDrop, useDrag, XYCoord, DropTargetMonitor } from 'react-dnd'
 import { DND_TYPE, INGREDIENT_TYPES_FILTER } from './constants'
+import {
+  BurgerConstructorDropProps,
+  dragElement,
+  dropType,
+  useBurgerDropProps,
+} from './types'
+import { IngredientItem } from './types'
 
-export const useBurgerElementDrop = (ref, index, moveElement) => {
-  const [{ handlerId }, drop] = useDrop({
+export const useBurgerElementDrop: useBurgerDropProps = (
+  ref,
+  index,
+  moveElement
+) => {
+  const [{ handlerId }, drop]: dropType = useDrop({
     accept: DND_TYPE.shake,
     collect(monitor) {
       return {
         handlerId: monitor.getHandlerId(),
       }
     },
-    hover(item, monitor) {
+    hover(item, monitor: DropTargetMonitor) {
       if (!ref.current) {
         return
       }
-      const dragIndex = item.index
+
+      if (!(typeof item === 'object' && item !== null && 'id' in item)) {
+        return
+      }
+
+      const el = item as dragElement
+      const dragIndex = el.index
       const hoverIndex = index
 
       if (dragIndex === hoverIndex) {
@@ -24,31 +41,32 @@ export const useBurgerElementDrop = (ref, index, moveElement) => {
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
 
-      const clientOffset = monitor.getClientOffset()
+      const clientOffset = monitor.getClientOffset() as XYCoord
       const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+      if ((dragIndex as number) < hoverIndex && hoverClientY < hoverMiddleY) {
         return
       }
 
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+      if ((dragIndex as number) > hoverIndex && hoverClientY > hoverMiddleY) {
         return
       }
 
-      moveElement(dragIndex, hoverIndex)
+      moveElement(dragIndex as number, hoverIndex)
 
-      item.index = hoverIndex
+      el.index = hoverIndex
     },
   })
 
   return { handlerId, drop }
 }
 
-export const useBurgerElementDrag = (id, index) => {
+export const useBurgerElementDrag = (id: string, index: number) => {
   const [{ opacity }, drag] = useDrag({
     type: DND_TYPE.shake,
     item: () => {
-      return { id, index }
+      const el: dragElement = { id, index }
+      return el
     },
     collect: (monitor) => ({
       opacity: monitor.isDragging() ? 0 : 1,
@@ -58,7 +76,7 @@ export const useBurgerElementDrag = (id, index) => {
   return { opacity, drag }
 }
 
-export const useIngredientDrag = (ingredient) => {
+export const useIngredientDrag = (ingredient: IngredientItem) => {
   const [{ opacity }, ref] = useDrag({
     type: DND_TYPE.item,
     item: ingredient,
@@ -70,10 +88,13 @@ export const useIngredientDrag = (ingredient) => {
   return { opacity, ref }
 }
 
-export const BurgerConstructorDrop = (updateBuns, updateItems) => {
+export const BurgerConstructorDrop: BurgerConstructorDropProps = (
+  updateBuns,
+  updateItems
+) => {
   const [, dropTarget] = useDrop({
     accept: DND_TYPE.item,
-    drop(item) {
+    drop(item: IngredientItem) {
       item.type === INGREDIENT_TYPES_FILTER.bun && updateBuns(item)
       item.type !== INGREDIENT_TYPES_FILTER.bun && updateItems(item)
     },
