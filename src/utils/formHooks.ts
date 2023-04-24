@@ -1,14 +1,11 @@
 import { useState, useCallback, ChangeEvent } from 'react'
-
-type UpdateValues<T> = (values: T, data: T) => void
+import { UpdateValues } from './types'
 
 export const useForm = <T>(initialState: T) => {
   const [values, setValues] = useState(initialState)
 
-  // type UpdateValues = <T>(values: T, data: T) => void
-
-  const updateValues = useCallback<UpdateValues<T>>((values, data) => {
-    setValues({ ...values, ...data })
+  const updateValues = useCallback<UpdateValues<T>>((values) => {
+    setValues({ ...values })
   }, [])
 
   const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {

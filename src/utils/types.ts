@@ -63,3 +63,4 @@ export type useBurgerDropProps = (
 type handler = { handlerId: Identifier | null }
 export type dropType = [handlerId: handler, drop: ConnectDropTarget]
 export type dragElement = { id: string; index: number }
+export type UpdateValues<T> = (values: T) => void
