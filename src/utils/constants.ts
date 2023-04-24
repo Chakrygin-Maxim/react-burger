@@ -1,7 +1,12 @@
 import {
+  BurgerPositionsText,
+  DndType,
+  IBZHUIngredient,
   IngredientFilterText,
   IngredientItem,
+  IngredientTypesFilter,
   Navigation,
+  OrderTexts,
   PositionsType,
 } from './types'
 
@@ -44,49 +49,45 @@ export const NAVIGATION: Navigation = Object.freeze({
 })
 
 // хранит текст БЖУ
-export const INGREDIENT_BZHU: { [key in string]: string } = Object.freeze({
+
+export const INGREDIENT_BZHU: IBZHUIngredient = {
   calories: 'Калории, ккал',
   proteins: 'Белки, г',
   fat: 'Жиры, г',
   carbohydrates: 'Углеводы, г',
-})
+}
 
-export const INGREDIENT_TYPES_FILTER_TEXT: IngredientFilterText = Object.freeze(
-  {
-    bun: 'Булки',
-    sauce: 'Соусы',
-    main: 'Начинки',
-  }
-)
+export const INGREDIENT_TYPES_FILTER_TEXT: IngredientFilterText = {
+  bun: 'Булки',
+  sauce: 'Соусы',
+  main: 'Начинки',
+}
 
 // для отбора булок в конструкторе бургера
-export const INGREDIENT_TYPES_FILTER: { [key in string]: string } =
-  Object.freeze({
-    bun: 'bun',
-    sauce: 'sauce',
-    main: 'main',
-  })
+export const INGREDIENT_TYPES_FILTER: IngredientTypesFilter = {
+  bun: 'bun',
+  sauce: 'sauce',
+  main: 'main',
+}
 
 // для определения позции булок
-export const BURGER_POSITIONS: PositionsType = Object.freeze({
+export const BURGER_POSITIONS: PositionsType = {
   TOP: 'top',
   BOTTOM: 'bottom',
-})
+}
 
 // для хранения соответствия текста позиции булки
-export const BURGER_POSITIONS_TEXT: { [key in string]: string } = Object.freeze(
-  {
-    top: '(верх)',
-    bottom: '(низ)',
-  }
-)
+export const BURGER_POSITIONS_TEXT: BurgerPositionsText = {
+  top: '(верх)',
+  bottom: '(низ)',
+}
 
-export const ORDER_TEXTS: { [key in string]: string } = Object.freeze({
+export const ORDER_TEXTS: OrderTexts = {
   orderId: 'идентификатор заказа',
   isCooking: 'Ваш заказ начали готовить',
   waiting: 'Дождитесь готовности на орбитальной станции',
   loading: 'Загрузка, ждите...',
-})
+}
 
 export const EDIT_PROFILE_PAGE_TEXT =
   'В этом разделе вы можете изменить свои персональные данные'
@@ -109,7 +110,7 @@ export const EMPTY_INGREDIENT: IngredientItem = {
   _id: '0',
 }
 
-export const DND_TYPE: { [key in string]: string } = {
+export const DND_TYPE: DndType = {
   item: 'item',
   shake: 'shake',
 }

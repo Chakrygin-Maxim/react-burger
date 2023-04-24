@@ -38,9 +38,9 @@ export type Navigation = {
 }
 // для рендера тексты фильтров составов бургера
 export type IngredientFilterText = {
-  bun: string
-  sauce: string
-  main: string
+  bun: 'Булки'
+  sauce: 'Соусы'
+  main: 'Начинки'
 }
 
 export type PositionsType = { TOP: BunPosition; BOTTOM: BunPosition }
@@ -64,3 +64,33 @@ type handler = { handlerId: Identifier | null }
 export type dropType = [handlerId: handler, drop: ConnectDropTarget]
 export type dragElement = { id: string; index: number }
 export type UpdateValues<T> = (values: T) => void
+
+export type IBZHUIngredient = {
+  calories: 'Калории, ккал'
+  proteins: 'Белки, г'
+  fat: 'Жиры, г'
+  carbohydrates: 'Углеводы, г'
+}
+
+export type BurgerPositionsText = {
+  top: '(верх)'
+  bottom: '(низ)'
+}
+
+export type IngredientTypesFilter = {
+  bun: 'bun'
+  sauce: 'sauce'
+  main: 'main'
+}
+
+export type OrderTexts = {
+  orderId: 'идентификатор заказа'
+  isCooking: 'Ваш заказ начали готовить'
+  waiting: 'Дождитесь готовности на орбитальной станции'
+  loading: 'Загрузка, ждите...'
+}
+
+export type DndType = {
+  item: 'item'
+  shake: 'shake'
+}
