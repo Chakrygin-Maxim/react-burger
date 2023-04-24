@@ -12,7 +12,7 @@ import {
 import { APP_ROUTES_MATCH } from '../../utils/constants'
 import { AppDispatch } from '../../store'
 
-function Login() {
+function Login(): JSX.Element {
   const dispatch: AppDispatch = useDispatch()
   const location = useLocation()
   const { auth } = useSelector(getUser)

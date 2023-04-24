@@ -14,7 +14,7 @@ import { IngredientFilterText } from '../../utils/types'
 import { IngredientItem, Ingredients } from '../../utils/types'
 import { ScrollRefs } from './types'
 
-function BurgerIngredients() {
+function BurgerIngredients(): JSX.Element {
   const { data } = useSelector(getIngredients)
   const [activeFilter, setActiveFilter] = useState<string>(INGREDIENTS_TYPE[0])
   const inViewOption = {

@@ -2,7 +2,7 @@ import styles from './style.module.css'
 import { Outlet } from 'react-router-dom'
 import ProfileNavigation from '../../components/profile-navigation'
 
-function Profile() {
+function Profile(): JSX.Element {
   return (
     <div className={styles.profile}>
       <ProfileNavigation />

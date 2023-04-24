@@ -8,7 +8,7 @@ import { FC } from 'react'
 function ProtectedRouteElement({
   checkAuth = false,
   element,
-}: ProtectedRouteElementProps) {
+}: ProtectedRouteElementProps): JSX.Element {
   const location = useLocation()
   const { auth } = useSelector(getUser)
 

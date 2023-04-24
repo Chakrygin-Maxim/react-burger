@@ -1,6 +1,6 @@
 import styles from './style.module.css'
 
-function OrderError() {
+function OrderError(): JSX.Element {
   return (
     <>
       <h2 className={styles.orderError__header}>Ошибка</h2>

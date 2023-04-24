@@ -29,7 +29,7 @@ import {
   resetItemsCount,
 } from '../../services/reducers/ingredients'
 
-function BurgerConstructor() {
+function BurgerConstructor(): JSX.Element {
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()

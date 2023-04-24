@@ -2,7 +2,7 @@ import styles from './style.module.css'
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { PriceProps } from './types'
 
-function Price({ total }: PriceProps) {
+function Price({ total }: PriceProps): JSX.Element {
   return (
     <div className={styles.price}>
       <span className={styles.price__text}>{total}</span>

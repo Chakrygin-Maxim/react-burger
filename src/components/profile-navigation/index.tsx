@@ -10,7 +10,7 @@ import {
 } from '../../utils/constants'
 import { AppDispatch } from '../../store'
 
-function ProfileNavigation() {
+function ProfileNavigation(): JSX.Element {
   const dispatch: AppDispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()

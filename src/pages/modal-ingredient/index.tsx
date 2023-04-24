@@ -15,7 +15,7 @@ const Loading = () => {
   return <h2 className={styles.loadingText}> Загрузка ингредиента...</h2>
 }
 
-function ModalIngredient() {
+function ModalIngredient(): JSX.Element {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()

@@ -12,7 +12,9 @@ function RenderBZHU({ title, text }: RenderBZHUProps) {
   )
 }
 
-function IngredientDetails({ ingredient }: IngredientDetailsProps) {
+function IngredientDetails({
+  ingredient,
+}: IngredientDetailsProps): JSX.Element {
   const location = useLocation()
 
   return (

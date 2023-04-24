@@ -7,7 +7,7 @@ import { getIngredients } from '../../services/reducers/ingredients'
 import { useMemo, useEffect } from 'react'
 import { IngredientItem } from '../../utils/types'
 
-function Ingredient() {
+function Ingredient(): JSX.Element {
   const dispatch = useDispatch()
   const { data } = useSelector(getIngredients)
   const { id } = useParams()

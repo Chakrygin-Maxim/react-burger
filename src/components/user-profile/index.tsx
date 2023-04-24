@@ -14,7 +14,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { AppDispatch } from '../../store'
 
-function UserProfile() {
+function UserProfile(): JSX.Element {
   const dispatch: AppDispatch = useDispatch()
   const { user } = useSelector(getUser)
 

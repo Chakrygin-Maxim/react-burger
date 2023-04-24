@@ -8,7 +8,10 @@ import { useCallback } from 'react'
 import { INGREDIENT_TYPES_FILTER } from '../../utils/constants'
 import { useDispatch } from 'react-redux'
 
-function BurgerElements({ items, deleteIngredient }: BurgerElementsProps) {
+function BurgerElements({
+  items,
+  deleteIngredient,
+}: BurgerElementsProps): JSX.Element {
   const dispatch = useDispatch()
   const moveElement = useCallback(
     (dragIndex: number, hoverIndex: number) => {

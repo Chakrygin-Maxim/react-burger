@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components'
 import { ModalProps } from './types'
 
-function Modal({ children, onClose }: ModalProps) {
+function Modal({ children, onClose }: ModalProps): JSX.Element {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {

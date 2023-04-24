@@ -9,7 +9,7 @@ const Loading = () => {
   return <h2 className={styles.orderDetails__loding}>{ORDER_TEXTS.loading}</h2>
 }
 
-function OrderDetails() {
+function OrderDetails(): JSX.Element {
   const { orderNumber, isLoading, hasError } = useSelector(getOrder)
 
   return (

@@ -1,4 +1,4 @@
-function OrderHistory() {
+function OrderHistory(): JSX.Element {
   return <>Раздел в разработке</>
 }
 

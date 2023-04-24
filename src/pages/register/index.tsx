@@ -12,7 +12,7 @@ import { registerUser } from '../../services/reducers/user'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch } from '../../store'
 
-function Register() {
+function Register(): JSX.Element {
   const dispatch: AppDispatch = useDispatch()
   const location = useLocation()
   const { auth } = useSelector(getUser)

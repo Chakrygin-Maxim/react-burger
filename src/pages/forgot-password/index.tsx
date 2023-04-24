@@ -9,7 +9,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components'
 import { AppDispatch } from '../../store'
 
-function ForgotPassword() {
+function ForgotPassword(): JSX.Element {
   const dispatch: AppDispatch = useDispatch()
   const { isResetPasswordStart } = useSelector(getUser)
   const [values, handleOnChange] = useForm({

@@ -1,7 +1,7 @@
 import styles from './style.module.css'
 import { ModalOverlayProps } from './types'
 
-function ModalOverlay({ children, onClose }: ModalOverlayProps) {
+function ModalOverlay({ children, onClose }: ModalOverlayProps): JSX.Element {
   const handleClickOnOverlay = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {

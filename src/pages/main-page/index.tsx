@@ -1,6 +1,6 @@
 import Main from '../../components/main'
 
-function MainPage() {
+function MainPage(): JSX.Element {
   return <Main />
 }
 
