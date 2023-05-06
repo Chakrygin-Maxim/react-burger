@@ -1,6 +1,6 @@
 import { API_URL } from './constants'
 
-const checkResponse = <T>(res: Response): Promise<T> => {
+const checkResponse = (res: Response) => {
   if (!res.ok) {
     return Promise.reject(`Ошибка: ${res.status}`)
   }

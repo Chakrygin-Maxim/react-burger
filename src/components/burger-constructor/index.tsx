@@ -50,8 +50,6 @@ function BurgerConstructor(): JSX.Element {
           ...items.map((item: IngredientItem) => item._id),
         ],
       }
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       dispatch(postOrder(order))
       setOrderDetailsIsOpen(true)
     }
