@@ -11,6 +11,6 @@ export const isCurrentRoute = (pathname: string, route: string) => {
   return pathname === route
 }
 
-export function request(url: string, options: RequestInit) {
+export function request(url: string, options?: RequestInit) {
   return fetch(API_URL + url, options).then(checkResponse)
 }
