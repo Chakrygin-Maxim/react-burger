@@ -18,7 +18,7 @@ export type IngredientItem = {
   fat: number
   carbohydrates: number
   count: number
-  _id?: string
+  _id: string
   index?: number
 }
 
