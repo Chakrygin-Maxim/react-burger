@@ -48,16 +48,20 @@ const registerUser = createAsyncThunk(
   }
 )
 
-const fetchLogoutWithRefresh = async (url, options) => {
+const fetchLogoutWithRefresh = async (url: string, options: RequestInit) => {
   try {
     return await request(url, options)
   } catch (err) {
-    if (err.message === 'jwt expired' || err === 'Ошибка: 403') {
+    if ((err as Error).message === 'jwt expired' || err === 'Ошибка: 403') {
       const refreshData = await refreshToken() //обновляем токен
       if (!refreshData.success) {
         return Promise.reject(refreshData)
       }
-      options.body.token = refreshData.refreshToken
+
+      options.body = JSON.stringify({
+        token: refreshData.refreshToken,
+      })
+
       return await request(url, options) //повторяем запрос
     } else {
       return Promise.reject(err)
@@ -82,18 +86,21 @@ const logoutUser = createAsyncThunk(name + '/postLogout', async () => {
   }
 })
 
-const fetchUserDataWithRefresh = async (url, options) => {
+const fetchUserDataWithRefresh = async (url: string, options: RequestInit) => {
   try {
     return await request(url, options)
   } catch (err) {
-    if (err.message === 'jwt expired' || err === 'Ошибка: 403') {
+    if ((err as Error).message === 'jwt expired' || err === 'Ошибка: 403') {
       const refreshData = await refreshToken() //обновляем токен
       if (!refreshData.success) {
         return Promise.reject(refreshData)
       }
       localStorage.setItem('refreshToken', refreshData.refreshToken)
       localStorage.setItem('accessToken', refreshData.accessToken)
-      options.headers.Authorization = refreshData.accessToken
+      options.headers = {
+        ...options.headers,
+        Authorization: refreshData.accessToken,
+      }
       return await request(url, options) //повторяем запрос
     } else {
       return Promise.reject(err)
@@ -108,7 +115,7 @@ const getUserData = createAsyncThunk(name + '/user', async () => {
         'Content-Type': 'application/json;charset=utf-8',
         Authorization: localStorage.getItem('accessToken'),
       },
-    })
+    } as RequestInit)
   } catch (err) {
     console.log('fail to get user', err)
     return { succsess: false }
@@ -126,7 +133,7 @@ const updateUserData = createAsyncThunk(
           Authorization: localStorage.getItem('accessToken'),
         },
         body: JSON.stringify(payload),
-      })
+      } as RequestInit)
     } catch (err) {
       console.log('fail to update user', err)
       return { succsess: false }
