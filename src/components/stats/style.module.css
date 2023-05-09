@@ -35,16 +35,17 @@
 }
 
 .list {
+  composes: mt-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   list-style: none;
+  max-height: 320px;
   padding: 0;
   margin-bottom: 0;
-  composes: mt-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
   row-gap: 8px;
 }
 
 .item {
   composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
 }
-

@@ -1,7 +1,11 @@
 import styles from './style.module.css'
 import Price from '../price'
+import { useSelector } from 'react-redux'
+import { getOrders } from '../../services/reducers/orders-feed'
 
-function FeedDetails(orderItem) {
+function FeedDetails(): JSX.Element {
+  const data = useSelector(getOrders)
+
   return (
     <div className={styles.test}>
       <div className={styles.feedDetail}>

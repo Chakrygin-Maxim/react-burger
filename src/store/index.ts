@@ -1,12 +1,30 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import webSocketMiddleware from '../services/orders-table/socket-middleware'
+import { configureStore } from '@reduxjs/toolkit'
 import { rootReducer } from '../services/reducers'
+import {
+  connect as OrderTableConnect,
+  disconnect as OrderTableDisconnect,
+  wsOpen as OrderTableWsOpen,
+  wsClose as OrderTableWsClose,
+  wsMessage as OrderTableWsMessage,
+  wsError as OrderTableWsError,
+  wsConnecting as OrderTableWsConnecting,
+} from '../services/orders-table/actions'
 
-const customizedMiddleware = getDefaultMiddleware({
-  serializableCheck: false,
+const liveOrderTablemiddleware = webSocketMiddleware({
+  wsConnect: OrderTableConnect,
+  wsDisconnect: OrderTableDisconnect,
+  wsConnecting: OrderTableWsConnecting,
+  onOpen: OrderTableWsOpen,
+  onClose: OrderTableWsClose,
+  onError: OrderTableWsError,
+  onMessage: OrderTableWsMessage,
 })
 
 const store = configureStore({
-  middleware: customizedMiddleware,
+  middleware: (getDefaultMiddleware) => {
+    return getDefaultMiddleware().concat(liveOrderTablemiddleware)
+  },
   reducer: rootReducer,
   devTools: process.env.NODE_ENV !== 'production',
 })

@@ -96,6 +96,10 @@ export const EDIT_PROFILE_PAGE_TEXT =
 
 export const API_URL = 'https://norma.nomoreparties.space/api'
 
+const ws_url = 'wss://norma.nomoreparties.space/orders'
+
+export const WS_URL_ALL_ORDERS = ws_url + '/all'
+
 export const EMPTY_INGREDIENT: IngredientItem = {
   id: '0',
   type: 'main',

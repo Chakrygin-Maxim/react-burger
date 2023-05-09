@@ -1,6 +1,10 @@
+import { useSelector } from 'react-redux'
 import styles from './style.module.css'
+import { getOrders } from '../../services/reducers/orders-feed'
 
-function Stats() {
+function Stats(): JSX.Element {
+  const data = useSelector(getOrders)
+
   return (
     <div className={styles.stats}>
       <div className={styles.statuses}>
@@ -13,6 +17,12 @@ function Stats() {
             <li className={`${styles.item} ${styles.collorReady}`}>034530</li>
             <li className={`${styles.item} ${styles.collorReady}`}>034529</li>
             <li className={`${styles.item} ${styles.collorReady}`}>034528</li>
+            <li className={`${styles.item} ${styles.collorReady}`}>034531</li>
+            <li className={`${styles.item} ${styles.collorReady}`}>034530</li>
+            <li className={`${styles.item} ${styles.collorReady}`}>034529</li>
+            <li className={`${styles.item} ${styles.collorReady}`}>034528</li>
+            <li className={`${styles.item} ${styles.collorReady}`}>034529</li>
+            <li className={`${styles.item} ${styles.collorReady}`}>034528</li>
           </ul>
         </div>
         <div className={styles.statusesInWork}>
@@ -21,16 +31,26 @@ function Stats() {
             <li className={styles.item}>034538</li>
             <li className={styles.item}>034541</li>
             <li className={styles.item}>034542</li>
+            <li className={styles.item}>034538</li>
+            <li className={styles.item}>034541</li>
+            <li className={styles.item}>034542</li>
+            <li className={styles.item}>034538</li>
+            <li className={styles.item}>034541</li>
+            <li className={styles.item}>034542</li>
+            <li className={styles.item}>034542</li>
+            <li className={styles.item}>034538</li>
+            <li className={styles.item}>034541</li>
+            <li className={styles.item}>034542</li>
           </ul>
         </div>
       </div>
       <div>
         <p className={styles.header}>Выполнено за все время:</p>
-        <p className={styles.total}>28752</p>
+        <p className={styles.total}>{data.total}</p>
       </div>
       <div>
         <p className={styles.header}>Выполнено за сегодня:</p>
-        <p className={styles.total}>138</p>
+        <p className={styles.total}>{data.totalToday}</p>
       </div>
     </div>
   )
