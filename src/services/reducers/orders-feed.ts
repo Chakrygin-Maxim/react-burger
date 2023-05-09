@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit'
-import { OrderItem } from '../orders-table/types'
+import { OrderItems } from '../orders-table/types'
 import {
   wsOpen,
   wsClose,
@@ -13,7 +13,7 @@ type InitialState = {
   isConnected: boolean
   total: number
   totalToday: number
-  orders: OrderItem[]
+  orders: OrderItems
   error?: string
 }
 

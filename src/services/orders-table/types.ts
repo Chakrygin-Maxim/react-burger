@@ -10,7 +10,7 @@ export enum OrdersDataActionTypes {
   ORDER_TABLE_CONNECT = 'ORDER_TABLE_CONNECT',
 }
 
-export type OrderItem = {
+type OrderItem = {
   _id: string
   ingredients: Array<string>
   status: Status
@@ -20,9 +20,15 @@ export type OrderItem = {
   number: number
 }
 
+export type OrderItems = Array<OrderItem>
+
 export type OrdersData = {
   success: boolean
-  orders: Array<OrderItem>
+  orders: OrderItems
   total: number
   totalToday: number
 }
+
+export type OrderNumber = Pick<OrderItem, '_id' | 'number'>
+
+export type OrderNumbers = Array<OrderNumber>
