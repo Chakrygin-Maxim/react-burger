@@ -88,7 +88,7 @@
 .text {
   composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
   position: absolute;
-  z-index: 6;
+  z-index: 2;
   margin-left: auto;
   margin-right: auto;
   left: 0;

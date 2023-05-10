@@ -1,3 +1,4 @@
+import { OrderItem, OrderItems } from '../services/orders-table/types'
 import { API_URL } from './constants'
 import { Ingredients } from './types'
 
@@ -30,4 +31,11 @@ export const getIngredientsById = (orderItems: string[], data: Ingredients) => {
   })
 
   return { totalPrice, ingredients }
+}
+
+export const getOrderByNumber = (
+  orders: OrderItems,
+  number: string | undefined
+): OrderItem | undefined => {
+  return orders?.find((el: OrderItem) => String(el.number) === number)
 }

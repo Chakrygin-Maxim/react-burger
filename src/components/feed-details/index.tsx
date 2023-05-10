@@ -14,7 +14,7 @@ function FeedDetails(): JSX.Element {
       {orders.map((order) => (
         <Link
           key={order._id}
-          to={`${APP_ROUTES_MATCH.feed}/${order._id}`}
+          to={`${APP_ROUTES_MATCH.feed}/${order.number}`}
           state={{ background: location }}
           className={styles.link}
         >
