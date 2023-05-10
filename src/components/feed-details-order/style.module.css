@@ -1,0 +1,96 @@
+.orderDetails {
+  padding: 40px;
+  width: 80%;
+}
+
+.orderNumber {
+  composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #f2f2f3;
+  margin: 0;
+  text-align: center;
+}
+
+.mainText {
+  composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #f2f2f3;
+  margin-bottom: 0;
+}
+
+.status {
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #00cccc;
+  margin: 0;
+  margin-top: 12px;
+}
+
+.bottomContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.createdTime {
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #8585ad;
+}
+
+.totalContent {
+  display: flex;
+}
+
+.price {
+  composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #f2f2f3;
+  margin: 0;
+  margin-right: 9px;
+}
+
+.list {
+  composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  overflow-y: auto;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  max-height: 30vh;
+}
+
+.list::-webkit-scrollbar {
+  /* scrollbar */
+  /* переопределяем согласно макету фигмы */
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  /* thumb */
+  /* переопределяем согласно макету фигмы */
+  border-radius: 0px;
+  border: 3px solid #8585ad;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.textContainer {
+  display: flex;
+}
+
+.image {
+  width: 64px;
+  height: 64px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(#1c1c21, #1c1c21),
+    linear-gradient(to right, #801ab2, #4c4cff);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  object-fit: cover;
+  position: relative;
+  box-sizing: border-box;
+  margin-right: 16px;
+}
+

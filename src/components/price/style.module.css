@@ -14,4 +14,5 @@
 
 .price__text {
   composes: text_type_digits-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #f2f2f3;
 }

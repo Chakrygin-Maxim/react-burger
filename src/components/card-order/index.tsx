@@ -1,26 +1,27 @@
 import Price from '../price'
 import styles from './style.module.css'
 import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components'
-import { CardOrderProps, ImagesData } from './types'
+import { CardOrderProps } from './types'
 import { useSelector } from 'react-redux'
 import { getIngredients } from '../../services/reducers/ingredients'
+import { getIngredientsById } from '../../utils/common'
 import { Ingredients } from '../../utils/types'
 
-const imagesRender = (images: ImagesData[]) => {
+const imagesRender = (ingredients: Ingredients) => {
   const maxLength = 5
 
   return (
     <ul className={styles.ingredients}>
-      {images
+      {ingredients
         .slice()
         .reverse()
         .map((item, index) => {
           if (index > maxLength) return null
 
-          const isExtraImages = images.length > 6 && index === 0
+          const isExtraImages = ingredients.length > 6 && index === 0
 
           return (
-            <li key={item._id} className={styles.ingredientsItem}>
+            <li key={index} className={styles.ingredientsItem}>
               <img
                 className={`${styles.image} ${
                   isExtraImages && styles.extraImage
@@ -29,7 +30,7 @@ const imagesRender = (images: ImagesData[]) => {
                 alt={item.name}
               />
               {isExtraImages && (
-                <p className={styles.text}>{`+ ${images.length - 6}`}</p>
+                <p className={styles.text}>{`+ ${ingredients.length - 6}`}</p>
               )}
             </li>
           )
@@ -38,26 +39,12 @@ const imagesRender = (images: ImagesData[]) => {
   )
 }
 
-const detailedOrderData = (orderItems: string[], data: Ingredients) => {
-  let total = 0
-  const images: ImagesData[] = []
-
-  orderItems.forEach((item) => {
-    const result = data.find((ingredient) => ingredient._id === item)
-    if (result) {
-      total += result.price * (result.type === 'bun' ? 2 : 1)
-
-      const { image, name, _id } = result
-      images.push({ image, name, _id })
-    }
-  })
-
-  return { total, images }
-}
-
 function CardOrder({ cardItem }: CardOrderProps) {
   const { data } = useSelector(getIngredients)
-  const { total, images } = detailedOrderData(cardItem.ingredients, data)
+  const { totalPrice, ingredients } = getIngredientsById(
+    cardItem.ingredients,
+    data
+  )
 
   return (
     <li className={styles.feedDetail}>
@@ -69,8 +56,10 @@ function CardOrder({ cardItem }: CardOrderProps) {
       </div>
       <h2 className={styles.mainText}>{cardItem.name}</h2>
       <div className={styles.detailContainer}>
-        <div className={styles.imagesContainer}> {imagesRender(images)}</div>
-        <Price total={total} />
+        <div className={styles.imagesContainer}>
+          {imagesRender(ingredients)}
+        </div>
+        <Price total={totalPrice} />
       </div>
     </li>
   )

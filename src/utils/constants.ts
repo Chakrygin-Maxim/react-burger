@@ -24,7 +24,7 @@ export const APP_ROUTES: { [key in string]: string } = Object.freeze({
   orders: 'orders',
   profileOrdersId: ':id',
   feed: '/feed',
-  feedId: ':id',
+  feedId: '/feed/:id',
 })
 
 export const APP_ROUTES_MATCH: { [key in string]: string } = Object.freeze({

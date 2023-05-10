@@ -7,14 +7,10 @@
 }
 
 .burgerElements__itemsList::-webkit-scrollbar {
-  /* scrollbar */
-  /* переопределяем согласно макету фигмы */
   width: 8px;
 }
+
 .burgerElements__itemsList::-webkit-scrollbar-thumb {
-  /* thumb */
-  /* переопределяем согласно макету фигмы */
   border-radius: 0px;
   border: 3px solid #8585ad;
 }
-

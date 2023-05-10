@@ -1,4 +1,4 @@
-type Status = 'created' | 'pending' | 'done'
+export type OrderStatus = 'created' | 'pending' | 'done'
 
 export enum OrdersDataActionTypes {
   ORDER_TABLE_WS_MESSAGE = 'ORDER_TABLE_WS_MESSAGE',
@@ -13,7 +13,7 @@ export enum OrdersDataActionTypes {
 export type OrderItem = {
   _id: string
   ingredients: Array<string>
-  status: Status
+  status: OrderStatus
   name: string
   createdAt: string
   updatedAt: string

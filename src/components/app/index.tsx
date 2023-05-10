@@ -19,6 +19,8 @@ import Ingredient from '../../pages/ingredient'
 import NotFound from '../../pages/not-found'
 import OrderHistory from '../order-history'
 import ModalIngredient from '../../pages/modal-ingredient'
+import ModalOrder from '../../pages/modal-order'
+import Order from '../../pages/order'
 
 function App(): JSX.Element {
   const location = useLocation()
@@ -67,6 +69,8 @@ function App(): JSX.Element {
           element={<OnlyUnAuth element={<ForgotPassword />} />}
         />
         <Route path={APP_ROUTES.ingredientsId} element={<Ingredient />} />
+        <Route path={APP_ROUTES.feedId} element={<Order />} />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       {state?.background && (
@@ -75,6 +79,7 @@ function App(): JSX.Element {
             path={APP_ROUTES.ingredientsId}
             element={<ModalIngredient />}
           />
+          <Route path={APP_ROUTES.feedId} element={<ModalOrder />} />
         </Routes>
       )}
     </>
