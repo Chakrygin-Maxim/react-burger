@@ -1,60 +1,23 @@
-.feedDetail {
-  composes: pr-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-  composes: pl-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 24px;
-  width: 584px;
-  /* min-height: 214px; */
-  border-radius: 40px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06),
-    0px 0px 1px rgba(0, 0, 0, 0.04);
-  background: #1c1c21;
-}
-
-.headerContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  margin-bottom: 24px;
-}
-
-.orderNumber {
-  composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
-  color: #f2f2f3;
-  margin: 0;
-}
-
-.orderDate {
-  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
-  color: #8585ad;
-  margin: 0;
-}
-
-.mainText {
-  composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
-  width: 100%;
-  color: #f2f2f3;
-  margin: 0;
-  margin-bottom: calc(var(--offset-base-size) * 2);
-}
-
-.ingredients {
-  height: 64px;
-}
-
-.detailContainer {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  position: relative;
-}
-
-/* TODO: удалить */
-.test {
+.orderList {
+  composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
   display: flex;
   flex-direction: column;
   row-gap: 16px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  max-height: 77vh;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0 56px 0 0;
+  padding: 0;
 }
 
+.orderList::-webkit-scrollbar {
+  width: 8px;
+  height: 664px;
+}
+.orderList::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  border: 3px solid #8585ad;
+}

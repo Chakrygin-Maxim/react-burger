@@ -44,10 +44,10 @@ const getOrdersByStatus = (orders: OrderItems) => {
   const ordersInWork: OrderNumbers = []
 
   orders.forEach(({ _id, number, status }) => {
-    if (status === 'done' && ordersReady.length < 20) {
+    if (status === 'done' && ordersReady.length < 10) {
       ordersReady.push({ _id, number })
     }
-    if (status !== 'done' && ordersReady.length < 20) {
+    if (status !== 'done' && ordersReady.length < 10) {
       ordersInWork.push({ _id, number })
     }
   })

@@ -1,5 +1,6 @@
 .stats {
-  width: 580px;
+  width: 90%;
+  max-width: 584px;
   display: flex;
   flex-direction: column;
   row-gap: 60px;
@@ -16,7 +17,7 @@
 }
 
 .statusesReady {
-  width: 400px;
+  width: 50%;
 }
 
 .collorReady {
@@ -24,7 +25,7 @@
 }
 
 .statusesInWork {
-  width: 400px;
+  width: 50%;
 }
 
 .total {
@@ -37,7 +38,7 @@
 .list {
   composes: mt-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   list-style: none;
-  max-height: 320px;
+  max-height: 160px;
   padding: 0;
   margin-bottom: 0;
   display: flex;

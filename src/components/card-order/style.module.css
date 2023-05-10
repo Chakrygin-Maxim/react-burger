@@ -1,0 +1,103 @@
+.feedDetail {
+  composes: pr-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  composes: pl-6 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 24px;
+  width: 90%;
+  border-radius: 40px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 2px rgba(0, 0, 0, 0.06),
+    0px 0px 1px rgba(0, 0, 0, 0.04);
+  background: #1c1c21;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.orderNumber {
+  composes: text_type_digits-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #f2f2f3;
+  margin: 0;
+}
+
+.orderDate {
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  color: #8585ad;
+  margin: 0;
+}
+
+.mainText {
+  composes: text_type_main-medium from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  width: 100%;
+  color: #f2f2f3;
+  margin: 0;
+  margin-bottom: 24px;
+}
+
+.detailContainer {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: relative;
+}
+
+.imagesContainer {
+  margin-left: 20px;
+}
+
+.ingredients {
+  height: 64px;
+  list-style: none;
+  padding: 0;
+  display: flex;
+  position: relative;
+  box-sizing: border-box;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.ingredientsItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  margin-left: -20px;
+  overflow: hidden;
+}
+
+.image {
+  width: 60px;
+  height: 60px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient(#1c1c21, #1c1c21),
+    linear-gradient(to right, #801ab2, #4c4cff);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  object-fit: cover;
+  position: relative;
+  box-sizing: border-box;
+}
+
+.text {
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  position: absolute;
+  z-index: 6;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.extraImage {
+  /* background: #1c1c21; */
+  opacity: 0.6;
+}
+

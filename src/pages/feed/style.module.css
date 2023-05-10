@@ -1,17 +1,17 @@
 .feed {
-  max-width: 1280px;
-  display: flex;
-  flex-direction: column;
+  width: 1240px;
   margin: 0 auto;
-  margin-top: 40px;
 }
 
 .container {
   display: flex;
-  column-gap: calc(var(--offset-base-size) * 15);
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .feed__header {
   composes: text_type_main-large from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
-  margin: 0 0 20px 0;
+  margin-top: calc(var(--offset-base-size) * 10);
+  margin-bottom: calc(var(--offset-base-size) * 5);
 }

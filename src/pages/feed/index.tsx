@@ -21,13 +21,13 @@ function Feed() {
   }, [dispatch])
 
   return (
-    <div className={styles.feed}>
+    <main className={styles.feed}>
       <h2 className={styles.feed__header}>Лента заказов</h2>
       <div className={styles.container}>
         <FeedDetails />
         <Stats />
       </div>
-    </div>
+    </main>
   )
 }
 
