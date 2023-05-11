@@ -16,7 +16,6 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 24px;
 }
 
 .orderNumber {
@@ -36,7 +35,7 @@
   width: 100%;
   color: #f2f2f3;
   margin: 0;
-  margin-bottom: 24px;
+  margin-top: 24px;
 }
 
 .detailContainer {
@@ -44,6 +43,7 @@
   justify-content: space-between;
   width: 100%;
   position: relative;
+  margin-top: 24px;
 }
 
 .imagesContainer {
@@ -99,5 +99,17 @@
 
 .extraImage {
   opacity: 0.6;
+}
+
+.statusText {
+  composes: text_type_main-default from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  margin: 0;
+  margin-top: 8px;
+  color: #f2f2f3;
+}
+
+.statusText__status_done {
+  composes: statusText;
+  color: #00cccc;
 }
 

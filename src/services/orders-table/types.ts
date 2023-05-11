@@ -1,3 +1,8 @@
+import {
+  ActionCreatorWithPayload,
+  ActionCreatorWithoutPayload,
+} from '@reduxjs/toolkit'
+
 export type OrderStatus = 'created' | 'pending' | 'done'
 
 export enum OrdersDataActionTypes {
@@ -8,6 +13,17 @@ export enum OrdersDataActionTypes {
   ORDER_TABLE_WS_CLOSE = 'ORDER_TABLE_WS_CLOSE',
   ORDER_TABLE_WS_ERROR = 'ORDER_TABLE_WS_ERROR',
   ORDER_TABLE_CONNECT = 'ORDER_TABLE_CONNECT',
+}
+
+export type ActionTypes = {
+  wsConnect: ActionCreatorWithPayload<string>
+  wsDisconnect: ActionCreatorWithoutPayload
+  wsConnecting: ActionCreatorWithoutPayload
+  onOpen: ActionCreatorWithoutPayload
+  onClose: ActionCreatorWithoutPayload
+  onError: ActionCreatorWithPayload<string>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onMessage: ActionCreatorWithPayload<any>
 }
 
 export type OrderItem = {

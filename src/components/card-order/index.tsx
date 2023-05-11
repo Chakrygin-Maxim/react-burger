@@ -4,7 +4,7 @@ import { FormattedDate } from '@ya.praktikum/react-developer-burger-ui-component
 import { CardOrderProps } from './types'
 import { useSelector } from 'react-redux'
 import { getIngredients } from '../../services/reducers/ingredients'
-import { getIngredientsById } from '../../utils/common'
+import { getIngredientsById, statusText } from '../../utils/common'
 import { Ingredients } from '../../utils/types'
 
 const imagesRender = (ingredients: Ingredients) => {
@@ -39,7 +39,7 @@ const imagesRender = (ingredients: Ingredients) => {
   )
 }
 
-function CardOrder({ cardItem }: CardOrderProps) {
+function CardOrder({ cardItem, showStatus }: CardOrderProps) {
   const { data } = useSelector(getIngredients)
   const { totalPrice, ingredients } = getIngredientsById(
     cardItem.ingredients,
@@ -55,6 +55,17 @@ function CardOrder({ cardItem }: CardOrderProps) {
         </p>
       </div>
       <h2 className={styles.mainText}>{cardItem.name}</h2>
+      {showStatus && (
+        <p
+          className={
+            cardItem.status !== 'done'
+              ? styles.statusText
+              : styles.statusText__status_done
+          }
+        >
+          {statusText(cardItem.status)}
+        </p>
+      )}
       <div className={styles.detailContainer}>
         <div className={styles.imagesContainer}>
           {imagesRender(ingredients)}

@@ -1,4 +1,8 @@
-import { OrderItem, OrderItems } from '../services/orders-table/types'
+import {
+  OrderItem,
+  OrderItems,
+  OrderStatus,
+} from '../services/orders-table/types'
 import { API_URL } from './constants'
 import { Ingredients } from './types'
 
@@ -38,4 +42,17 @@ export const getOrderByNumber = (
   number: string | undefined
 ): OrderItem | undefined => {
   return orders?.find((el: OrderItem) => String(el.number) === number)
+}
+
+export const statusText = (status: OrderStatus): string => {
+  switch (status) {
+    case 'done':
+      return 'Выполнен'
+
+    case 'pending':
+      return 'В процессе'
+
+    case 'created':
+      return 'Создан'
+  }
 }

@@ -1,8 +1,8 @@
 import { Middleware } from 'redux'
 import { wsClose, wsConnecting } from './actions'
-import { ActionTypes } from './types'
+import { ActionTypes } from '../types'
 
-const webSocketMiddleware =
+const webSocketUserFeerMiddleware =
   (wsActions: ActionTypes): Middleware =>
   (store) => {
     let socket: WebSocket | null = null
@@ -19,7 +19,7 @@ const webSocketMiddleware =
         socket.onopen = () => dispatch(wsActions.onOpen())
         socket.onerror = (err) => {
           console.log(err)
-          return dispatch(wsActions.onError('WebSocket error'))
+          return dispatch(wsActions.onError('WebSocket for user feed error'))
         }
         socket.onmessage = (event: MessageEvent<string>) => {
           const data = JSON.parse(event.data)
@@ -37,4 +37,4 @@ const webSocketMiddleware =
     }
   }
 
-export default webSocketMiddleware
+export default webSocketUserFeerMiddleware

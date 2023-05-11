@@ -4,6 +4,7 @@ import currentIngredientReducer from './currentIngredient'
 import orderReducer from './order'
 import userReduser from './user'
 import orderTableReducer from './orders-feed'
+import userOrderTableReducer from './orders-user-feed'
 import { combineReducers } from 'redux'
 
 export const rootReducer = combineReducers({
@@ -13,4 +14,5 @@ export const rootReducer = combineReducers({
   order: orderReducer,
   user: userReduser,
   orderTable: orderTableReducer,
+  userOrderTable: userOrderTableReducer,
 })

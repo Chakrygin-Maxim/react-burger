@@ -6,21 +6,7 @@ import {
 import { FeedOrderDetailsIngredient, FeedOrderDetailsProps } from './types'
 import { useSelector } from 'react-redux'
 import { getIngredients } from '../../services/reducers/ingredients'
-import { getIngredientsById } from '../../utils/common'
-import { OrderStatus } from '../../services/orders-table/types'
-
-const statusText = (status: OrderStatus): string => {
-  switch (status) {
-    case 'done':
-      return 'Выполнен'
-
-    case 'pending':
-      return 'В процессе'
-
-    case 'created':
-      return 'Создан'
-  }
-}
+import { getIngredientsById, statusText } from '../../utils/common'
 
 const ingredientDetailsRender = (ingredients: FeedOrderDetailsIngredient[]) => {
   return (

@@ -6,6 +6,8 @@ import { useSelector } from 'react-redux'
 import { getOrders } from '../../services/reducers/orders-feed'
 import { useMemo } from 'react'
 import { getOrderByNumber } from '../../utils/common'
+import { getUserOrders } from '../../services/reducers/orders-user-feed'
+import { APP_ROUTES_MATCH } from '../../utils/constants'
 
 const Loading = () => {
   return (
@@ -18,8 +20,12 @@ const Loading = () => {
 function ModalOrder(): JSX.Element {
   const navigate = useNavigate()
   const location = useLocation()
+  const { pathname } = location
 
-  const { orders } = useSelector(getOrders)
+  const regExp = new RegExp(APP_ROUTES_MATCH.profileOrders)
+  const selector = pathname.match(regExp) ? getUserOrders : getOrders
+
+  const { orders } = useSelector(selector)
   const { id } = useParams()
   const order = useMemo(() => getOrderByNumber(orders, id), [orders, id])
 

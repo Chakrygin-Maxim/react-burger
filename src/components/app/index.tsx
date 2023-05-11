@@ -50,10 +50,11 @@ function App(): JSX.Element {
           element={<OnlyAuth element={<Profile />} />}
         >
           <Route index element={<UserProfile />} />
-          <Route path={APP_ROUTES.orders} element={<OrderHistory />} />
+          <Route
+            path={APP_ROUTES.orders}
+            element={<OnlyAuth element={<OrderHistory />} />}
+          />
         </Route>
-
-        <Route path={APP_ROUTES.profileOrdersId} element={<NotFound />} />
 
         <Route
           path={APP_ROUTES.register}
@@ -71,6 +72,11 @@ function App(): JSX.Element {
         <Route path={APP_ROUTES.ingredientsId} element={<Ingredient />} />
         <Route path={APP_ROUTES.feedId} element={<Order />} />
 
+        <Route
+          path={APP_ROUTES.ordersId}
+          element={<OnlyAuth element={<Order />} />}
+        />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       {state?.background && (
@@ -80,6 +86,7 @@ function App(): JSX.Element {
             element={<ModalIngredient />}
           />
           <Route path={APP_ROUTES.feedId} element={<ModalOrder />} />
+          <Route path={APP_ROUTES.ordersId} element={<ModalOrder />} />
         </Routes>
       )}
     </>
