@@ -22,8 +22,7 @@ export type ActionTypes = {
   onOpen: ActionCreatorWithoutPayload
   onClose: ActionCreatorWithoutPayload
   onError: ActionCreatorWithPayload<string>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onMessage: ActionCreatorWithPayload<any>
+  onMessage: ActionCreatorWithPayload<OrdersData>
 }
 
 export type OrderItem = {
