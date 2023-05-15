@@ -21,9 +21,11 @@ export const APP_ROUTES: { [key in string]: string } = Object.freeze({
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   ingredientsId: '/ingredients/:id',
-  orderList: '/order-list',
   orders: 'orders',
+  ordersId: '/profile/orders/:id',
   profileOrdersId: ':id',
+  feed: '/feed',
+  feedId: '/feed/:id',
 })
 
 export const APP_ROUTES_MATCH: { [key in string]: string } = Object.freeze({
@@ -36,7 +38,8 @@ export const APP_ROUTES_MATCH: { [key in string]: string } = Object.freeze({
   forgotPassword: '/forgot-password',
   resetPassword: '/reset-password',
   ingredientsId: '/ingredients/:id',
-  orderList: '/order-list',
+  feed: '/feed',
+  feedId: '/feed/:id',
 })
 
 export const NAVIGATION: Navigation = Object.freeze({
@@ -93,6 +96,11 @@ export const EDIT_PROFILE_PAGE_TEXT =
   'В этом разделе вы можете изменить свои персональные данные'
 
 export const API_URL = 'https://norma.nomoreparties.space/api'
+
+const ws_url = 'wss://norma.nomoreparties.space/orders'
+
+export const WS_URL_ALL_ORDERS = ws_url + '/all'
+export const WS_URL_USER_ORDERS = ws_url + '?token='
 
 export const EMPTY_INGREDIENT: IngredientItem = {
   id: '0',

@@ -8,6 +8,7 @@ import {
   forgotPassword,
   resetPassword,
 } from './userApi'
+import { RootState } from '../../store'
 
 const name = 'user'
 
@@ -170,7 +171,7 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer
 
-export const getUser = (state) => state.user
+export const getUser = (state: RootState) => state.user
 
 export const { cleanUser } = userSlice.actions
 

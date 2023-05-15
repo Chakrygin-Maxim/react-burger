@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { EMPTY_INGREDIENT } from '../../utils/constants'
+import { RootState } from '../../store'
 
 const initialState = {
   item: EMPTY_INGREDIENT,
@@ -23,6 +24,7 @@ export const currentIngredientSlice = createSlice({
 export const { setCurrentItem, deleteCurrentItem } =
   currentIngredientSlice.actions
 
-export const getCurrentIngredient = (state) => state.currentIngredient.item
+export const getCurrentIngredient = (state: RootState) =>
+  state.currentIngredient.item
 
 export default currentIngredientSlice.reducer

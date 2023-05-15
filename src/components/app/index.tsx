@@ -8,6 +8,7 @@ import { OnlyAuth, OnlyUnAuth } from '../protected-route'
 import { AppDispatch } from '../../store'
 import AppHeader from '../app-header'
 import MainPage from '../../pages/main-page'
+import Feed from '../../pages/feed'
 import Login from '../../pages/login'
 import Profile from '../../pages/profile'
 import UserProfile from '../user-profile'
@@ -18,6 +19,8 @@ import Ingredient from '../../pages/ingredient'
 import NotFound from '../../pages/not-found'
 import OrderHistory from '../order-history'
 import ModalIngredient from '../../pages/modal-ingredient'
+import ModalOrder from '../../pages/modal-order'
+import Order from '../../pages/order'
 
 function App(): JSX.Element {
   const location = useLocation()
@@ -35,6 +38,7 @@ function App(): JSX.Element {
       <AppHeader />
       <Routes location={state?.background || location}>
         <Route path={APP_ROUTES.root} element={<MainPage />} />
+        <Route path={APP_ROUTES.feed} element={<Feed />} />
 
         <Route
           path={APP_ROUTES.login}
@@ -46,10 +50,11 @@ function App(): JSX.Element {
           element={<OnlyAuth element={<Profile />} />}
         >
           <Route index element={<UserProfile />} />
-          <Route path={APP_ROUTES.orders} element={<OrderHistory />} />
+          <Route
+            path={APP_ROUTES.orders}
+            element={<OnlyAuth element={<OrderHistory />} />}
+          />
         </Route>
-
-        <Route path={APP_ROUTES.profileOrdersId} element={<NotFound />} />
 
         <Route
           path={APP_ROUTES.register}
@@ -65,6 +70,13 @@ function App(): JSX.Element {
           element={<OnlyUnAuth element={<ForgotPassword />} />}
         />
         <Route path={APP_ROUTES.ingredientsId} element={<Ingredient />} />
+        <Route path={APP_ROUTES.feedId} element={<Order />} />
+
+        <Route
+          path={APP_ROUTES.ordersId}
+          element={<OnlyAuth element={<Order />} />}
+        />
+
         <Route path="*" element={<NotFound />} />
       </Routes>
       {state?.background && (
@@ -73,6 +85,8 @@ function App(): JSX.Element {
             path={APP_ROUTES.ingredientsId}
             element={<ModalIngredient />}
           />
+          <Route path={APP_ROUTES.feedId} element={<ModalOrder />} />
+          <Route path={APP_ROUTES.ordersId} element={<ModalOrder />} />
         </Routes>
       )}
     </>

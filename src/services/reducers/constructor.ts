@@ -1,7 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { EMPTY_INGREDIENT } from '../../utils/constants'
+import { RootState } from '../../store'
+import { IngredientItem, Ingredients } from '../../utils/types'
 
-const initialState = {
+type InitialState = {
+  bun: IngredientItem
+  items: Ingredients
+}
+
+const initialState: InitialState = {
   bun: EMPTY_INGREDIENT,
   items: [],
 }
@@ -37,6 +44,7 @@ export const constructorSlice = createSlice({
 export const { addBun, addItem, removeItem, updateItems, deleteItems } =
   constructorSlice.actions
 
-export const getIngredientsConstructor = (state) => state.ingredientsConstructor
+export const getIngredientsConstructor = (state: RootState) =>
+  state.ingredientsConstructor
 
 export default constructorSlice.reducer

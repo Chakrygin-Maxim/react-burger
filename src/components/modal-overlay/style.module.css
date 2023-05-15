@@ -1,7 +1,7 @@
 .modalOverlay {
   visibility: hidden;
   opacity: 0;
-  z-index: 2;
+  z-index: 6;
   animation: opacity 0.3s forwards;
   position: fixed;
   top: 0;

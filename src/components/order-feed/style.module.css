@@ -1,0 +1,28 @@
+.orderList {
+  composes: custom-scroll from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/common.css';
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  max-height: 77vh;
+  align-items: center;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0 56px 0 0;
+  padding: 0;
+}
+
+.orderList::-webkit-scrollbar {
+  width: 8px;
+  height: 664px;
+}
+.orderList::-webkit-scrollbar-thumb {
+  border-radius: 0px;
+  border: 3px solid #8585ad;
+}
+
+.link {
+  text-decoration: none;
+  width: 90%;
+}

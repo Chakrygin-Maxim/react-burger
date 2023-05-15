@@ -18,7 +18,7 @@ export type IngredientItem = {
   fat: number
   carbohydrates: number
   count: number
-  _id?: string
+  _id: string
   index?: number
 }
 
@@ -93,4 +93,29 @@ export type OrderTexts = {
 export type DndType = {
   item: 'item'
   shake: 'shake'
+}
+
+type OrderOwner = {
+  name: string
+  email: string
+  createdAt: string
+  updatedAt: string
+}
+
+type CreatedOrder = {
+  _id: string
+  createdAt: string
+  name: string
+  number: number
+  price: number
+  status: string
+  updatedAt: string
+  ingredients: Ingredients
+  owner: OrderOwner
+}
+
+export type NewOrder = {
+  name: string
+  order: CreatedOrder
+  success: boolean
 }

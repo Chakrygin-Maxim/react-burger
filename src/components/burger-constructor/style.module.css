@@ -1,7 +1,7 @@
 .burgerConstructor {
   composes: mt-25 from '@ya.praktikum/react-developer-burger-ui-components/dist/ui/box.css';
   padding: 0;
-  width: 600px;
+  width: 100%;
 }
 
 .burgerConstructor__list {
@@ -21,4 +21,5 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: calc(var(--offset-base-size) * 10);
 }

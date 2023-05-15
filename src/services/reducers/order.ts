@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { request } from '../../utils/common'
+import { NewOrder, Order } from '../../utils/types'
+import { RootState } from '../../store'
 
 const initialState = {
   name: '',
@@ -10,24 +12,25 @@ const initialState = {
 
 const name = 'order'
 
-export const postOrder = createAsyncThunk(
-  name + '/postOrder',
-  async (order) => {
-    try {
-      return await request('/orders', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8',
-          Authorization: localStorage.getItem('accessToken'),
-        },
-        body: JSON.stringify(order),
-      })
-    } catch (err) {
-      console.log('faild to fetch', err)
-      return { success: false }
-    }
+export const postOrder = createAsyncThunk<
+  NewOrder,
+  Order,
+  { state: RootState }
+>(name + '/postOrder', async (order) => {
+  try {
+    return await request('/orders', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        Authorization: localStorage.getItem('accessToken'),
+      },
+      body: JSON.stringify(order),
+    } as RequestInit)
+  } catch (err) {
+    console.log('faild to fetch', err)
+    return { success: false }
   }
-)
+})
 
 export const orderSlice = createSlice({
   name,
@@ -63,6 +66,6 @@ export const orderSlice = createSlice({
 
 export default orderSlice.reducer
 
-export const getOrder = (state) => state.order
+export const getOrder = (state: RootState) => state.order
 
 export const { cleanOrder } = orderSlice.actions
