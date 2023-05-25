@@ -13,6 +13,7 @@ describe('test-order-reducer', () => {
   it('initial-state', () => {
     expect(orderReducer(undefined, { type: null })).toEqual(initialState)
   })
+
   it('clean-order', () => {
     expect(orderReducer(initialState, cleanOrder())).toEqual(initialState)
   })

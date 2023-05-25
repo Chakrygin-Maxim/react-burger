@@ -29,8 +29,6 @@ export const constructorSlice = createSlice({
       })
     },
     removeItem(state, { payload }) {
-      console.log('>>>>>>>>>', payload)
-
       state.items = state.items.filter((item) => payload !== item.id)
     },
     deleteItems(state) {
