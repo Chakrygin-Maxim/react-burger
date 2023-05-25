@@ -20,8 +20,12 @@ function Modal({ children, onClose }: ModalProps): JSX.Element {
   return createPortal(
     <ModalOverlay onClose={onClose}>
       <div className={styles.modal}>
-        <div className={styles.modal__closeContainer}>
-          <CloseIcon type="primary" onClick={onClose} />
+        <div
+          id="close-icon"
+          onClick={onClose}
+          className={styles.modal__closeContainer}
+        >
+          <CloseIcon type="primary" />
         </div>
         {children}
       </div>

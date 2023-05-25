@@ -37,6 +37,7 @@ function BurgerConstructor(): JSX.Element {
   const { bun, items } = useSelector(getIngredientsConstructor)
   const { auth } = useSelector(getUser)
 
+  console.log(auth)
   const handlerButtonOnClick = () => {
     if (!auth) {
       navigate(APP_ROUTES_MATCH.login, {
@@ -95,7 +96,11 @@ function BurgerConstructor(): JSX.Element {
 
   return (
     <>
-      <section className={styles.burgerConstructor} ref={dropTarget}>
+      <section
+        id="dropArea"
+        className={styles.burgerConstructor}
+        ref={dropTarget}
+      >
         <ul className={styles.burgerConstructor__list}>
           <Bun ingredient={bun} position={BURGER_POSITIONS.TOP} isLocked />
           <BurgerElements items={items} deleteIngredient={deleteIngredient} />
