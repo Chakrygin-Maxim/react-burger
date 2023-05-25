@@ -10,7 +10,7 @@ type InitialState = {
   hasError: boolean
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   data: [],
   isLoading: false,
   hasError: false,
@@ -44,7 +44,12 @@ export const ingredientsSlice = createSlice({
     increaseItemCount(state, { payload }) {
       state.data.forEach((item: IngredientItem) => {
         if (item.type !== INGREDIENT_TYPES_FILTER.bun) {
-          item.count = item._id === payload._id ? ++item.count : item.count
+          item.count =
+            item._id === payload._id
+              ? isNaN(item.count)
+                ? 1
+                : ++item.count
+              : item.count
         }
       })
     },
@@ -66,8 +71,7 @@ export const ingredientsSlice = createSlice({
     builder.addCase(getIngrediensData.fulfilled, (state, { payload }) => {
       state.isLoading = false
       if (payload.success) {
-        payload.data.forEach((item: IngredientItem) => (item.count = 0))
-        state.data = [...payload.data]
+        state.data = payload.data
       } else {
         state.hasError = true
       }

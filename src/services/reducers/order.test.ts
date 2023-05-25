@@ -1,7 +1,7 @@
 import orderReducer from './order'
 import { initialState, cleanOrder, postOrder } from './order'
 
-const data = {
+const payload = {
   name: 'Краторный spicy бургер',
   success: true,
   order: {
@@ -29,7 +29,7 @@ describe('test-order-reducer', () => {
   })
 
   it('make-order-fulfilled', () => {
-    const action = { type: postOrder.fulfilled.type, payload: data }
+    const action = { type: postOrder.fulfilled.type, payload }
     const result = orderReducer(initialState, action)
     expect(result).toEqual({
       name: 'Краторный spicy бургер',
