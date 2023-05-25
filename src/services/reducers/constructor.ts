@@ -8,7 +8,7 @@ type InitialState = {
   items: Ingredients
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   bun: EMPTY_INGREDIENT,
   items: [],
 }
@@ -29,6 +29,8 @@ export const constructorSlice = createSlice({
       })
     },
     removeItem(state, { payload }) {
+      console.log('>>>>>>>>>', payload)
+
       state.items = state.items.filter((item) => payload !== item.id)
     },
     deleteItems(state) {

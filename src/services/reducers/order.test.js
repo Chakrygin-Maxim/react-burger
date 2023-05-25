@@ -1,5 +1,5 @@
-import { initialState, cleanOrder, postOrder } from './order'
 import orderReducer from './order'
+import { initialState, cleanOrder, postOrder } from './order'
 
 const data = {
   name: 'Краторный spicy бургер',
