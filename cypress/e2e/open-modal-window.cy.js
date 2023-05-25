@@ -1,5 +1,3 @@
-/* eslint-disable cypress/no-unnecessary-waiting */
-
 describe('open modal window with ingredient', () => {
   before('should be available on localhost:3000', () => {
     cy.visit('/')
@@ -18,7 +16,6 @@ describe('open modal window with ingredient', () => {
       JSON.stringify('test-refreshToken')
     )
     window.localStorage.setItem('token', JSON.stringify('test-token'))
-    cy.wait(2000)
     cy.get('[alt="Краторная булка N-200i"]').click()
     cy.contains('Детали ингредиента').should('be.visible')
     cy.get('#modal').find('img').should('be.visible')
