@@ -1,6 +1,5 @@
-import currentIngredient from './currentIngredient'
 import { IngredientItem } from '../../utils/types'
-import {
+import currentIngredient, {
   initialState,
   setCurrentItem,
   deleteCurrentItem,

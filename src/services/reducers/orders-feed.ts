@@ -25,7 +25,7 @@ type OrderItemAnswer = {
   orders: OrderItems
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   isConnected: false,
   total: 0,
   totalToday: 0,

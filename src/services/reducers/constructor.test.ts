@@ -1,6 +1,5 @@
-import constructorReducer from './constructor'
 import { Ingredients } from '../../utils/types'
-import {
+import constructorReducer, {
   initialState,
   addBun,
   addItem,

@@ -1,6 +1,5 @@
 import { Ingredients } from '../../utils/types'
-import ingredients from './ingredients'
-import {
+import ingredients, {
   initialState,
   updateBunsCount,
   increaseItemCount,
