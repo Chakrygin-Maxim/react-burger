@@ -12,7 +12,7 @@ import { RootState } from '../../store'
 
 const name = 'user'
 
-const initialState = {
+export const initialState = {
   user: { email: '', name: '', password: '' },
   isLoading: false,
   hasError: false,

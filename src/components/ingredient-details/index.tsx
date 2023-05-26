@@ -25,7 +25,7 @@ function IngredientDetails({
           styles.ingredientDetails__header_align_center
         }`}
       >
-        Детали ингридиента
+        Детали ингредиента
       </h2>
       <img src={ingredient.image_large} alt={ingredient.name}></img>
       <h3 className={styles.ingredientDetails__textName}>{ingredient.name}</h3>

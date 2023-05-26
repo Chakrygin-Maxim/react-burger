@@ -95,7 +95,11 @@ function BurgerConstructor(): JSX.Element {
 
   return (
     <>
-      <section className={styles.burgerConstructor} ref={dropTarget}>
+      <section
+        id="dropArea"
+        className={styles.burgerConstructor}
+        ref={dropTarget}
+      >
         <ul className={styles.burgerConstructor__list}>
           <Bun ingredient={bun} position={BURGER_POSITIONS.TOP} isLocked />
           <BurgerElements items={items} deleteIngredient={deleteIngredient} />

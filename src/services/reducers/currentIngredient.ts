@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { EMPTY_INGREDIENT } from '../../utils/constants'
 import { RootState } from '../../store'
 
-const initialState = {
+export const initialState = {
   item: EMPTY_INGREDIENT,
 }
 

@@ -10,7 +10,12 @@ function Ingredient({ ingredient }: IngredientProps): JSX.Element {
   const { opacity, ref } = useIngredientDrag(ingredient)
 
   return (
-    <li className={styles.ingredient} ref={ref} style={{ opacity }}>
+    <li
+      id="dragElement"
+      className={styles.ingredient}
+      ref={ref}
+      style={{ opacity }}
+    >
       <Counter count={ingredient.count} size="default" extraClass="m-1" />
       <img src={ingredient.image} alt={ingredient.name}></img>
       <div className={styles.ingredient__priceContainer}>

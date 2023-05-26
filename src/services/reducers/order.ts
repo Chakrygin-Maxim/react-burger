@@ -3,7 +3,7 @@ import { request } from '../../utils/common'
 import { NewOrder, Order } from '../../utils/types'
 import { RootState } from '../../store'
 
-const initialState = {
+export const initialState = {
   name: '',
   orderNumber: 0,
   isLoading: false,

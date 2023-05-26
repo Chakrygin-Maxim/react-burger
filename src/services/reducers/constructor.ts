@@ -8,7 +8,7 @@ type InitialState = {
   items: Ingredients
 }
 
-const initialState: InitialState = {
+export const initialState: InitialState = {
   bun: EMPTY_INGREDIENT,
   items: [],
 }
