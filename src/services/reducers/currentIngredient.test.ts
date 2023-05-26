@@ -1,5 +1,5 @@
 import { IngredientItem } from '../../utils/types'
-import currentIngredient, {
+import reducer, {
   initialState,
   setCurrentItem,
   deleteCurrentItem,
@@ -23,18 +23,16 @@ const data: IngredientItem = {
 
 describe('test-current-ingredient-reducer', () => {
   it('initial-state', () => {
-    expect(currentIngredient(undefined, { type: null })).toEqual(initialState)
+    expect(reducer(undefined, { type: null })).toEqual(initialState)
   })
 
   it('set-current-item', () => {
-    expect(currentIngredient(initialState, setCurrentItem(data))).toEqual({
+    expect(reducer(initialState, setCurrentItem(data))).toEqual({
       item: data,
     })
   })
 
   it('delete-current-item', () => {
-    expect(currentIngredient(initialState, deleteCurrentItem())).toEqual(
-      initialState
-    )
+    expect(reducer(initialState, deleteCurrentItem())).toEqual(initialState)
   })
 })

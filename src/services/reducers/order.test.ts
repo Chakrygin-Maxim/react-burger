@@ -1,4 +1,4 @@
-import orderReducer, { initialState, cleanOrder, postOrder } from './order'
+import reducer, { initialState, cleanOrder, postOrder } from './order'
 
 const payload = {
   name: 'Краторный spicy бургер',
@@ -10,16 +10,16 @@ const payload = {
 
 describe('test-order-reducer', () => {
   it('initial-state', () => {
-    expect(orderReducer(undefined, { type: null })).toEqual(initialState)
+    expect(reducer(undefined, { type: null })).toEqual(initialState)
   })
 
   it('clean-order', () => {
-    expect(orderReducer(initialState, cleanOrder())).toEqual(initialState)
+    expect(reducer(initialState, cleanOrder())).toEqual(initialState)
   })
 
   it('make-order-pending', () => {
     const action = { type: postOrder.pending.type }
-    const result = orderReducer(initialState, action)
+    const result = reducer(initialState, action)
     expect(result).toEqual({
       ...initialState,
       hasError: false,
@@ -29,7 +29,7 @@ describe('test-order-reducer', () => {
 
   it('make-order-fulfilled', () => {
     const action = { type: postOrder.fulfilled.type, payload }
-    const result = orderReducer(initialState, action)
+    const result = reducer(initialState, action)
     expect(result).toEqual({
       name: 'Краторный spicy бургер',
       orderNumber: 5358,
@@ -40,7 +40,7 @@ describe('test-order-reducer', () => {
 
   it('make-order-rejected', () => {
     const action = { type: postOrder.rejected.type }
-    const result = orderReducer(initialState, action)
+    const result = reducer(initialState, action)
     expect(result).toEqual({
       ...initialState,
       hasError: true,

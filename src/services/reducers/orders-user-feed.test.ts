@@ -1,4 +1,4 @@
-import reducer, { initialState, getOrderData } from './orders-feed'
+import reducer, { initialState } from './orders-user-feed'
 import { OrderItem, OrdersData } from '../orders-table/types'
 import {
   wsOpen,
@@ -6,7 +6,7 @@ import {
   wsMessage,
   wsError,
   wsConnecting,
-} from '../orders-table/actions'
+} from '../orders-table/user-orders-table/actions'
 
 const orderItem: OrderItem = {
   _id: '123',
@@ -25,7 +25,7 @@ const payload: OrdersData = {
   totalToday: 2,
 }
 
-describe('test-orders-feed-reducer', () => {
+describe('test-orders-user-feed-reducer', () => {
   it('initial-state', () => {
     expect(reducer(undefined, { type: null })).toEqual(initialState)
   })
@@ -65,37 +65,6 @@ describe('test-orders-feed-reducer', () => {
       total: payload.total,
       totalToday: payload.totalToday,
       orders: payload.orders,
-    })
-  })
-
-  it('order-data-pending', () => {
-    const action = { type: getOrderData.pending.type }
-    const result = reducer(initialState, action)
-    expect(result).toEqual({
-      ...initialState,
-      hasError: false,
-      isLoading: true,
-    })
-  })
-
-  it('order-data-fulfilled', () => {
-    const action = { type: getOrderData.fulfilled.type, payload }
-    const result = reducer(initialState, action)
-    expect(result).toEqual({
-      ...initialState,
-      hasError: false,
-      isLoading: false,
-      orders: payload.orders,
-    })
-  })
-
-  it('order-data-rejected', () => {
-    const action = { type: getOrderData.rejected.type }
-    const result = reducer(initialState, action)
-    expect(result).toEqual({
-      ...initialState,
-      hasError: true,
-      isLoading: false,
     })
   })
 })

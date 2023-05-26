@@ -1,5 +1,5 @@
 import { Ingredients } from '../../utils/types'
-import constructorReducer, {
+import reducer, {
   initialState,
   addBun,
   addItem,
@@ -63,11 +63,11 @@ const state = {
 
 describe('test-constructor-reducer', () => {
   it('initial-state', () => {
-    expect(constructorReducer(undefined, { type: null })).toEqual(initialState)
+    expect(reducer(undefined, { type: null })).toEqual(initialState)
   })
 
   it('add-bun', () => {
-    expect(constructorReducer(initialState, addBun(data[0]))).toEqual({
+    expect(reducer(initialState, addBun(data[0]))).toEqual({
       ...initialState,
       bun: data[0],
     })
@@ -75,10 +75,7 @@ describe('test-constructor-reducer', () => {
 
   it('add-item', () => {
     expect(
-      constructorReducer(
-        initialState,
-        addItem({ item: data[1], id: data[1].id })
-      )
+      reducer(initialState, addItem({ item: data[1], id: data[1].id }))
     ).toEqual({
       ...initialState,
       items: [data[1]],
@@ -86,20 +83,18 @@ describe('test-constructor-reducer', () => {
   })
 
   it('remove-item', () => {
-    expect(constructorReducer(state, removeItem(data[2].id))).toEqual({
+    expect(reducer(state, removeItem(data[2].id))).toEqual({
       ...initialState,
       items: [data[0], data[1]],
     })
   })
 
   it('delete-items', () => {
-    expect(constructorReducer(initialState, deleteItems())).toEqual(
-      initialState
-    )
+    expect(reducer(initialState, deleteItems())).toEqual(initialState)
   })
 
   it('update-items', () => {
-    expect(constructorReducer(initialState, updateItems(data))).toEqual({
+    expect(reducer(initialState, updateItems(data))).toEqual({
       ...initialState,
       items: data,
     })

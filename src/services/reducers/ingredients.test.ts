@@ -1,5 +1,5 @@
 import { Ingredients } from '../../utils/types'
-import ingredients, {
+import reducer, {
   initialState,
   updateBunsCount,
   increaseItemCount,
@@ -65,37 +65,37 @@ const payload = {
 
 describe('test-ingredients-reducer', () => {
   it('initial-state', () => {
-    expect(ingredients(undefined, { type: null })).toEqual(initialState)
+    expect(reducer(undefined, { type: null })).toEqual(initialState)
   })
 
   it('update-buns-count', () => {
-    expect(ingredients(state, updateBunsCount(data[0]))).toEqual({
+    expect(reducer(state, updateBunsCount(data[0]))).toEqual({
       ...state,
       data: [{ ...data[0], count: 2 }, data[1], data[2]],
     })
   })
 
   it('increase-item-count', () => {
-    expect(ingredients(state, increaseItemCount(data[1]))).toEqual({
+    expect(reducer(state, increaseItemCount(data[1]))).toEqual({
       ...state,
       data: [data[0], { ...data[1], count: 1 }, data[2]],
     })
   })
 
   it('decrease-item-count', () => {
-    expect(ingredients(state, decreaseItemCount(data[1]))).toEqual({
+    expect(reducer(state, decreaseItemCount(data[1]))).toEqual({
       ...state,
       data: [data[0], { ...data[1], count: -1 }, data[2]],
     })
   })
 
   it('reset-items-count', () => {
-    expect(ingredients(state, resetItemsCount())).toEqual(state)
+    expect(reducer(state, resetItemsCount())).toEqual(state)
   })
 
   it('get-ingrediens-pending', () => {
     const action = { type: getIngrediensData.pending.type }
-    const result = ingredients(initialState, action)
+    const result = reducer(initialState, action)
     expect(result).toEqual({
       ...initialState,
       isLoading: true,
@@ -104,7 +104,7 @@ describe('test-ingredients-reducer', () => {
 
   it('get-ingrediens-fulfilled', () => {
     const action = { type: getIngrediensData.fulfilled.type, payload }
-    const result = ingredients(initialState, action)
+    const result = reducer(initialState, action)
     expect(result).toEqual({
       ...initialState,
       isLoading: false,
@@ -114,7 +114,7 @@ describe('test-ingredients-reducer', () => {
 
   it('get-ingrediens-rejected', () => {
     const action = { type: getIngrediensData.rejected.type }
-    const result = ingredients(initialState, action)
+    const result = reducer(initialState, action)
     expect(result).toEqual({
       ...initialState,
       isLoading: false,
