@@ -1,4 +1,4 @@
-import orderTableReducer, { initialState, getOrderData } from './orders-feed'
+import reducer, { initialState, getOrderData } from './orders-feed'
 import {
   wsOpen,
   wsClose,
@@ -27,32 +27,32 @@ const payload: OrdersData = {
 
 describe('test-ingredients-reducer', () => {
   it('initial-state', () => {
-    expect(orderTableReducer(undefined, { type: null })).toEqual(initialState)
+    expect(reducer(undefined, { type: null })).toEqual(initialState)
   })
 
   it('wsConnecting', () => {
-    expect(orderTableReducer(initialState, wsConnecting())).toEqual({
+    expect(reducer(initialState, wsConnecting())).toEqual({
       ...initialState,
       isConnected: true,
     })
   })
 
   it('wsOpen', () => {
-    expect(orderTableReducer(initialState, wsOpen())).toEqual({
+    expect(reducer(initialState, wsOpen())).toEqual({
       ...initialState,
       isConnected: true,
     })
   })
 
   it('wsClose', () => {
-    expect(orderTableReducer(initialState, wsClose())).toEqual({
+    expect(reducer(initialState, wsClose())).toEqual({
       ...initialState,
       isConnected: false,
     })
   })
 
   it('wsError', () => {
-    expect(orderTableReducer(initialState, wsError('error'))).toEqual({
+    expect(reducer(initialState, wsError('error'))).toEqual({
       ...initialState,
       isConnected: false,
       error: 'error',
@@ -60,11 +60,42 @@ describe('test-ingredients-reducer', () => {
   })
 
   it('wsMessage', () => {
-    expect(orderTableReducer(initialState, wsMessage(payload))).toEqual({
+    expect(reducer(initialState, wsMessage(payload))).toEqual({
       ...initialState,
       total: payload.total,
       totalToday: payload.totalToday,
       orders: payload.orders,
+    })
+  })
+
+  it('order-data-pending', () => {
+    const action = { type: getOrderData.pending.type }
+    const result = reducer(initialState, action)
+    expect(result).toEqual({
+      ...initialState,
+      hasError: false,
+      isLoading: true,
+    })
+  })
+
+  it('order-data-fulfilled', () => {
+    const action = { type: getOrderData.fulfilled.type, payload }
+    const result = reducer(initialState, action)
+    expect(result).toEqual({
+      ...initialState,
+      hasError: false,
+      isLoading: false,
+      orders: payload.orders,
+    })
+  })
+
+  it('order-data-rejected', () => {
+    const action = { type: getOrderData.rejected.type }
+    const result = reducer(initialState, action)
+    expect(result).toEqual({
+      ...initialState,
+      hasError: true,
+      isLoading: false,
     })
   })
 })
